@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
-import { MEDICAL_EXAMINATION_1, MEDICAL_EXAMINATION_2 } from './constants';
+import RemarkInput from '../../../components/RemarkInput/RemarkInput';
+import { checkIfObjectHasRemarksKey } from '../../../utils/utils';
+import { MAJOR_DISABILITY, MEDICAL_EXAMINATION_1, MEDICAL_EXAMINATION_2, MEDICAL_EXAMINATION_3, MEDICAL_EXAMINATION_4 } from './constants';
 import "./medical-examination.styles.css";
 
 
@@ -15,6 +17,60 @@ const MedicalExamination = () => {
                 <div className="name-item">
                     {
                         MEDICAL_EXAMINATION_1.map(item => {
+                            {
+                                return <input className='medical-exam-input-fields' type="text" name={item.key} placeholder={item.label} />
+                            }
+                        })
+                    }
+                </div>
+            </div>
+        );
+    };
+
+    const renderSections2 = () => {
+        return (
+            <>
+                <p>Details</p>
+                <div className="questions-wrapper">
+                    <div className='options'>
+                        <ul>
+                            {MEDICAL_EXAMINATION_2.map((item, idx) => {
+                                return (
+                                    <>
+                                    {!checkIfObjectHasRemarksKey(item) ?
+                                        <>
+                                            <li key={idx}>
+                                                <input
+                                                    key={item.key}
+                                                    id={item.value.toString()}
+                                                    type="checkbox"
+                                                    name={item.key}
+                                                    checked={item.value}
+                                                />
+                                                <span key={item.label.toString()}>
+                                                    {capitalizeFirstLetter(item.key).replace(/_/g, " ")}
+                                                </span>
+                                            </li>
+                                        </> : <li>
+                                            <RemarkInput option={item} />
+                                        </li>}
+                                    </>
+                                )
+                            })}
+                        </ul>
+                    </div>
+                </div>
+            </>
+        );
+    };
+
+    const renderSections3 = () => {
+        return (
+            <div className="item">
+                <p>Details</p>
+                <div className="name-item">
+                    {
+                        MEDICAL_EXAMINATION_3.map(item => {
                             return (
                                 <input className='medical-exam-input-fields' type="text" name={item.key} placeholder={item.label} />
                             )
@@ -25,38 +81,127 @@ const MedicalExamination = () => {
         );
     };
 
-    const renderInputFieldForRemark = (option) => {
-        const REMARK = "remark";
-        const key = Object.keys(option).find(i => i.includes(REMARK));
-        if(option[key]) {
-            return (
-                // <input className='remark-input' placeholder="Remark" type="text" value={option[key] ? option[key] === true ? "" : option[key] : ""}/>
-                <input className='remark-input' placeholder="Remark" type="text" disabled={!isFirstStepComplete}/>
-            )
-        }
-        return null;
-    };
-
-    const renderSections2 = () => {
+    const renderQuestions = () => {
         return (
-            <div className="item">
-                {/* <p>Details</p> */}
-                    {
-                        MEDICAL_EXAMINATION_2.map(item => {
+            <>
+                <div className='questions-wrapper'>
+                    <span className='question'>
+                    </span>
+                    <div className='options'>
+                        {MEDICAL_EXAMINATION_4.map((item, idx) => {
                             return (
-                                <>
-                                    <div className='section-2'>
-                                        <input type="checkbox" name={item.key} placeholder={item.label} />
-                                        <div>{item.label}</div>
-                                        {JSON.stringify(item)}
-                                    </div>
-                                </>
+                                <ul>
+                                    {item.options.map((item, idx) => {
+                                        return (
+                                            <>
+                                                <li key={idx}>
+                                                    {renderOptions(item)}
+                                                </li>
+                                            </>
+                                        )})
+                                    }
+                                </ul>
                             )
-                        })
-                    }
-            </div>
+                        })}
+                    </div>
+                </div>
+            </>
         );
     };
+
+    const renderOptions = (listOfObj) => Object.entries(listOfObj).map(([key,value], idx) => {
+        const option = listOfObj[key];
+        const remarkKey = key.toString().includes("remark");
+        return (
+            <>
+                {
+                    !remarkKey ?
+                    (
+                        <>
+                            <input
+                                key={key}
+                                id={option.toString()}
+                                type="checkbox"
+                                name={key}
+                                checked={option}
+                                // onChange={() => handleCheckbox(listOfObj, key)}
+                                // disabled={!isFirstStepComplete}
+                            />
+                            <span key={option.toString()}>{capitalizeFirstLetter(key).replace(/_/g, " ")}</span>
+                        </>
+                    )
+                    : <input className='medical-exam-input-fields remark-input' placeholder="Remark" type="text" />
+                }
+            </>
+        )
+    });
+
+    function capitalizeFirstLetter(string) {
+        if(string) {
+            const new_str = string.charAt(0).toUpperCase() + string.slice(1);
+            if(new_str.includes("Remark") || new_str.includes("Yes")) {
+                return new_str.split("_")[0];
+            }
+            return new_str;
+        }
+        return string;
+    }
+
+    const renderContagiousDieaseQuestions = () => {
+        return (
+            <>
+                {MAJOR_DISABILITY.map((item, idx) => {
+                    return (
+                        <div key={idx} className='questions-wrapper'>
+                            <span className='question'>
+                                {idx+1}. {item.q}
+                            </span>
+                            <div className='options'>
+                                <ul>
+                                {!checkIfObjectHasRemarksKey(item) ?
+                                    <>
+                                        <li key={idx}>
+                                            {renderContagiousDieaseOptions(item)}
+                                        </li>
+                                    </> : <li>
+                                        <RemarkInput option={item} />
+                                    </li>
+                                }
+                                    {/* {item.options.map((option, idx) => {
+                                        return(
+                                            <>
+                                                <li key={idx}>
+                                                    {renderContagiousDieaseOptions(option)}
+                                                </li>
+                                            </>
+                                        )})
+                                    } */}
+                                </ul>
+                            </div>
+                        </div>
+                    )
+                })}
+            </>
+        );
+    };
+
+    const renderContagiousDieaseOptions = (listOfObj) => Object.entries(listOfObj).map(([key,value], idx) => {
+        const option = listOfObj[key];
+        return (
+            <>
+                <input
+                    key={key}
+                    id={option.toString()}
+                    type="checkbox"
+                    name={key}
+                    checked={option}
+                    // onChange={() => handleCheckbox(listOfObj, key)}
+                    // disabled={!isFirstStepComplete}
+                />
+                <span key={option.toString()}>{capitalizeFirstLetter(key).replace(/_/g, " ")}</span>
+            </>
+        )
+    });
 
     return (
         <div className="testbox">
@@ -66,26 +211,18 @@ const MedicalExamination = () => {
                     {/* <p>Complainant's Name</p> */}
                     {renderSections1()}
                 </div>
+                    {renderSections2()}
+                    {renderSections3()}
                 <div className="item">
-                    <p>Address</p>
-                    <input className='medical-exam-input-fields' type="text" name="name" placeholder="Street address"/>
-                    <input className='medical-exam-input-fields' type="text" name="name" placeholder="Street address line 2"/>
-                        {renderSections2()}
-                    {/* <div className="city-item"> */}
-                        {/* <input className='medical-exam-input-fields' type="text" name="name" placeholder="City" />
-                        <input className='medical-exam-input-fields' type="text" name="name" placeholder="Region" />
-                        <input className='medical-exam-input-fields' type="text" name="name" placeholder="Postal / Zip code" />
-                        <select>
-                            <option value="">Country</option>
-                            <option value="1">Russia</option>
-                            <option value="2">Germany</option>
-                            <option value="3">France</option>
-                            <option value="4">Armenia</option>
-                            <option value="5">USA</option>
-                        </select> */}
-                    {/* </div> */}
+                    <p>Contagiou Disease</p>
+                    {renderQuestions()}
                 </div>
                 <div className="item">
+                    <p>Major Disability</p>
+                    {renderContagiousDieaseQuestions()}
+                </div>
+
+                {/* <div className="item">
                     <p>Email</p>
                     <input className='medical-exam-input-fields' type="text" name="name"/>
                 </div>
@@ -134,7 +271,7 @@ const MedicalExamination = () => {
                 </div>
                 <div className="btn-block">
                     <button type="submit" href="/">Next</button>
-                </div>
+                </div> */}
             </form>
         </div>
     )

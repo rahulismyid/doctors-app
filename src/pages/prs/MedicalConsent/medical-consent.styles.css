@@ -34,6 +34,7 @@
     padding: 10px;
     list-style: none;
     text-transform: capitalize;
+    /* display: flex; */
 }
 
 .options > ul > li > span {

@@ -38,82 +38,93 @@ export const MEDICAL_EXAMINATION_1 = [{
 export const MEDICAL_EXAMINATION_2 = [{
     key: "pallor",
     label: "Pallor",
-    type: "text",
-    value: ""
+    value: false
 }, {
-    pallor: "lnpathy",
+    key: "lnpathy",
     label: "Lnpathy",
-    type: "text",
-    value: ""
+    value: false
 },{
     key: "cynosis",
     label: "Cynosis",
-    type: "text",
-    value: ""
+    value: false
 },{
     key: "clubbing",
     label: "Clubbing",
-    type: "text",
-    value: ""
+    value: false
 },{
     key: "edema",
     label: "Edema",
-    type: "text",
-    value: ""
+    value: false
 },{
     key: "icterus",
     label: "Icterus",
-    type: "text",
-    value: ""
+    value: false
 },{
     key: "other",
     label: "Other",
     type: "text",
-    value: ""
+    value: false
 },{
-    remarks_2: "Remarks",
+    key: "remarks_2",
+    label: "Remarks",
     type: "text",
     value: ""
 }];
 
 export const MEDICAL_EXAMINATION_3 = [{
-    cvs: "CSV",
+    key: "cvs",
+    label: "CVS",
     type: "text",
     value: ""
 }, {
-    rs: "R.S.",
+    key: "rs",
+    label: "R.S.",
     type: "text",
     value: ""
 }, {
-    pa: "P/A",
+    key: "pa",
+    label: "P/A",
     type: "text",
     value: ""
 }, {
-    cns: "CNS",
+    key: "cns",
+    label: "CNS",
     type: "text",
     value: ""
 }, {
-    ent: "ENT",
+    key: "ent",
+    label: "ENT",
     type: "text",
     value: ""
 }, {
-    musculoskeletal_system: "Musculoskeletal System",
+    key: "musculoskeletal_system",
+    label: "Musculoskeletal System",
     type: "text",
     value: ""
 }, {
-    genitourinary_system: "Genitourinary System",
+    key: "genitourinary_system",
+    label: "Genitourinary System",
     type: "text",
     value: ""
 }];
 
-export const MEDICAL_EXAMINATION_4 = [ {
-    q: "Contagious skin disease ? such as",
+export const MEDICAL_EXAMINATION_4 = [{
+    q: "Contagious skin disease? such as",
     options: [{
         scabies: false,
         dermatitis: false,
         boils: false,
         cuts: false,
         soars: false,
-        remarks_4: ""
+        remarks_4: "",
     }],
-}]
+}];
+
+export const MAJOR_DISABILITY = [{
+    q: "Any major deformity/disability?",
+    options: [{
+        yes_no_q41: false,
+        details: "",
+        remark_q51: ""
+    }]
+}];
