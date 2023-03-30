@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useDB } from '../../../contexts/DbContext';
 import { GlobalContext } from '../../../contexts/GlobalContext';
+import MedicalExamination from '../MedicalExamination/MedicalExamination';
 import "./medical-consent.styles.css";
 
 // eslint-disable
@@ -14,7 +15,7 @@ const MedicalConsent = () => {
         if(Object.keys(medicalConsents).length > 0) {
             setValues(medicalConsents);
         }
-    }, [medicalConsents])
+    }, [medicalConsents]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -118,10 +119,10 @@ const MedicalConsent = () => {
                     <div>
                         {renderQuestions()}
                     </div>
-                    {/* <div className="error-warning">The form did not submit because there were 2 errors.</div> */}
                 </form>
-                <button onClick={() => handleSubmit} className="submit-btn position-prescription-btn" disabled={!isFirstStepComplete}>Submit</button>
+                <MedicalExamination />
             </div>
+            <button onClick={handleSubmit} className="submit-btn position-prescription-btn" disabled={!isFirstStepComplete}>Submit</button>
         </>
     )
 };

@@ -10,7 +10,7 @@ const NotFound = () => {
                 Page Not found!
             </div>
 
-            <button 
+            <button
                 onClick={() => navigate(-1)}
             >
                 Go Back

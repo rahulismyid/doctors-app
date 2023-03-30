@@ -12,13 +12,21 @@ const PRSHomeScreen = () => {
 
     return (
         <div className="container">
-            <main className="signup-container">
+            <main className="home-screen-container">
                 <div className='home-screen-banner-text'>
                     <h1 className="heading-primary">Doctors stuff!<span className="span-blue">.</span></h1>
                     <section className="content">
-                        <Button navigatingRoute={'/app/add-patient'} callbackFn={handleOnClick} classNames={'homescreen-btn'} btnText={'Add New Patient'}/>
-                        <Button navigatingRoute={'/app/list-patient'} callbackFn={navigate} classNames={'homescreen-btn'} btnText={'View Patient List'}/>
-                        <Button navigatingRoute={'/app/medical-examination'} callbackFn={navigate} classNames={'homescreen-btn'} btnText={'Mecidal Form'}/>
+                        <ul className='home-screen-grid-wrapper'>
+                            <li>
+                                <Button navigatingRoute={'/app/add-patient'} callbackFn={handleOnClick} classNames={'homescreen-btn'} btnText={'Add New Patient'}/>
+                            </li>
+                            <li>
+                                <Button navigatingRoute={'/app/list-patient'} callbackFn={navigate} classNames={'homescreen-btn'} btnText={'View Patient List'}/>
+                            </li>
+                            <li>
+                                <Button navigatingRoute={'/app/medical-examination'} callbackFn={navigate} classNames={'homescreen-btn'} btnText={'Mecidal Form'}/>
+                            </li>
+                        </ul>
                     </section>
                 </div>
             </main>

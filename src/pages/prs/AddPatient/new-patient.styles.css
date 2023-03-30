@@ -10,7 +10,7 @@ p {
 	/* color: #666; */
 }
 
-.testbox > div{
+.new-patient-form-container > div{
 	font-size: 14px;
 	line-height: 22px;
 }
@@ -20,14 +20,27 @@ h1 {
 	font-weight: 400;
 }
 
-.testbox {
+#doj::placeholder {
+    color: #ff0000;
+    opacity: 1;
+}
+
+.new-patient-form-container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	height: inherit;
 	padding: 30px;
-	margin-top: 60px;
+	margin: 0 auto;
+	margin-top: 5%;
 	width: 50%;
+}
+
+@media (max-width: 480px) {
+	.new-patient-form-container {
+		width: 100%;
+		margin-top: 20%;
+	}
 }
 
 form {
@@ -46,15 +59,34 @@ textarea {
 }
 
 .new-patient-input-fields {
-	width: calc(100% - 10px);
+	/* width: calc(100% - 10px);
+	line-height: 22px; */
 	padding: 5px;
-	line-height: 22px;
 }
 
-select {
-	width: 100%;
+.new-patient-select-fields {
+	width: calc(30% - 0px);
 	padding: 7px 0;
 	background: transparent;
+}
+
+@media (min-width: 568px) {
+
+	.new-patient-input-fields-wrapper,
+	.city-item {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+
+	.new-patient-input-fields-wrapper input,
+	.city-item input {
+		/* width: calc(30% - 0px); */
+	}
+
+	.city-item select {
+		/* width: calc(50% - 8px); */
+	}
 }
 
 textarea {
@@ -89,7 +121,7 @@ textarea:hover {
 .new-patient-input-fields[type="date"]::-webkit-calendar-picker-indicator {
 	position: absolute;
 	font-size: 20px;
-	color: #a9a9a9;
+	color: #000;
 }
 
 .item i {
@@ -105,9 +137,12 @@ textarea:hover {
 	cursor: pointer;
 }
 
-.btn-block {
+.new-patient-btn-block {
+	display: flex;
 	margin-top: 20px;
 	text-align: center;
+	justify-content: center;
+	gap: 20px;
 }
 
 button {
@@ -127,21 +162,29 @@ button:hover {
 	background-color: #0666a3;
 }
 
-@media (min-width: 568px) {
+/* New patient form grid */
+.new-patient-input-fields-wrapper {
+	--auto-grid-min-size: 16rem;
+	display: grid;
+	grid-gap: 0 1rem;
+	grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Montserrat', sans-serif;
+}
 
-	.name-item,
-	.city-item {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-between;
-	}
+.new-patient-input-fields {
+	/* background-color: #ef4444; */
+	/* color: #ffffff; */
+	/* font-size: 24px; */
+	list-style-type: none;
+	/* padding: 5rem 1rem; */
+	text-align: center;
+	/* text-transform: capitalize; */
+	font-weight: 600;
+}
 
-	.name-item input,
-	.city-item input {
-		width: calc(50% - 20px);
-	}
-
-	.city-item select {
-		width: calc(50% - 8px);
-	}
+.date-field {
+	text-transform: uppercase;
 }

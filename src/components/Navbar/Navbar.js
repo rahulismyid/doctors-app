@@ -29,8 +29,6 @@ const Navbar = () => {
                     <ul id="menu">
                         <ul id="menu">
                             <li><Link to="/"> Home</Link></li>
-                            <li><Link to="/services"> Services</Link></li>
-                            <li><Link to="/about"> About</Link></li>
                             <li><a onClick={() => setOpenModal(true)}>Logout</a></li>
                         </ul>
                         {/* <a href="#myModal" className="trigger-btn" data-toggle="modal">Click to Open Confirm Modal</a> */}

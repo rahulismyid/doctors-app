@@ -29,7 +29,9 @@
     line-height: 60px;
     width: 100%;
     z-index: 10;
-    box-shadow: 0px 2px 4px #888888;
+    /* box-shadow: 0px 2px 4px #888888; */
+    /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.24);
   }
   
   .nav-wrapper {
@@ -59,6 +61,10 @@
   /*       margin-left: 5px; */
       }
     }
+
+  .logo:hover {
+    cursor: pointer;
+  }
   
   #navbar ul {
     display: inline-block;

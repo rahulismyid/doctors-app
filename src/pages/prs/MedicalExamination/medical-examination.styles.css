@@ -1,15 +1,14 @@
 form,
-input,
 select,
 p {
 	padding: 0;
 	margin: 0;
 	outline: none;
 	font-family: Roboto, Arial, sans-serif;
-	color: #666;
+	/* color: #666; */
 }
 
-.testbox > div {
+.medical-examination-form > div {
 	font-size: 14px;
 	line-height: 22px;
 }
@@ -19,14 +18,18 @@ h1 {
 	font-weight: 400;
 }
 
-.testbox {
+.medical-examination-form {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	height: inherit;
-	padding: 30px;
-	margin-top: 60px;
+	/* padding: 30px;
+	margin-top: 60px; */
 	width: 50%;
+}
+
+.medical-examination-form > form {
+	padding-top: 0;
 }
 
 form {
@@ -128,7 +131,7 @@ button:hover {
 
 @media (min-width: 568px) {
 
-	.name-item,
+	/* .name-item,
 	.city-item {
 		display: flex;
 		flex-wrap: wrap;
@@ -138,7 +141,7 @@ button:hover {
 	.name-item input,
 	.city-item input {
 		width: calc(50% - 20px);
-	}
+	} */
 
 	.city-item select {
 		width: calc(50% - 8px);

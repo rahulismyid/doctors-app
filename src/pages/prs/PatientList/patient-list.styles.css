@@ -2,6 +2,19 @@
 	margin-top: 10%;
 }
 
+.patient-list-table-container > header {
+	justify-content: space-between;
+}
+
+.patient-list-table-header-wrapper > span {
+	font-size: 30px;
+	font-weight: 700;
+}
+
+.patient-list-table-header-wrapper > span:hover {
+	cursor: pointer;
+}
+
 .patient-list-table {
 	width: 100%;
 	display: table;

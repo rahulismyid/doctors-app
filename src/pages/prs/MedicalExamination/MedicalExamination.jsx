@@ -30,8 +30,8 @@ const MedicalExamination = () => {
     const renderSections2 = () => {
         return (
             <>
+                <div className="item questions-wrapper">
                 <p>Details</p>
-                <div className="questions-wrapper">
                     <div className='options'>
                         <ul>
                             {MEDICAL_EXAMINATION_2.map((item, idx) => {
@@ -204,7 +204,7 @@ const MedicalExamination = () => {
     });
 
     return (
-        <div className="testbox">
+        <div className="medical-examination-form">
             <form action="/">
                 <h1>Medical Examination</h1>
                 <div className="item">

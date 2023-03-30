@@ -7,7 +7,7 @@ const Modal = (props) => {
         callback && callback();
         setOpen(false)
     }
-    
+
     return (
         <>
         {

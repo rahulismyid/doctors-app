@@ -70,9 +70,8 @@ export default function DbProvider({ children }) {
 	// }
 
 	// create new Patient in the DB
-	const createPatient = async ({fName, ...data}) => {
+	const createPatient = async (data) => {
 		await addDoc(patientsCollectionRef, {
-			name: fName,
 			uid: currentUser.uid,
 			...data
 		});
@@ -92,7 +91,6 @@ export default function DbProvider({ children }) {
 		fetchAllConsents()
 		// addMedicalConsentQues();
 		fetchUsers();
-		fetchAllPatients();
 	}, [currentUser]);
 
 	useEffect(() => {

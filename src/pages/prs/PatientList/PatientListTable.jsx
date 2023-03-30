@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import DataTable, { createTheme } from 'react-data-table-component';
+import { useNavigate } from 'react-router-dom';
 import { useDB } from '../../../contexts/DbContext';
 import { COLUMNS } from './constants';
 
@@ -49,14 +50,19 @@ createTheme('solarized', {
 }, 'default');
 
 const PatientListTable = () => {
-    const { allPatients } = useDB();
+    const { allPatients, fetchAllPatients } = useDB();
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     const [filterText, setFilterText] = useState('');
 	const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
 	const filteredItems = allPatients && allPatients.filter(
 		item => item.name && item.name.toLowerCase().includes(filterText.toLowerCase()),
 	);
+
+    useEffect(() => {
+        fetchAllPatients();
+    },[]);
 
     useEffect(() => {
         if(allPatients) {
@@ -74,7 +80,13 @@ const PatientListTable = () => {
 
 		return (
             <>
-                <input className='medical-exam-input-fields' onChange={e => setFilterText(e.target.value)} value={filterText} />
+                <div className='patient-list-table-header-wrapper'>
+                    <span className='less-than' onClick={() => navigate("/")}>&lt;</span>
+                </div>
+                <div className='patient-list-table-filter-wrapper'>
+                    <span>Filter</span>
+                    <input className='medical-exam-input-fields' onChange={e => setFilterText(e.target.value)} value={filterText} />
+                </div>
             </>
 		);
 	}, [filterText, resetPaginationToggle]);
@@ -82,7 +94,7 @@ const PatientListTable = () => {
     return (
         <div className='patient-list-table-container'>
             <DataTable
-                title="Patient List"
+                // title="Patient List"
                 theme="default"
                 columns={COLUMNS}
                 data={filteredItems}
