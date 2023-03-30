@@ -13,6 +13,7 @@ import AuthLayout from "./Layout/AuthLayout";
 import GlobalContextProvider from "./contexts/GlobalContext";
 import MedicalConsent from "./pages/prs/MedicalConsent/MedicalConsent";
 import MedicalExamination from "./pages/prs/MedicalExamination/MedicalExamination";
+import PatientListTable from "./pages/prs/PatientList/PatientListTable";
 
 function App() {
   return (
@@ -27,7 +28,7 @@ function App() {
                   <Route path="/app" element={<Navigate to={'/app/home'}/>} />
                   <Route path="/app/home" element={<PRSHomeScreen/>} />
                   <Route path='/app/add-patient' element={<NewPatient/>} />
-                  <Route path='/app/list-patient' element={<PatientList />} />
+                  <Route path='/app/list-patient' element={<PatientListTable />} />
                   <Route path='/app/medical-consent' element={<MedicalConsent />} />
                   <Route path='/app/medical-examination' element={<MedicalExamination />} />
                 </Route>

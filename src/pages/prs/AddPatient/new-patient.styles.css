@@ -7,7 +7,7 @@ p {
 	margin: 0;
 	outline: none;
 	font-family: Roboto, Arial, sans-serif;
-	color: #666;
+	/* color: #666; */
 }
 
 .testbox > div{
