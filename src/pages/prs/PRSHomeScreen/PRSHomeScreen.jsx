@@ -14,7 +14,8 @@ const PRSHomeScreen = () => {
         <div className="container">
             <main className="home-screen-container">
                 <div className='home-screen-banner-text'>
-                    <h1 className="heading-primary">Doctors stuff!<span className="span-blue">.</span></h1>
+                <h1 className="heading-primary wecome-text"><div>Welcome to</div><span className="lg">Aaradhya Polyclinic and Diagnostic Center<span className="span-blue">.</span></span></h1>
+                    <h1 className="heading-primary doctors-stuff">Doctors stuff!<span className="span-blue">.</span></h1>
                     <section className="content">
                         <ul className='home-screen-grid-wrapper'>
                             <li>

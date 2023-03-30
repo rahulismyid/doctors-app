@@ -6,12 +6,12 @@
 	justify-content: space-between;
 }
 
-.patient-list-table-header-wrapper > span {
+.patient-list-table-header-wrapper > .less-than {
 	font-size: 30px;
 	font-weight: 700;
 }
 
-.patient-list-table-header-wrapper > span:hover {
+.patient-list-table-header-wrapper > .less-than:hover {
 	cursor: pointer;
 }
 

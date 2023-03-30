@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Modal from '../../../components/Modal/Modal';
 import { useDB } from '../../../contexts/DbContext';
 import { GlobalContext } from '../../../contexts/GlobalContext';
+import { checkIfObjectHasEmptyProperty } from '../../../utils/utils';
 import "./new-patient.styles.css";
 
 const initialValues = {
@@ -10,7 +11,7 @@ const initialValues = {
     code: "",
     age: "",
     gender: "",
-    doj: Date.now("en-GB", "toLocaleString"),
+    doj: "",
     department: "",
     son_of: "",
     mobile: "",
@@ -22,6 +23,7 @@ const initialValues = {
 const NewPatient = () => {
     const [values, setValues] = useState();
     const [showModal, setShowModal] = useState(false);
+    const [showError, setShowError] = useState(false);
     const navigate = useNavigate();
     const { createPatient } = useDB();
     const ref = useRef();
@@ -33,7 +35,12 @@ const NewPatient = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setShowModal(true);
+        if(checkIfObjectHasEmptyProperty(values)) {
+            setShowError(true);
+        } else {
+            setShowError(false);
+            setShowModal(true);
+        }
     };
 
     const savePatientDetails = async () => {
@@ -60,7 +67,7 @@ const NewPatient = () => {
         }
             <div className="new-patient-form-container">
                 <form action="/">
-                    <h1>New Patient Details</h1>
+                    <h1><span className='new-patient-form-header-less-than' onClick={() => navigate("/")}>&lt;</span>New Patient Details</h1>
                     <div className="item">
                         <p>Patient's Details</p>
                         <div className="new-patient-input-fields-wrapper">
@@ -96,6 +103,11 @@ const NewPatient = () => {
                         <input className='new-patient-input-fields' type="text" name="emergency_contact_person" placeholder="Emergency Contact" onChange={(e) => setValues({...values, emergency_contact_person: e.target.value})}/>
                         <input className='new-patient-input-fields' type="text" name="emergency_mobile" placeholder="Emergency Mobile" onChange={(e) => setValues({...values, emergency_mobile: e.target.value})}/>
                     </div>
+                    {
+                        showError
+                            ? <p className='new-patient-submit-error'>Error occurred, please fill the form.</p>
+                            : null
+                    }
                     <div className="new-patient-btn-block">
                         <button onClick={handleSubmit} href="/">Add patient</button>
                         <button onClick={handleSubmit} href="/">Proceed to add more details</button>

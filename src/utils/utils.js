@@ -18,3 +18,7 @@ export const checkIfObjectHasRemarksKey = (option) => {
     }
     return key
 };
+
+export const checkIfObjectHasEmptyProperty = (obj) => {
+    return !Object.values(obj).find(x => !!x);
+}

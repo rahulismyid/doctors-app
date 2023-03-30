@@ -15,6 +15,20 @@ p {
 	line-height: 22px;
 }
 
+.new-patient-submit-error {
+	color: red;
+	font-weight: 700;
+}
+
+.new-patient-form-header-less-than {
+	color: #ccc;
+    font-size: 30px;
+    margin: 0 10px 0 0;
+}
+
+.new-patient-form-header-less-than:hover {
+	cursor: pointer;
+}
 h1 {
 	margin: 15px 0;
 	font-weight: 400;
