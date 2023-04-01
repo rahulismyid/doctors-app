@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useDB } from '../../../contexts/DbContext';
 import { GlobalContext } from '../../../contexts/GlobalContext';
-import MedicalExamination from '../MedicalExamination/MedicalExamination';
 import "./medical-consent.styles.css";
 
 // eslint-disable
@@ -55,7 +54,7 @@ const MedicalConsent = () => {
         if(option[key]) {
             return (
                 // <input className='remark-input' placeholder="Remark" type="text" value={option[key] ? option[key] === true ? "" : option[key] : ""}/>
-                <input className='remark-input' placeholder="Remark" type="text" disabled={!isFirstStepComplete}/>
+                <input className='remark-input' placeholder="Remark" type="text" />
             )
         }
         return null;
@@ -120,7 +119,6 @@ const MedicalConsent = () => {
                         {renderQuestions()}
                     </div>
                 </form>
-                <MedicalExamination />
             </div>
             <button onClick={handleSubmit} className="submit-btn position-prescription-btn" disabled={!isFirstStepComplete}>Submit</button>
         </>

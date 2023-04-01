@@ -1,0 +1,14 @@
+.findings-visual-details-table,
+.findings-visual-details-table > thead > tr > th,
+.findings-visual-details-table > tbody > tr > td {
+  font: 96% Helvetica;
+  color: #555;
+  text-align: center;
+  padding: 0.5em;
+  border: thin solid #ccc;
+  border-collapse: collapse;
+}
+
+.findings-table-input {
+    width: 60px;
+}

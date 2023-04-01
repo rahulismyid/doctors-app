@@ -9,7 +9,7 @@ export const checkIfObjectHasRemarksKey = (option) => {
     });
     if(!key) {
         value = Object.values(option).find(i => {
-            const res = i && i.includes(REMARK);
+            const res = i && i.toString().includes(REMARK);
             if(res) {
                 return res;
             }

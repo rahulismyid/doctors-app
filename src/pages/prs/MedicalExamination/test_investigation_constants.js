@@ -1,18 +1,20 @@
-export const MEDICAL_EXAMINATION_4 = [{
-    q: "Visual Activity:",
+export const INVESTIGATION_VISUAL_DETAILS_1 = [{
+    key: "vision_with_glasses",
     options: [{
-            eye_test_done: false,
-        }, {
-            vision_with_glasses: {
-                right_eye: "",
-                left_eye: "",
-            },
-            vision_without_glasses: {
-                right_eye: "",
-                left_eye: "",
-            }
-        }
-    ],
+        key: "right_eye",
+        value: "",
+    }, {
+        key: "left_eye",
+        value: "",
+    }],
+    key: "vision_without_glasses",
+    options: {
+        right_eye: "",
+        left_eye: "",
+    }
+}];
+
+export const INVESTIGATION_VISUAL_DETAILS_2 = [{
     right_eye_data: [{
             sph: "SPH",
             value: [""]
@@ -47,19 +49,26 @@ export const MEDICAL_EXAMINATION_4 = [{
         value: [""]
     }
     ]
-}, {
+}];
+
+export const INVESTIGATION_CHECKBOX_QUESTIONS_1 = [{
     q: "Ecg Findings:",
-    ecg_done: false,
+    key: "ecg_done",
+    checked: false,
     value: "",
 }, {
     q: "Lab Test Report No.",
-    lab_sample_taken: false,
+    key: "lab_sample_taken",
+    checked: false,
     value: "",
 }, {
     q: "Audiometry",
-    audiometry_done: false,
+    key: "audiometry_done",
+    checked: false,
     value: "",
-}, {
+}];
+
+export const INVESTIGATION_CHECKBOX_QUESTIONS_2 = [{
     q: "Abnormal Reports if any",
     value: "",
 }, {
