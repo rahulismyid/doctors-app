@@ -106,12 +106,14 @@ export const MEDICAL_EXAMINATION_4 = [{
     remarks_4: "",
 }];
 
-export const MAJOR_DISABILITY = [{
+export const MAJOR_DISABILITY = {
     q: "Any major deformity/disability?",
     yes: false,
     details: "",
     remark: ""
-}, {
+};
+
+export const VISUAL_ACTIVITY = {
     q: "Visual Activity:",
     eye_test_done: false,
-}];
+};

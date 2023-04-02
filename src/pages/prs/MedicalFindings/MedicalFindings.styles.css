@@ -10,5 +10,13 @@
 }
 
 .findings-table-input {
-    width: 60px;
+    width: fit-content;
+    border: 1px solid #ccc;
+    height: 30px;
+}
+
+.ti3-input-fields {
+  width: fit-content;
+  border: 1px solid #ccc;
+  height: 30px;  
 }
