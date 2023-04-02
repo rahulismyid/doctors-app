@@ -10,7 +10,6 @@ import {
     MAJOR_DISABILITY,
     TEST_EVALUATIONS_AND_FINDINGS,
     VISION_TEST_DETAILS,
-    VISUAL_ACTIVITY,
 } from './constants';
 import "./MedicalFindings.styles.css";
 
@@ -30,7 +29,6 @@ const MedicalFindings = () => {
     const [bodyOrgansAndTests, setBodyOrgansAndTests] = useState();
     const [contagiuosSkinDiseases, setContagiuosSkinDiseases] = useState();
     const [majorDisability, setMajorDisability] = useState();
-    const [visualActivity, setVisualActivity] = useState();
     const [visualTestDetails, setVisualTestDetails] = useState();
     const [eyeSightDetails, setEyeSightDetails] = useState();
     const [testEvaluationsAndFindings, setTestEvaluationsAndFindings] = useState();
@@ -42,7 +40,6 @@ const MedicalFindings = () => {
         setBodyOrgansAndTests(BODY_ORGANS_AND_TESTS);
         setContagiuosSkinDiseases(CONTAGIOUS_SKIN_DISEASES);
         setMajorDisability(MAJOR_DISABILITY);
-        setVisualActivity(VISUAL_ACTIVITY);
         setVisualTestDetails(VISION_TEST_DETAILS);
         setEyeSightDetails(EYE_SIGHT_DETAILS);
         setTestEvaluationsAndFindings(TEST_EVALUATIONS_AND_FINDINGS);
@@ -122,13 +119,6 @@ const MedicalFindings = () => {
             return item;
         });
         setAilmentsHistoryDetails([...newData]);
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        console.log(ailmentsHistoryDetails)
-        // const data = await createPatient({...values, fName: values.name});
-        // navigate(PRS_ROOT_ROUTE);
     };
 
     /* MEDICAL_CONSENT */
@@ -379,14 +369,14 @@ const MedicalFindings = () => {
                             <ul>
                                 <li>
                                     <span className='question'>
-                                        {visualActivity.q}
+                                        {majorDisability.eye_test_done_q}
                                     </span>
                                     <input
                                         type="checkbox"
                                         name="eye_test_done"
                                         id="eye_test_done"
-                                        onChange={(e) => setVisualActivity({...visualActivity, eye_test_done: e.target.checked})}
-                                        value={visualActivity.eye_test_done}
+                                        onChange={(e) => handleSection5Input('eye_test_done', e.target.checked)}
+                                        value={majorDisability.eye_test_done}
                                         readOnly
                                     />
                                 </li>
@@ -758,6 +748,26 @@ const MedicalFindings = () => {
     };
 
     /* TEST_INVESTIGATION */
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log(ailmentsHistoryDetails)
+        // const data = await createPatient({...values, fName: values.name});
+        // navigate(PRS_ROOT_ROUTE);
+
+        // ailmentsHistoryDetails,
+        // bodyExaminationMetrics,
+        // bodyExaminationAilments,
+        // bodyOrgansAndTests,
+        // contagiuosSkinDiseases,
+        // majorDisability,
+        // visualActivity,
+        // visualTestDetails,
+        // eyeSightDetails,
+        // testEvaluationsAndFindings,
+    };
+
+
 
     return (
         <>
