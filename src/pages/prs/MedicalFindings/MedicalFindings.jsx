@@ -1,8 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { checkIfObjectHasRemarksKey } from '../../../utils/utils';
-import { MEDICAL_DECLARATION_CONSENT_FIELDS } from '../MedicalConsent/constants';
-import { MAJOR_DISABILITY, MEDICAL_EXAMINATION_1, MEDICAL_EXAMINATION_2, MEDICAL_EXAMINATION_3, MEDICAL_EXAMINATION_4, VISUAL_ACTIVITY } from '../MedicalExamination/constants';
-import { INVESTIGATION_CHECKBOX_QUESTIONS, INVESTIGATION_VISUAL_DETAILS, INVESTIGATION_VISUAL_DETAILS_2 } from '../MedicalExamination/test_investigation_constants';
+import {
+    AILMENT_HISTORY_DETAILS,
+    BODY_EXAMINATION_AILMENTS,
+    BODY_EXAMINATION_METRICS,
+    BODY_ORGANS_AND_TESTS,
+    CONTAGIOUS_SKIN_DISEASES,
+    EYE_SIGHT_DETAILS,
+    MAJOR_DISABILITY,
+    TEST_EVALUATIONS_AND_FINDINGS,
+    VISION_TEST_DETAILS,
+    VISUAL_ACTIVITY,
+} from './constants';
 import "./MedicalFindings.styles.css";
 
 function capitalizeFirstLetter(string) {
@@ -15,28 +24,28 @@ function capitalizeFirstLetter(string) {
 
 const MedicalFindings = () => {
 
-    const [medicalDeclarationSectionValues, setMedicalDeclarationSectionValues] = useState();
-    const [section1Values, setSection1Values] = useState();
-    const [section2Values, setSection2Values] = useState();
-    const [section3Values, setSection3Values] = useState();
-    const [section4Values, setSection4Values] = useState();
-    const [section5Values, setSection5Values] = useState();
-    const [section6Values, setSection6Values] = useState();
-    const [tiSection1Values, setTISection1Values] = useState();
-    const [tiSection2Values, setTISection2Values] = useState();
-    const [tiChecboxQuestionsValues, setTIChecboxQuestionsValues] = useState();
+    const [ailmentsHistoryDetails, setAilmentsHistoryDetails] = useState();
+    const [bodyExaminationMetrics, setBodyExaminationMetrics] = useState();
+    const [bodyExaminationAilments, setBodyExaminationAilments] = useState();
+    const [bodyOrgansAndTests, setBodyOrgansAndTests] = useState();
+    const [contagiuosSkinDiseases, setContagiuosSkinDiseases] = useState();
+    const [majorDisability, setMajorDisability] = useState();
+    const [visualActivity, setVisualActivity] = useState();
+    const [visualTestDetails, setVisualTestDetails] = useState();
+    const [eyeSightDetails, setEyeSightDetails] = useState();
+    const [testEvaluationsAndFindings, setTestEvaluationsAndFindings] = useState();
 
     useEffect(() => {
-        setMedicalDeclarationSectionValues(MEDICAL_DECLARATION_CONSENT_FIELDS);
-        setSection1Values(MEDICAL_EXAMINATION_1);
-        setSection2Values(MEDICAL_EXAMINATION_2);
-        setSection3Values(MEDICAL_EXAMINATION_3);
-        setSection4Values(MEDICAL_EXAMINATION_4);
-        setSection5Values(MAJOR_DISABILITY);
-        setSection6Values(VISUAL_ACTIVITY);
-        setTISection1Values(INVESTIGATION_VISUAL_DETAILS);
-        setTISection2Values(INVESTIGATION_VISUAL_DETAILS_2);
-        setTIChecboxQuestionsValues(INVESTIGATION_CHECKBOX_QUESTIONS);
+        setAilmentsHistoryDetails(AILMENT_HISTORY_DETAILS);
+        setBodyExaminationMetrics(BODY_EXAMINATION_METRICS);
+        setBodyExaminationAilments(BODY_EXAMINATION_AILMENTS);
+        setBodyOrgansAndTests(BODY_ORGANS_AND_TESTS);
+        setContagiuosSkinDiseases(CONTAGIOUS_SKIN_DISEASES);
+        setMajorDisability(MAJOR_DISABILITY);
+        setVisualActivity(VISUAL_ACTIVITY);
+        setVisualTestDetails(VISION_TEST_DETAILS);
+        setEyeSightDetails(EYE_SIGHT_DETAILS);
+        setTestEvaluationsAndFindings(TEST_EVALUATIONS_AND_FINDINGS);
     }, []);
 
     /* MEDICAL_CONSENT */
@@ -44,7 +53,7 @@ const MedicalFindings = () => {
     const renderConsentQuestions = () => {
         return (
             <>
-                {medicalDeclarationSectionValues && medicalDeclarationSectionValues.map((item, idx) => {
+                {ailmentsHistoryDetails && ailmentsHistoryDetails.map((item, idx) => {
                     return (
                         <div key={JSON.stringify(item.options)} className='questions-wrapper'>
                             <span  className='question'>
@@ -101,7 +110,7 @@ const MedicalFindings = () => {
     };
 
     const handleCheckbox = (obj, key) => {
-        const newData = medicalDeclarationSectionValues.map(item => {
+        const newData = ailmentsHistoryDetails.map(item => {
             item.options.map(o => {
                 for (const k in o) {
                     if (Object.hasOwnProperty.call(o, k) && k === key) {
@@ -112,12 +121,12 @@ const MedicalFindings = () => {
             });
             return item;
         });
-        setMedicalDeclarationSectionValues([...newData]);
+        setAilmentsHistoryDetails([...newData]);
     };
 
-    const medicalConsentSubmit = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(medicalDeclarationSectionValues)
+        console.log(ailmentsHistoryDetails)
         // const data = await createPatient({...values, fName: values.name});
         // navigate(PRS_ROOT_ROUTE);
     };
@@ -127,13 +136,13 @@ const MedicalFindings = () => {
     /* MEDICAL_EXAMINATION */
 
     const handleMedicalExam1Change = (obj, value) => {
-        const newData = MEDICAL_EXAMINATION_1.map(item => {
+        const newData = BODY_EXAMINATION_METRICS.map(item => {
             if(obj && item.key === obj.key) {
                 item.value = value;
             }
             return item;
         });
-        setSection1Values([...newData]);
+        setBodyExaminationMetrics([...newData]);
     };
 
     const renderSection1 = () => {
@@ -142,7 +151,7 @@ const MedicalFindings = () => {
                 <p>Details</p>
                 <div className="name-item">
                     {
-                        section1Values.map(item => {
+                        bodyExaminationMetrics.map(item => {
                             return <input
                                     className='medical-exam-input-fields'
                                     type="text"
@@ -158,23 +167,23 @@ const MedicalFindings = () => {
     };
 
     const handleMedicalExam2Change = (obj, value) => {
-        const newData = section2Values.map(item => {
+        const newData = bodyExaminationAilments.map(item => {
             if(obj && item.key === obj.key) {
                 item.value = value;
             }
             return item;
         });
-        setSection2Values([...newData]);
+        setBodyExaminationAilments([...newData]);
     };
 
     const handkeMedicalExam2Remark = (value) => {
-        const newData = section2Values.map(i => {
+        const newData = bodyExaminationAilments.map(i => {
             if(i.key == "remarks_2") {
                 i.value = value;
             };
             return i;
         })
-        setSection2Values([...newData]);
+        setBodyExaminationAilments([...newData]);
     };
 
     const renderSection2 = () => {
@@ -184,7 +193,7 @@ const MedicalFindings = () => {
                     <p>Details</p>
                     <div className='options'>
                         <ul>
-                            {section2Values && section2Values.map((item, idx) => {
+                            {bodyExaminationAilments && bodyExaminationAilments.map((item, idx) => {
                                 return (
                                     <>
                                     {!checkIfObjectHasRemarksKey(item) ?
@@ -212,20 +221,19 @@ const MedicalFindings = () => {
                             })}
                         </ul>
                     </div>
-                    {JSON.stringify(section2Values)}
                 </div>
             </>
         );
     };
 
     const handleSection3Input = (obj, value) => {
-        const newData = section3Values.map(item => {
+        const newData = bodyOrgansAndTests.map(item => {
             if(obj && item.key === obj.key) {
                 item.value = value;
             }
             return item;
         });
-        setSection3Values([...newData]);
+        setBodyOrgansAndTests([...newData]);
     };
 
     const renderSection3 = () => {
@@ -234,7 +242,7 @@ const MedicalFindings = () => {
                 <p>Details</p>
                 <div className="name-item">
                     {
-                        section3Values && section3Values.map(item => {
+                        bodyOrgansAndTests && bodyOrgansAndTests.map(item => {
                             return (
                                 <input className='medical-exam-input-fields' onChange={(e) => handleSection3Input(item, e.target.value)} type="text" name={item.key} placeholder={item.label} />
                             )
@@ -246,11 +254,11 @@ const MedicalFindings = () => {
     };
 
     const handleSection4Remark = (value) => {
-        const newData = section4Values.map(i => {
+        const newData = contagiuosSkinDiseases.map(i => {
             i.remarks_4 = value;
             return i;
         });
-        setSection4Values([...newData]);
+        setContagiuosSkinDiseases([...newData]);
     };
 
     const renderSection4 = () => {
@@ -261,7 +269,7 @@ const MedicalFindings = () => {
                         Contagious skin disease?
                     </span>
                     <div className='options'>
-                        {section4Values && section4Values.map((item, idx) => {
+                        {contagiuosSkinDiseases && contagiuosSkinDiseases.map((item, idx) => {
                             return (
                                 <ul>
                                     {item.options.map((item, idx) => {
@@ -289,7 +297,7 @@ const MedicalFindings = () => {
     };
 
     const handleSection4Change = (obj, key, value) => {
-        const newOptionsData = section4Values.map(i => {
+        const newOptionsData = contagiuosSkinDiseases.map(i => {
             i.options.find(i => {
                 if(i[key] === obj[key]) {
                     i[key] = value;
@@ -298,7 +306,7 @@ const MedicalFindings = () => {
             })
             return i;
         });
-        setSection4Values([...newOptionsData]);
+        setContagiuosSkinDiseases([...newOptionsData]);
     };
 
     const renderSection4Options = (listOfObj) => Object.entries(listOfObj).map(([key,value], idx) => {
@@ -320,9 +328,9 @@ const MedicalFindings = () => {
     });
 
     const handleSection5Input = (key, value) => {
-        const section5Data = section5Values;
+        const section5Data = majorDisability;
         section5Data[key] = value;
-        setSection5Values({...section5Data});
+        setMajorDisability({...section5Data});
     };
 
     const renderSection5Questions = () => {
@@ -330,7 +338,7 @@ const MedicalFindings = () => {
             <>
                 <div className='questions-wrapper'>
                     <span className='question'>
-                        {section5Values.q}
+                        {majorDisability.q}
                     </span>
                     <div className='options'>
                         <ul>
@@ -339,8 +347,8 @@ const MedicalFindings = () => {
                                     type="checkbox"
                                     name="yes"
                                     id="yes"
-                                    value={section5Values.yes}
-                                    onChange={(e) => setSection5Values({...section5Values, yes: e.target.checked})}
+                                    value={majorDisability.yes}
+                                    onChange={(e) => setMajorDisability({...majorDisability, yes: e.target.checked})}
                                     readOnly
                                 />
                             </li>
@@ -351,7 +359,7 @@ const MedicalFindings = () => {
                                     className='medical-exam-input-fields'
                                     placeholder='Details'
                                     onChange={(e) => handleSection5Input('details', e.target.value)}
-                                    value={section5Values.details}
+                                    value={majorDisability.details}
                                 />
                             </li>
                             <li>
@@ -361,7 +369,7 @@ const MedicalFindings = () => {
                                     className='medical-exam-input-fields'
                                     placeholder='Remark'
                                     onChange={(e) => handleSection5Input('remark', e.target.value)}
-                                    value={section5Values.remark}
+                                    value={majorDisability.remark}
                                 />
                             </li>
                         </ul>
@@ -371,14 +379,14 @@ const MedicalFindings = () => {
                             <ul>
                                 <li>
                                     <span className='question'>
-                                        {section6Values.q}
+                                        {visualActivity.q}
                                     </span>
                                     <input
                                         type="checkbox"
                                         name="eye_test_done"
                                         id="eye_test_done"
-                                        onChange={(e) => setSection6Values({...section6Values, eye_test_done: e.target.checked})}
-                                        value={section6Values.eye_test_done}
+                                        onChange={(e) => setVisualActivity({...visualActivity, eye_test_done: e.target.checked})}
+                                        value={visualActivity.eye_test_done}
                                         readOnly
                                     />
                                 </li>
@@ -395,7 +403,7 @@ const MedicalFindings = () => {
     /* TEST_INVESTIGATION */
 
     const handleTITableData = (key, eye, options, value) => {
-        const newData = tiSection1Values.map((item) => {
+        const newData = visualTestDetails.map((item) => {
             if(key == "color_vision") {
                 item[key] = value;
             } else {
@@ -410,7 +418,7 @@ const MedicalFindings = () => {
             }
             return item;
         });
-        setTISection1Values([...newData]);
+        setVisualTestDetails([...newData]);
     };
 
     const renderTestInvestigationVisualQuestions1 = () => {
@@ -474,7 +482,7 @@ const MedicalFindings = () => {
     };
 
     const handleTableChange = (eye_type, key, value) => {
-        const newData = tiSection2Values.filter(i => {
+        const newData = eyeSightDetails.filter(i => {
             if(i.eye.toLowerCase() == eye_type) {
                 i.eye_power.map(i => {
                     i.options[key] = value;
@@ -483,14 +491,14 @@ const MedicalFindings = () => {
             }
             return i;
         });
-        setTISection2Values([...newData]);
+        setEyeSightDetails([...newData]);
     };
 
     const renderTable = () => {
         return (
             <>
                 {
-                    tiSection2Values && tiSection2Values.map((item, idx) => {
+                    eyeSightDetails && eyeSightDetails.map((item, idx) => {
                         return (
                             <tr key={idx}>
                                 <td key={item.eye}>{item.eye}</td>
@@ -564,9 +572,9 @@ const MedicalFindings = () => {
     };
 
     const handleTiCheckboxQuestion = (key, value) => {
-        const newData = tiChecboxQuestionsValues;
+        const newData = testEvaluationsAndFindings;
         newData[key] = value;
-        setTIChecboxQuestionsValues({...newData});
+        setTestEvaluationsAndFindings({...newData});
     }
 
     const renderTestInvestigationQuestions3 = () => {
@@ -579,16 +587,17 @@ const MedicalFindings = () => {
                             <li>
                                 <label>ECG Findings</label>
                                 <input
-                                    type="text"
-                                    className="ti3-input-fields"
-                                    value={tiChecboxQuestionsValues.ecg_done_remark}
-                                    onChange={(e) => handleTiCheckboxQuestion("ecg_done_remark", e.target.value)}
-                                />
-                                <input
                                     type="checkbox"
                                     name='ecg_findings'
-                                    value={tiChecboxQuestionsValues.ecg_done}
+                                    value={testEvaluationsAndFindings.ecg_done}
                                     onChange={(e) => handleTiCheckboxQuestion("ecg_done", e.target.checked)}
+                                />
+                                <input
+                                    type="text"
+                                    className="ti3-input-fields"
+                                    value={testEvaluationsAndFindings.ecg_done_remark}
+                                    onChange={(e) => handleTiCheckboxQuestion("ecg_done_remark", e.target.value)}
+                                    disabled={!testEvaluationsAndFindings.ecg_done}
                                 />
                             </li>
                             <li>
@@ -596,14 +605,15 @@ const MedicalFindings = () => {
                                 <input
                                     type="checkbox"
                                     name='ecg_findings'
-                                    value={tiChecboxQuestionsValues.lab_sample_taken}
+                                    value={testEvaluationsAndFindings.lab_sample_taken}
                                     onChange={(e) => handleTiCheckboxQuestion("lab_sample_taken", e.target.checked)}
                                 />
                                 <input
                                     type="text"
                                     className="ti3-input-fields"
-                                    value={tiChecboxQuestionsValues.lab_sample_taken_value}
+                                    value={testEvaluationsAndFindings.lab_sample_taken_value}
                                     onChange={(e) => handleTiCheckboxQuestion("lab_sample_taken_value", e.target.value)}
+                                    disabled={!testEvaluationsAndFindings.lab_sample_taken}
                                 />
                             </li>
                             <li>
@@ -611,14 +621,15 @@ const MedicalFindings = () => {
                                 <input
                                     type="checkbox"
                                     name='ecg_findings'
-                                    value={tiChecboxQuestionsValues.audiometry_done_checked}
+                                    value={testEvaluationsAndFindings.audiometry_done_checked}
                                     onChange={(e) => handleTiCheckboxQuestion("audiometry_done_checked", e.target.checked)}
                                 />
                                 <input
                                     type="text"
                                     className="ti3-input-fields"
-                                    value={tiChecboxQuestionsValues.audiometry_done_value}
+                                    value={testEvaluationsAndFindings.audiometry_done_value}
                                     onChange={(e) => handleTiCheckboxQuestion("audiometry_done_value", e.target.value)}
+                                    disabled={!testEvaluationsAndFindings.audiometry_done_checked}
                                     placeholder='Remark'
                                 />
                             </li>
@@ -627,7 +638,7 @@ const MedicalFindings = () => {
                                 <input
                                     type="text"
                                     className="ti3-input-fields"
-                                    value={tiChecboxQuestionsValues.abnormal_reports_value}
+                                    value={testEvaluationsAndFindings.abnormal_reports_value}
                                     onChange={(e) => handleTiCheckboxQuestion("abnormal_reports_value", e.target.value)}
                                     placeholder='Remark'
                                 />
@@ -637,13 +648,13 @@ const MedicalFindings = () => {
                                 <input
                                     type="text"
                                     className="ti3-input-fields"
-                                    value={tiChecboxQuestionsValues.deworming_value}
+                                    value={testEvaluationsAndFindings.deworming_value}
                                     onChange={(e) => handleTiCheckboxQuestion("deworming_value", e.target.value)}
                                 />
                                 <input
                                     type="text"
                                     className="ti3-input-fields"
-                                    value={tiChecboxQuestionsValues.deworming_remark}
+                                    value={testEvaluationsAndFindings.deworming_remark}
                                     onChange={(e) => handleTiCheckboxQuestion("deworming_remark", e.target.value)}
                                     placeholder='Remark'
                                 />
@@ -653,7 +664,7 @@ const MedicalFindings = () => {
                                 <input
                                     type="text"
                                     className="ti3-input-fields"
-                                    value={tiChecboxQuestionsValues.covid_value}
+                                    value={testEvaluationsAndFindings.covid_value}
                                     onChange={(e) => handleTiCheckboxQuestion("covid_value", e.target.value)}
                                 />
                             </li>
@@ -662,7 +673,7 @@ const MedicalFindings = () => {
                                 <input
                                     type="text"
                                     className="ti3-input-fields"
-                                    value={tiChecboxQuestionsValues.evaluation_value}
+                                    value={testEvaluationsAndFindings.evaluation_value}
                                     onChange={(e) => handleTiCheckboxQuestion("evaluation_value", e.target.value)}
                                 />
                             </li>
@@ -671,7 +682,7 @@ const MedicalFindings = () => {
                                 <input
                                     type="text"
                                     className="ti3-input-fields"
-                                    value={tiChecboxQuestionsValues.treatment_value}
+                                    value={testEvaluationsAndFindings.treatment_value}
                                     onChange={(e) => handleTiCheckboxQuestion("treatment_value", e.target.value)}
                                 />
                             </li>
@@ -680,7 +691,7 @@ const MedicalFindings = () => {
                                 <input
                                     type="text"
                                     className="ti3-input-fields"
-                                    value={tiChecboxQuestionsValues.restriction_value}
+                                    value={testEvaluationsAndFindings.restriction_value}
                                     onChange={(e) => handleTiCheckboxQuestion("restriction_value", e.target.value)}
                                 />
                             </li>
@@ -689,7 +700,7 @@ const MedicalFindings = () => {
                                 <input
                                     type="text"
                                     className="ti3-input-fields"
-                                    value={tiChecboxQuestionsValues.follow_up_value}
+                                    value={testEvaluationsAndFindings.follow_up_value}
                                     onChange={(e) => handleTiCheckboxQuestion("follow_up_value", e.target.value)}
                                 />
                             </li>
@@ -698,7 +709,7 @@ const MedicalFindings = () => {
                                 <input
                                     type="text"
                                     className="ti3-input-fields"
-                                    value={tiChecboxQuestionsValues.remark_value}
+                                    value={testEvaluationsAndFindings.remark_value}
                                     onChange={(e) => handleTiCheckboxQuestion("remark_value", e.target.value)}
                                 />
                             </li>
@@ -710,7 +721,7 @@ const MedicalFindings = () => {
                                     <input
                                         type="checkbox"
                                         name='ecg_findings'
-                                        value={tiChecboxQuestionsValues.fit}
+                                        value={testEvaluationsAndFindings.fit}
                                         onChange={(e) => handleTiCheckboxQuestion("fit", e.target.checked)}
                                     />
                                 </li>
@@ -718,7 +729,7 @@ const MedicalFindings = () => {
                                     <input
                                         type="checkbox"
                                         name='ecg_findings'
-                                        value={tiChecboxQuestionsValues.fit_with_restrictions}
+                                        value={testEvaluationsAndFindings.fit_with_restrictions}
                                         onChange={(e) => handleTiCheckboxQuestion("fit_with_restrictions", e.target.checked)}
                                     />
                                 </li>
@@ -726,7 +737,7 @@ const MedicalFindings = () => {
                                     <input
                                         type="checkbox"
                                         name='ecg_findings'
-                                        value={tiChecboxQuestionsValues.temporary_unfit}
+                                        value={testEvaluationsAndFindings.temporary_unfit}
                                         onChange={(e) => handleTiCheckboxQuestion("temporary_unfit", e.target.checked)}
                                     />
                                 </li>
@@ -734,7 +745,7 @@ const MedicalFindings = () => {
                                     <input
                                         type="checkbox"
                                         name='ecg_findings'
-                                        value={tiChecboxQuestionsValues.unfit}
+                                        value={testEvaluationsAndFindings.unfit}
                                         onChange={(e) => handleTiCheckboxQuestion("unfit", e.target.checked)}
                                     />
                                 </li>
@@ -754,17 +765,17 @@ const MedicalFindings = () => {
                 <div className="form-description">
                     <h2>Medical declaration consent</h2>
                 </div>
-                    {medicalDeclarationSectionValues && renderConsentQuestions()}
-                    {section1Values && renderSection1()}
+                    {ailmentsHistoryDetails && renderConsentQuestions()}
+                    {bodyExaminationMetrics && renderSection1()}
                     {renderSection2()}
                     {renderSection3()}
                     {renderSection4()}
-                    {section5Values && renderSection5Questions()}
+                    {majorDisability && renderSection5Questions()}
                     {renderTestInvestigationVisualQuestions1()}
                     {renderTestInvestigationVisualQuestions2()}
-                    {tiChecboxQuestionsValues && renderTestInvestigationQuestions3()}
+                    {testEvaluationsAndFindings && renderTestInvestigationQuestions3()}
             </div>
-            <button onClick={medicalConsentSubmit} className="submit-btn position-prescription-btn" >Submit</button>
+            <button onClick={handleSubmit} className="submit-btn position-prescription-btn" >Submit</button>
         </>
     )
 }
