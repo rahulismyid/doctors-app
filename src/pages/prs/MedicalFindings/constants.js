@@ -197,14 +197,14 @@ export const EYE_SIGHT_DETAILS = [{
     eye_power: [{
         power_type: "dist",
         options: {
-            r_sph: "1rd",
-            r_cyl: "2rd",
-            r_axis: "3rd",
-            r_vn: "4rd",
-            l_sph: "1ld",
-            l_cyl: "2ld",
-            l_axis: "3ld",
-            l_vn: "4ld"
+            r_sph: "",
+            r_cyl: "",
+            r_axis: "",
+            r_vn: "",
+            l_sph: "",
+            l_cyl: "",
+            l_axis: "",
+            l_vn: ""
         }
     }]
 }, {
@@ -212,14 +212,14 @@ export const EYE_SIGHT_DETAILS = [{
     eye_power: [{
         power_type: "near",
         options: {
-            r_sph: "1rd",
-            r_cyl: "2rd",
-            r_axis: "3rd",
-            r_vn: "4rd",
-            l_sph: "1ld",
-            l_cyl: "2ld",
-            l_axis: "3ld",
-            l_vn: "4ld"
+            r_sph: "",
+            r_cyl: "",
+            r_axis: "",
+            r_vn: "",
+            l_sph: "",
+            l_cyl: "",
+            l_axis: "",
+            l_vn: ""
         }
     }],
 }];

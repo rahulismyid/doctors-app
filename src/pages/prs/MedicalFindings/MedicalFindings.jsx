@@ -1,4 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useDB } from '../../../contexts/DbContext';
+import { GlobalContext } from '../../../contexts/GlobalContext';
 import { checkIfObjectHasRemarksKey } from '../../../utils/utils';
 import {
     AILMENT_HISTORY_DETAILS,
@@ -32,6 +35,10 @@ const MedicalFindings = () => {
     const [visualTestDetails, setVisualTestDetails] = useState();
     const [eyeSightDetails, setEyeSightDetails] = useState();
     const [testEvaluationsAndFindings, setTestEvaluationsAndFindings] = useState();
+    const { firstStepData } = useContext(GlobalContext);
+    const { patientMedicalDetails, fetchPatientDetails } = useDB();
+    const navigate = useNavigate();
+    const { pid } = useParams();                              //returns the :id
 
     useEffect(() => {
         setAilmentsHistoryDetails(AILMENT_HISTORY_DETAILS);
@@ -44,6 +51,29 @@ const MedicalFindings = () => {
         setEyeSightDetails(EYE_SIGHT_DETAILS);
         setTestEvaluationsAndFindings(TEST_EVALUATIONS_AND_FINDINGS);
     }, []);
+
+    useEffect(() => {
+        if(pid) {
+            getData()
+        }
+    },[]);
+
+    const getData = async () => {
+        const data = await fetchPatientDetails(pid);
+        console.log('===>', data[0]);
+        if(data && data[0]) {
+            const newData = data[0];
+            setAilmentsHistoryDetails(newData.ailmentsHistoryDetails)
+            setBodyExaminationMetrics(newData.bodyExaminationMetrics)
+            setBodyExaminationAilments(newData.bodyExaminationAilments)
+            setBodyOrgansAndTests(newData.bodyOrgansAndTests)
+            setContagiuosSkinDiseases(newData.contagiuosSkinDiseases)
+            setMajorDisability(newData.majorDisability)
+            setVisualTestDetails(newData.visualTestDetails)
+            setEyeSightDetails(newData.eyeSightDetails)
+            setTestEvaluationsAndFindings(newData.testEvaluationsAndFindings)
+        }
+    };
 
     /* MEDICAL_CONSENT */
 
@@ -529,7 +559,7 @@ const MedicalFindings = () => {
                 }
             </>
         )
-    }
+    };
 
     const renderTestInvestigationVisualQuestions2 = () => {
         return (
@@ -565,7 +595,7 @@ const MedicalFindings = () => {
         const newData = testEvaluationsAndFindings;
         newData[key] = value;
         setTestEvaluationsAndFindings({...newData});
-    }
+    };
 
     const renderTestInvestigationQuestions3 = () => {
         return (
@@ -751,20 +781,25 @@ const MedicalFindings = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(ailmentsHistoryDetails)
-        // const data = await createPatient({...values, fName: values.name});
-        // navigate(PRS_ROOT_ROUTE);
-
-        // ailmentsHistoryDetails,
-        // bodyExaminationMetrics,
-        // bodyExaminationAilments,
-        // bodyOrgansAndTests,
-        // contagiuosSkinDiseases,
-        // majorDisability,
-        // visualActivity,
-        // visualTestDetails,
-        // eyeSightDetails,
-        // testEvaluationsAndFindings,
+        if(firstStepData.pid) {
+            const postDataObject = {
+                pid: firstStepData?.pid,
+                ailmentsHistoryDetails,
+                bodyExaminationMetrics,
+                bodyExaminationAilments,
+                bodyOrgansAndTests,
+                contagiuosSkinDiseases,
+                majorDisability,
+                visualTestDetails,
+                eyeSightDetails,
+                testEvaluationsAndFindings,
+            };
+            console.log(postDataObject);
+            patientMedicalDetails(postDataObject).then(res => {
+                alert("Saved!");
+                navigate("/app/list-patient");
+            });
+        }
     };
 
 

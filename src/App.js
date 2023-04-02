@@ -6,7 +6,6 @@ import DbProvider from "./contexts/DbContext";
 import NotFound from "./pages/404/404";
 import PRSHomeScreen from "./pages/prs/PRSHomeScreen/PRSHomeScreen";
 import NewPatient from "./pages/prs/AddPatient/NewPatient";
-import PatientList from "./pages/prs/PatientList/PatientList";
 
 import AuthLayout from "./Layout/AuthLayout";
 import GlobalContextProvider from "./contexts/GlobalContext";
@@ -14,6 +13,7 @@ import MedicalConsent from "./pages/prs/MedicalConsent/MedicalConsent";
 import MedicalExamination from "./pages/prs/MedicalExamination/MedicalExamination";
 import PatientListTable from "./pages/prs/PatientList/PatientListTable";
 import MedicalFindings from "./pages/prs/MedicalFindings/MedicalFindings";
+import Modal from "./components/Modal/Modal";
 
 function App() {
   return (
@@ -22,15 +22,14 @@ function App() {
         <AuthProvider>
           <DbProvider>
             <GlobalContextProvider>
+              <Modal />
               <Routes>
                 <Route path='/' element={<Login/>}/>
                 <Route path='/app' element={<Navigate to={'/app/home'}/>} />
                 <Route path='/app/home' element={<AuthLayout><PRSHomeScreen/></AuthLayout>} />
                 <Route path='/app/add-patient' element={<AuthLayout><NewPatient/></AuthLayout>} />
                 <Route path='/app/list-patient' element={<AuthLayout><PatientListTable /></AuthLayout>} />
-                <Route path='/app/medical-consent' element={<AuthLayout><MedicalConsent /></AuthLayout>} />
-                {/* <Route path='/app/medical-examination' element={<MedicalConsent />} /> */}
-                <Route path='/app/medical-findings' element={<AuthLayout><MedicalFindings /></AuthLayout>} />
+                <Route key={'finding'} path='/app/medical-findings/:pid?' element={<AuthLayout><MedicalFindings /></AuthLayout>} />
                 <Route path='/login' element={<Login />}/>
                 <Route path='/signup' element={<Signup />}/>
                 <Route path='*' element={<NotFound/>}/>

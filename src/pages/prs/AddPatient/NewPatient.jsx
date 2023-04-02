@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import Modal from '../../../components/Modal/Modal';
 import { useDB } from '../../../contexts/DbContext';
 import { GlobalContext } from '../../../contexts/GlobalContext';
 import { checkIfObjectHasEmptyProperty } from '../../../utils/utils';
@@ -28,12 +27,11 @@ const initialValues = {
 
 const NewPatient = () => {
     const [values, setValues] = useState();
-    const [showModal, setShowModal] = useState(false);
     const [showError, setShowError] = useState(false);
     const navigate = useNavigate();
     const { createPatient } = useDB();
     const ref = useRef();
-    const {setFirstStepData } = useContext(GlobalContext);
+    const {setFirstStepData, setModalData } = useContext(GlobalContext);
 
     useEffect(() => {
         setValues(initialValues);
@@ -45,32 +43,48 @@ const NewPatient = () => {
             setShowError(true);
         } else {
             setShowError(false);
-            setShowModal(true);
+            setModalData({
+                open: true,
+                title: 'Confirm',
+                msg: 'Are you sure you want to save this patient details?',
+                callback: savePatientDetails,
+            });
         }
     };
 
-    const savePatientDetails = async () => {
-        console.log(values);
-        setFirstStepData(values);
-        await createPatient(values);
-        alert('Saved');
-        navigate('/app', {replace: true});
+    const submitForNextStep = (e) => {
+        e.preventDefault();
+        setModalData({
+            open: true,
+            title: 'Save details.',
+            msg: 'Are you sure to you want to save and go to next step?',
+            callback: () => savePatientDetails(true)
+        });
     };
 
-    const _onFocus = (e) => {
-        e.currentTarget.type = "date";
-    };
-
-    const _onBlur = (e) => {
-        e.currentTarget.type = "text";
-        e.currentTarget.placeholder = "Date of Joining";
+    const savePatientDetails = (goToNextStep = false) => {
+        if(values.pid) {
+            createPatient(values).then((res) => {
+                alert('Saved');
+                setFirstStepData(values);
+                if(goToNextStep) {
+                    navigate('/app/medical-findings', {replace: true});
+                } else {
+                    navigate('/app/list-patient', {replace: true});
+                }
+            });
+        } else {
+            setModalData({
+                open: true,
+                title: 'Error.',
+                msg: 'Error occurred. Please try saving again.',
+                callback: () => savePatientDetails(true)
+            });
+        }
     };
 
     return (
         <>
-        {
-            showModal ? <Modal open={showModal} setOpen={setShowModal} title={'Confirm'} msg={'Are you sure you want to save this patient details?'} callback={savePatientDetails} /> : null
-        }
             <div className="new-patient-form-container">
                 <form action="/">
                     <h1><span className='new-patient-form-header-less-than' onClick={() => navigate("/")}>&lt;</span>New Patient Details</h1>
@@ -79,7 +93,7 @@ const NewPatient = () => {
                         <div className="new-patient-input-fields-wrapper">
                             <input className='new-patient-input-fields' type="text" name="name" placeholder="Name" onChange={(e) => setValues({...values, name: e.target.value})} />
                             <input className='new-patient-input-fields' type="text" name="code" placeholder="Code" onChange={(e) => setValues({...values, code: e.target.value})} />
-                            <input className='new-patient-input-fields' type="text" name="age" placeholder="Age" onChange={(e) => setValues({...values, age: e.target.value})} />
+                            <input className='new-patient-input-fields' type="number" name="age" placeholder="Age" onChange={(e) => setValues({...values, age: e.target.value})} />
                             <input
                                 className='new-patient-input-fields date-field'
                                 ref={ref}
@@ -111,8 +125,8 @@ const NewPatient = () => {
                             : null
                     }
                     <div className="new-patient-btn-block">
-                        <button onClick={handleSubmit} href="/">Add patient</button>
-                        <button onClick={handleSubmit} href="/">Proceed to add more details</button>
+                        <button onClick={handleSubmit}>Add new patient</button>
+                        <button onClick={submitForNextStep}>Proceed to add more details</button>
                     </div>
                 </form>
             </div>

@@ -48,6 +48,7 @@ p {
 }
 .btn-close:hover {
     color: #919191;
+    cursor: pointer;
 }
 .modal:target:before {
     display: none;

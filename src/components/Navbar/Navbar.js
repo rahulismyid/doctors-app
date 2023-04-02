@@ -1,20 +1,28 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import { HOME_ROUTE, PRS_ROOT_ROUTE, ROOT_ROUTE } from '../../routes/constants';
-import Modal from '../Modal/Modal'
 import logo from "../../pages/prs/PRSPrintDocument/target001_cropped.png";
+import { GlobalContext } from '../../contexts/GlobalContext';
 import "./styles.css"
 
 const Navbar = () => {
-    const [openModal, setOpenModal] = useState(false);
 	const { logout } = useAuth();
     const navigate = useNavigate();
+    const { setModalData } = useContext(GlobalContext);
 
     const handleLogout = async () => {
         await logout();
         navigate('/login', {replace: true});
-    }
+    };
+
+    const handleModalClick = () => {
+        setModalData({
+            open: true,
+            title: 'Logout',
+            msg: 'Are you sure to you want to logout?',
+            callback: handleLogout
+        });
+    };
 
     return (
         <>
@@ -29,7 +37,7 @@ const Navbar = () => {
                     <ul id="menu">
                         <ul id="menu">
                             <li><Link to="/"> Home</Link></li>
-                            <li><a onClick={() => setOpenModal(true)}>Logout</a></li>
+                            <li><a onClick={() => handleModalClick()}>Logout</a></li>
                         </ul>
                         {/* <a href="#myModal" className="trigger-btn" data-toggle="modal">Click to Open Confirm Modal</a> */}
                     </ul>
@@ -50,8 +58,6 @@ const Navbar = () => {
                     <li><a href="#logout">Logout</a></li>
                 </ul>
             </div>
-            {openModal && <Modal open={openModal} setOpen={setOpenModal} title="Logout" msg="Are you sure to logout?" callback={handleLogout}/>}
-
         </>
     )
 }

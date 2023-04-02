@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import Modal from "../components/Modal/Modal";
 import Navbar from "../components/Navbar/Navbar";
 import { useAuth } from "../contexts/AuthContext";
 
@@ -20,6 +21,7 @@ export default function AuthLayout({children}) {
 	}
  	return <>
 		<Navbar />
+		<Modal />
 		{children}
 	</>
 }

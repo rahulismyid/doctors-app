@@ -91,11 +91,14 @@ const PatientListTable = () => {
 		);
 	}, [filterText, resetPaginationToggle]);
 
+    const onRowClicked = (row) => navigate(`/app/medical-findings/${row.pid}`);
+
     return (
         <div className='patient-list-table-container'>
             <DataTable
                 // title="Patient List"
                 theme="default"
+                onRowClicked={onRowClicked}
                 columns={COLUMNS}
                 data={filteredItems}
                 customStyles={customStyles}
@@ -108,7 +111,11 @@ const PatientListTable = () => {
                 dense
                 persistTableHead
                 fixedHeader
-                fixedHeaderScrollHeight="300px"
+                fixedHeaderScrollHeight="400px"
+                striped
+                responsive
+                pointerOnHover
+                highlightOnHover
             />
         </div>
     )

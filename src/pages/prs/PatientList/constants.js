@@ -27,6 +27,9 @@ export const COLUMNS_HEADER_TITLE = [
 ];
 
 export const COLUMNS = [{
+    name: 'PID',
+    selector: row => row.pid,
+}, {
     name: 'Name',
     selector: row => row.name,
     sortable: true,
@@ -38,6 +41,7 @@ export const COLUMNS = [{
     name: 'Gender',
     selector: row => row.gender,
     sortable: true,
+    minWidth: 50
 }, {
     name: 'Code',
     selector: row => row.code,
@@ -55,15 +59,7 @@ export const COLUMNS = [{
     selector: row => row.emergency_mobile,
     sortable: true,
 }, {
-    name: 'Emergency Contact Person',
-    selector: row => row.emergency_contact_person,
-    sortable: true,
-}, {
     name: 'Date Of Joining',
     selector: row => row.doj,
-    sortable: true,
-}, {
-    name: 'Son of',
-    selector: row => row.name,
     sortable: true,
 }];

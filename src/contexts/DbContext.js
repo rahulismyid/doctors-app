@@ -4,14 +4,13 @@ import {
 	collection,
 	getDocs,
 	addDoc,
+	where,
+	query,
 	// deleteDoc,
 	// doc,
-	// query,
-	// where,
 	// updateDoc,
 } from "firebase/firestore";
 import { useAuth } from "./AuthContext";
-// import { MEDICAL_DECLARATION_CONSENT_FIELDS } from "../pages/prs/Prescription/constants.js";
 
 const DbContext = React.createContext();
 export function useDB() {
@@ -26,6 +25,7 @@ export default function DbProvider({ children }) {
 	const usersCollectionRef = collection(db, "users");
 	const patientsCollectionRef = collection(db, "patients");
 	const consentCollectionRef = collection(db, "medical_consent_questions");
+	const patientMedicalDetailsRef = collection(db, "patient_medical_details");
 
 	// Fetching data from DB
 	const fetchAllPatients = async () => {
@@ -36,7 +36,6 @@ export default function DbProvider({ children }) {
 	const fetchAllConsents = async () => {
 		const data = await getDocs(consentCollectionRef);
 		let o = [];
-		// console.log()
 		const obj = data.docs.map((doc) => ({ ...doc.data() }))[0]
 		Object.entries(obj).map((i) => {
 			o.push(i[1])
@@ -61,41 +60,48 @@ export default function DbProvider({ children }) {
 		});
 	};
 
-	// const addMedicalConsentQues = async () => {
-	// 	await addDoc(consentCollectionRef, {...MEDICAL_DECLARATION_CONSENT_FIELDS}).then(res => {
-	// 		console.log(res);
-	// 	}).catch(err => {
-	// 		console.log(err)
-	// 	});
-	// }
-
 	// create new Patient in the DB
-	const createPatient = async (data) => {
-		await addDoc(patientsCollectionRef, {
+	const createPatient = (data) => new Promise((resolve, reject) => {
+		addDoc(patientsCollectionRef, {
 			uid: currentUser.uid,
 			...data
+		}).then(res => {
+			resolve(res);
+		}).catch(err => reject(err));
+	});
+
+	const patientMedicalDetails = (data, pid) => {
+		return new Promise((resolve, reject) => {
+			addDoc(patientMedicalDetailsRef, {
+				uid: currentUser.uid,
+				pid,
+				...data
+			}).then(res => {
+				resolve(res);
+			}).catch(err => reject(err));
 		});
 	};
+
+	const fetchPatientDetails = async(pid) => {
+        const data = await getDocs(query(patientMedicalDetailsRef, where("pid", "==", `${pid}`)));
+		return data.docs.map((doc) => ({...doc.data()}));
+    };
 
 	// value to return forn useDB();
 	const value = {
 		users,
 		allPatients,
 		medicalConsents,
+		patientMedicalDetails,
 		createUser,
 		createPatient,
-		fetchAllPatients
+		fetchAllPatients,
+		fetchPatientDetails,
 	};
 
 	useEffect(() => {
 		fetchAllConsents()
-		// addMedicalConsentQues();
 		fetchUsers();
-	}, [currentUser]);
-
-	useEffect(() => {
-		// fetchAllPatients();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [currentUser]);
 
 	return <DbContext.Provider value={value}>{children}</DbContext.Provider>;
