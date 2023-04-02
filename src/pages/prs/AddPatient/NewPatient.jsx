@@ -6,7 +6,13 @@ import { GlobalContext } from '../../../contexts/GlobalContext';
 import { checkIfObjectHasEmptyProperty } from '../../../utils/utils';
 import "./new-patient.styles.css";
 
+const generatePid = () => {
+    const timestamp = Date.now().toString();
+    return timestamp.slice(4,9);
+};
+
 const initialValues = {
+    pid: generatePid(),
     name: "",
     code: "",
     age: "",
@@ -81,10 +87,6 @@ const NewPatient = () => {
                                 name="doj"
                                 placeholder='Date of Joining'
                                 id="doj"
-                                // onFocus={_onFocus}
-                                // onBlur={_onBlur}
-                                // onFocus={() => (ref.current.type = "date")}
-                                // onBlur={() => (ref.current.type = "date")}
                                 onChange={(e) => setValues({...values, doj: e.target.value})}
                             />
                             <input className='new-patient-input-fields' type="text" name="department" placeholder="Department" onChange={(e) => setValues({...values, department: e.target.value})} />
