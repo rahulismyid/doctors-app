@@ -1,14 +1,14 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { db } from "../config/firebase.js";
 import {
-	collection,
-	getDocs,
 	addDoc,
-	where,
+	collection,
+	doc,
+	getDocs,
 	query,
+	updateDoc,
+	where,
 	// deleteDoc,
-	// doc,
-	// updateDoc,
 } from "firebase/firestore";
 import { useAuth } from "./AuthContext";
 
@@ -23,21 +23,21 @@ export default function DbProvider({ children }) {
 	const [medicalConsents, setMedicalConsents] = useState([]);
 	const [allPatients, setAllPatients] = useState([]);
 	const usersCollectionRef = collection(db, "users");
-	const patientsCollectionRef = collection(db, "patients");
+	const patientsPersonalDetailsCollectionRef = collection(db, "patients_personal_details");
 	const consentCollectionRef = collection(db, "medical_consent_questions");
 	const patientMedicalDetailsRef = collection(db, "patient_medical_details");
 
 	// Fetching data from DB
 	const fetchAllPatients = async () => {
-		const data = await getDocs(patientsCollectionRef);
+		const data = await getDocs(patientsPersonalDetailsCollectionRef);
 		setAllPatients(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
 	};
-	
+
 	const fetchAllConsents = async () => {
 		const data = await getDocs(consentCollectionRef);
 		let o = [];
 		const obj = data.docs.map((doc) => ({ ...doc.data() }))[0]
-		Object.entries(obj).map((i) => {
+		obj && Object.entries(obj).map((i) => {
 			o.push(i[1])
 			return i;
 		});
@@ -61,16 +61,40 @@ export default function DbProvider({ children }) {
 	};
 
 	// create new Patient in the DB
-	const createPatient = (data) => new Promise((resolve, reject) => {
-		addDoc(patientsCollectionRef, {
+	const createPatientPersonalDetails = (data) => new Promise((resolve, reject) => {
+		addDoc(patientsPersonalDetailsCollectionRef, {
 			uid: currentUser.uid,
+			medical_details_added: false,		// to check if the medical details has to be updated or inserted on next screen.
 			...data
 		}).then(res => {
 			resolve(res);
 		}).catch(err => reject(err));
 	});
 
-	const patientMedicalDetails = (data, pid) => {
+	const fetchPatientPersonalDetails = (pid) => {
+		return new Promise((resolve, reject) => {
+			getDocs(query(patientsPersonalDetailsCollectionRef, where("pid", "==", `${pid}`)))
+			.then((res) => {
+				resolve(res.docs.map((doc) => ({...doc.data(), id: doc.id })));
+			}).catch(err => reject(err));
+		});
+    };
+
+	const updatePatientPersonalDetails = (data, id) => {
+		return new Promise((resolve, reject) => {
+			updateDoc(doc(db, "patients_personal_details", id), {
+				medical_details_added: true,		// to check if the medical details has to be updated or inserted on next screen.
+				...data
+			}).then(res => {
+				resolve(res);
+			}).catch(err => {
+				alert(err)
+				reject(err);
+			});
+		})
+	};
+
+	const addPatientMedicalDetails = (data, pid) => {
 		return new Promise((resolve, reject) => {
 			addDoc(patientMedicalDetailsRef, {
 				uid: currentUser.uid,
@@ -82,9 +106,24 @@ export default function DbProvider({ children }) {
 		});
 	};
 
-	const fetchPatientDetails = async(pid) => {
-        const data = await getDocs(query(patientMedicalDetailsRef, where("pid", "==", `${pid}`)));
-		return data.docs.map((doc) => ({...doc.data()}));
+	const fetchPatientMedicalDetails = (pid) => {
+		return new Promise((resolve, reject) => {
+			getDocs(query(patientMedicalDetailsRef, where("pid", "==", `${pid}`)))
+			.then(res => {
+				const data = res.docs.map((doc) => ({...doc.data(), id: doc.id }));
+				resolve(data);
+			}).catch(err => reject(err));
+		});
+    };
+
+	const updatePatientDetails = (id, data) => {
+		return new Promise((resolve, reject) => {
+			updateDoc(doc(db, "patient_medical_details", id), {
+				...data
+			}).then(res => {
+				resolve(res);
+			}).catch(err => reject(err));
+		});
     };
 
 	// value to return forn useDB();
@@ -92,17 +131,15 @@ export default function DbProvider({ children }) {
 		users,
 		allPatients,
 		medicalConsents,
-		patientMedicalDetails,
+		addPatientMedicalDetails,
 		createUser,
-		createPatient,
+		createPatientPersonalDetails,
+		updatePatientPersonalDetails,
 		fetchAllPatients,
-		fetchPatientDetails,
+		fetchPatientMedicalDetails,
+		fetchPatientPersonalDetails,
+		updatePatientDetails,
 	};
-
-	useEffect(() => {
-		fetchAllConsents()
-		fetchUsers();
-	}, [currentUser]);
 
 	return <DbContext.Provider value={value}>{children}</DbContext.Provider>;
 }

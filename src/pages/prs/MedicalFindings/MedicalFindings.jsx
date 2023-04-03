@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { Fragment, useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDB } from '../../../contexts/DbContext';
 import { GlobalContext } from '../../../contexts/GlobalContext';
@@ -35,10 +35,18 @@ const MedicalFindings = () => {
     const [visualTestDetails, setVisualTestDetails] = useState();
     const [eyeSightDetails, setEyeSightDetails] = useState();
     const [testEvaluationsAndFindings, setTestEvaluationsAndFindings] = useState();
-    const { firstStepData } = useContext(GlobalContext);
-    const { patientMedicalDetails, fetchPatientDetails } = useDB();
+    const [patientPersonalDetails, setPatientPersonalDetails] = useState();
+    const [medicalDetailId, setMedicalDetailId] = useState();
+    const { setModalData } = useContext(GlobalContext);
+    const {
+        addPatientMedicalDetails,
+        fetchPatientMedicalDetails,
+        updatePatientDetails,
+        updatePatientPersonalDetails,
+        fetchPatientPersonalDetails,
+    } = useDB();
     const navigate = useNavigate();
-    const { pid } = useParams();                              //returns the :id
+    const { pid } = useParams();
 
     useEffect(() => {
         setAilmentsHistoryDetails(AILMENT_HISTORY_DETAILS);
@@ -54,13 +62,19 @@ const MedicalFindings = () => {
 
     useEffect(() => {
         if(pid) {
-            getData()
+            getPatientMedicalDetails();
+            fetchPatient();
         }
     },[]);
 
-    const getData = async () => {
-        const data = await fetchPatientDetails(pid);
-        console.log('===>', data[0]);
+    const fetchPatient = async () => {
+        const data = await fetchPatientPersonalDetails(pid);
+        setPatientPersonalDetails(data[0]);
+    }
+
+    const getPatientMedicalDetails = async () => {
+        const data = await fetchPatientMedicalDetails(pid);
+        setMedicalDetailId(data[0].id);
         if(data && data[0]) {
             const newData = data[0];
             setAilmentsHistoryDetails(newData.ailmentsHistoryDetails)
@@ -83,19 +97,17 @@ const MedicalFindings = () => {
                 {ailmentsHistoryDetails && ailmentsHistoryDetails.map((item, idx) => {
                     return (
                         <div key={JSON.stringify(item.options)} className='questions-wrapper'>
-                            <span  className='question'>
+                            <span className='question'>
                                 {idx+1}. {item.q}
                             </span>
                             <div key={idx} className='options'>
                                 <ul key={idx}>
-                                    {item.options.map((option, idx) => {
+                                    {item.options.map((option, index) => {
                                         return (
-                                            <>
-                                                <li key={idx}>
-                                                    {renderMedicalConsentOptions(option)}
-                                                </li>
+                                            <li key={`${idx}${index}`}>
+                                                {renderMedicalConsentOptions(option)}
                                                 {renderInputFieldForRemark(option)}
-                                            </>
+                                            </li>
                                         )})
                                     }
                                 </ul>
@@ -110,17 +122,16 @@ const MedicalFindings = () => {
     const renderMedicalConsentOptions = (listOfObj) => Object.entries(listOfObj).map(([key,value], idx) => {
         const option = listOfObj[key];
         return (
-            <>
+            <Fragment key={`${key}${idx}`}>
                 <input
-                    key={key}
                     id={option.toString()}
                     type="checkbox"
                     name={key}
                     checked={option}
                     onChange={() => handleCheckbox(listOfObj, key)}
                 />
-                <span key={option.toString()}>{capitalizeFirstLetter(key).replace(/_/g, " ")}</span>
-            </>
+                <span key={`${idx}${key}`}>{capitalizeFirstLetter(key).replace(/_/g, " ")}</span>
+            </Fragment>
         )
     });
 
@@ -171,12 +182,14 @@ const MedicalFindings = () => {
                 <p>Details</p>
                 <div className="name-item">
                     {
-                        bodyExaminationMetrics.map(item => {
+                        bodyExaminationMetrics.map((item, idx) => {
                             return <input
+                                    key={idx}
                                     className='medical-exam-input-fields'
                                     type="text"
                                     name={item.key}
                                     placeholder={item.label}
+                                    value={item.value}
                                     onChange={(e) => handleMedicalExam1Change(item, e.target.value)}
                                 />
                         })
@@ -215,7 +228,7 @@ const MedicalFindings = () => {
                         <ul>
                             {bodyExaminationAilments && bodyExaminationAilments.map((item, idx) => {
                                 return (
-                                    <>
+                                    <Fragment key={idx}>
                                     {!checkIfObjectHasRemarksKey(item) ?
                                         <>
                                             <li key={idx}>
@@ -226,7 +239,6 @@ const MedicalFindings = () => {
                                                     name={item.key}
                                                     onChange={(e) => handleMedicalExam2Change(item, e.target.checked)}
                                                     checked={item.value}
-                                                    defaultChecked={false}
                                                     readOnly
                                                 />
                                                 <span key={item.label}>
@@ -234,9 +246,15 @@ const MedicalFindings = () => {
                                                 </span>
                                             </li>
                                         </> : <li>
-                                            <input onChange={(e) => handkeMedicalExam2Remark(e.target.value)} className='medical-exam-input-fields remark-input' placeholder="Remark" type="text" />
+                                            <input
+                                                type="text"
+                                                className='medical-exam-input-fields remark-input'
+                                                placeholder="Remark"
+                                                value={item.value}
+                                                onChange={(e) => handkeMedicalExam2Remark(e.target.value)}
+                                            />
                                         </li>}
-                                    </>
+                                    </Fragment>
                                 )
                             })}
                         </ul>
@@ -262,9 +280,17 @@ const MedicalFindings = () => {
                 <p>Details</p>
                 <div className="name-item">
                     {
-                        bodyOrgansAndTests && bodyOrgansAndTests.map(item => {
+                        bodyOrgansAndTests && bodyOrgansAndTests.map((item, idx) => {
                             return (
-                                <input className='medical-exam-input-fields' onChange={(e) => handleSection3Input(item, e.target.value)} type="text" name={item.key} placeholder={item.label} />
+                                <input
+                                    key={idx}
+                                    type="text"
+                                    name={item.key}
+                                    className='medical-exam-input-fields'
+                                    placeholder={item.label}
+                                    value={item.value}
+                                    onChange={(e) => handleSection3Input(item, e.target.value)}
+                                />
                             )
                         })
                     }
@@ -291,25 +317,28 @@ const MedicalFindings = () => {
                     <div className='options'>
                         {contagiuosSkinDiseases && contagiuosSkinDiseases.map((item, idx) => {
                             return (
-                                <ul>
-                                    {item.options.map((item, idx) => {
+                                <ul key={idx}>
+                                    {item.options.map((item, index) => {
                                         return (
-                                            <>
-                                                <li key={idx}>
-                                                    {renderSection4Options(item)}
-                                                </li>
-                                            </>
+                                            <li key={index}>
+                                                {renderSection4Options(item)}
+                                            </li>
                                         )})
+                                    }
+                                    {
+                                        item.remarks_4 ? (
+                                            <input
+                                                type="text"
+                                                className="medical-exam-input-fields remark-input"
+                                                placeholder="Remark"
+                                                value={item.remarks_4}
+                                                onChange={(e) => handleSection4Remark(e.target.value)}
+                                            />
+                                        ) : null
                                     }
                                 </ul>
                             )
                         })}
-                        <input
-                            type="text"
-                            className="medical-exam-input-fields remark-input"
-                            onChange={(e) => handleSection4Remark(e.target.value)}
-                            placeholder="Remark"
-                        />
                     </div>
                 </div>
             </>
@@ -332,9 +361,8 @@ const MedicalFindings = () => {
     const renderSection4Options = (listOfObj) => Object.entries(listOfObj).map(([key,value], idx) => {
         const option = listOfObj[key];
         return (
-            <>
+            <Fragment key={key}>
                 <input
-                    key={key}
                     id={option.toString()}
                     type="checkbox"
                     name={key}
@@ -343,7 +371,7 @@ const MedicalFindings = () => {
                     readOnly
                 />
                 <span key={option.toString()}>{capitalizeFirstLetter(key).replace(/_/g, " ")}</span>
-            </>
+            </Fragment>
         )
     });
 
@@ -458,7 +486,8 @@ const MedicalFindings = () => {
                                 <input
                                     type="text"
                                     className='findings-table-input'
-                                    onChange={(e) => handleTITableData('color_vision',"color_vision", false, e.target.value)}
+                                    onChange={(e) => handleTITableData('no_display',"color_vision", false, e.target.value)}
+                                    value={visualTestDetails[0].options[0].value}
                                 />
                             </td>
                             <td>Right Eye</td>
@@ -467,6 +496,7 @@ const MedicalFindings = () => {
                                     type="text"
                                     className='findings-table-input'
                                     onChange={(e) => handleTITableData('vision_with_glasses',"right_eye", true, e.target.value)}
+                                    value={visualTestDetails[1].options[0].value}
                                 />
                             </td>
                             <td>
@@ -474,6 +504,7 @@ const MedicalFindings = () => {
                                     type="text"
                                     className='findings-table-input'
                                     onChange={(e) => handleTITableData('vision_without_glasses',"right_eye", true, e.target.value)}
+                                    value={visualTestDetails[1].options[1].value}
                                 />
                             </td>
                         </tr>
@@ -485,6 +516,7 @@ const MedicalFindings = () => {
                                     type="text"
                                     className='findings-table-input'
                                     onChange={(e) => handleTITableData('vision_with_glasses',"left_eye", true, e.target.value)}
+                                    value={visualTestDetails[2].options[0].value}
                                 />
                             </td>
                             <td>
@@ -492,6 +524,7 @@ const MedicalFindings = () => {
                                     type="text"
                                     className='findings-table-input'
                                     onChange={(e) => handleTITableData('vision_without_glasses',"left_eye", true, e.target.value)}
+                                    value={visualTestDetails[2].options[1].value}
                                 />
                             </td>
                         </tr>
@@ -522,35 +555,35 @@ const MedicalFindings = () => {
                         return (
                             <tr key={idx}>
                                 <td key={item.eye}>{item.eye}</td>
-                                {item.eye_power.map((i, idx) => {
+                                {item.eye_power.map((i, index) => {
                                     const cell = i.options;
                                     return (
-                                        <>
-                                            <td key={`${i.power_type}${idx}`}>
+                                        <Fragment key={index}>
+                                            <td>
                                                 <input type="text"  className='findings-table-input' value={cell.r_sph} onChange={(e) => handleTableChange(i.power_type, "r_sph", e.target.value)} />
                                             </td>
-                                            <td key={`${i.power_type}${idx}`}>
+                                            <td>
                                                 <input type="text" className='findings-table-input' value={cell.r_cyl}  onChange={(e) => handleTableChange(i.power_type, "r_cyl", e.target.value)} />
                                             </td>
-                                            <td key={`${i.power_type}${idx}`}>
+                                            <td>
                                                 <input type="text" className='findings-table-input' value={cell.r_axis} onChange={(e) => handleTableChange(i.power_type, "r_axis", e.target.value)} />
                                             </td>
-                                            <td key={`${i.power_type}${idx}`}>
+                                            <td>
                                                 <input type="text" className='findings-table-input' value={cell.r_vn} onChange={(e) => handleTableChange(i.power_type, "r_vn", e.target.value)} />
                                             </td>
-                                            <td key={`${i.power_type}${idx}`}>
+                                            <td>
                                                 <input type="text"  className='findings-table-input' value={cell.l_sph} onChange={(e) => handleTableChange(i.power_type, "l_sph", e.target.value)} />
                                             </td>
-                                            <td key={`${i.power_type}${idx}`}>
+                                            <td>
                                                 <input type="text" className='findings-table-input' value={cell.l_cyl}  onChange={(e) => handleTableChange(i.power_type, "l_cyl", e.target.value)} />
                                             </td>
-                                            <td key={`${i.power_type}${idx}`}>
+                                            <td>
                                                 <input type="text" className='findings-table-input' value={cell.l_axis} onChange={(e) => handleTableChange(i.power_type, "l_axis", e.target.value)} />
                                             </td>
-                                            <td key={`${i.power_type}${idx}`}>
+                                            <td>
                                                 <input type="text" className='findings-table-input' value={cell.l_vn} onChange={(e) => handleTableChange(i.power_type, "l_vn", e.target.value)} />
                                             </td>
-                                        </>
+                                        </Fragment>
                                     )
                                 })}
                             </tr>
@@ -566,21 +599,21 @@ const MedicalFindings = () => {
             <>
                 <table className='findings-visual-details-table'>
                     <thead>
-                        <tr>
-                            <th colSpan={1}></th>
-                            <th colSpan={4}>Right Eye</th>
-                            <th colSpan={4}>Left Eye</th>
+                        <tr key={1234}>
+                            <th key={1} colSpan={1}></th>
+                            <th key={2} colSpan={4}>Right Eye</th>
+                            <th key={3} colSpan={4}>Left Eye</th>
                         </tr>
-                        <tr>
-                            <th></th>
-                            <th>SPH</th>
-                            <th>CYL</th>
-                            <th>AXIS</th>
-                            <th>VN</th>
-                            <th>SPH</th>
-                            <th>CYL</th>
-                            <th>AXIS</th>
-                            <th>VN</th>
+                        <tr key={12345}>
+                            <th key={4}></th>
+                            <th key={5}>SPH</th>
+                            <th key={6}>CYL</th>
+                            <th key={7}>AXIS</th>
+                            <th key={8}>VN</th>
+                            <th key={9}>SPH</th>
+                            <th key={10}>CYL</th>
+                            <th key={11}>AXIS</th>
+                            <th key={12}>VN</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -609,7 +642,7 @@ const MedicalFindings = () => {
                                 <input
                                     type="checkbox"
                                     name='ecg_findings'
-                                    value={testEvaluationsAndFindings.ecg_done}
+                                    checked={testEvaluationsAndFindings.ecg_done}
                                     onChange={(e) => handleTiCheckboxQuestion("ecg_done", e.target.checked)}
                                 />
                                 <input
@@ -625,7 +658,7 @@ const MedicalFindings = () => {
                                 <input
                                     type="checkbox"
                                     name='ecg_findings'
-                                    value={testEvaluationsAndFindings.lab_sample_taken}
+                                    checked={testEvaluationsAndFindings.lab_sample_taken}
                                     onChange={(e) => handleTiCheckboxQuestion("lab_sample_taken", e.target.checked)}
                                 />
                                 <input
@@ -641,7 +674,7 @@ const MedicalFindings = () => {
                                 <input
                                     type="checkbox"
                                     name='ecg_findings'
-                                    value={testEvaluationsAndFindings.audiometry_done_checked}
+                                    checked={testEvaluationsAndFindings.audiometry_done_checked}
                                     onChange={(e) => handleTiCheckboxQuestion("audiometry_done_checked", e.target.checked)}
                                 />
                                 <input
@@ -741,7 +774,7 @@ const MedicalFindings = () => {
                                     <input
                                         type="checkbox"
                                         name='ecg_findings'
-                                        value={testEvaluationsAndFindings.fit}
+                                        checked={testEvaluationsAndFindings.fit}
                                         onChange={(e) => handleTiCheckboxQuestion("fit", e.target.checked)}
                                     />
                                 </li>
@@ -749,7 +782,7 @@ const MedicalFindings = () => {
                                     <input
                                         type="checkbox"
                                         name='ecg_findings'
-                                        value={testEvaluationsAndFindings.fit_with_restrictions}
+                                        checked={testEvaluationsAndFindings.fit_with_restrictions}
                                         onChange={(e) => handleTiCheckboxQuestion("fit_with_restrictions", e.target.checked)}
                                     />
                                 </li>
@@ -757,7 +790,7 @@ const MedicalFindings = () => {
                                     <input
                                         type="checkbox"
                                         name='ecg_findings'
-                                        value={testEvaluationsAndFindings.temporary_unfit}
+                                        checked={testEvaluationsAndFindings.temporary_unfit}
                                         onChange={(e) => handleTiCheckboxQuestion("temporary_unfit", e.target.checked)}
                                     />
                                 </li>
@@ -765,7 +798,7 @@ const MedicalFindings = () => {
                                     <input
                                         type="checkbox"
                                         name='ecg_findings'
-                                        value={testEvaluationsAndFindings.unfit}
+                                        checked={testEvaluationsAndFindings.unfit}
                                         onChange={(e) => handleTiCheckboxQuestion("unfit", e.target.checked)}
                                     />
                                 </li>
@@ -781,28 +814,43 @@ const MedicalFindings = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if(firstStepData.pid) {
-            const postDataObject = {
-                pid: firstStepData?.pid,
-                ailmentsHistoryDetails,
-                bodyExaminationMetrics,
-                bodyExaminationAilments,
-                bodyOrgansAndTests,
-                contagiuosSkinDiseases,
-                majorDisability,
-                visualTestDetails,
-                eyeSightDetails,
-                testEvaluationsAndFindings,
-            };
-            console.log(postDataObject);
-            patientMedicalDetails(postDataObject).then(res => {
-                alert("Saved!");
+        const postDataObject = {
+            pid: patientPersonalDetails?.pid || pid,
+            ailmentsHistoryDetails,
+            bodyExaminationMetrics,
+            bodyExaminationAilments,
+            bodyOrgansAndTests,
+            contagiuosSkinDiseases,
+            majorDisability,
+            visualTestDetails,
+            eyeSightDetails,
+            testEvaluationsAndFindings,
+        };
+        if(patientPersonalDetails && !patientPersonalDetails.medical_details_added) {
+            delete patientPersonalDetails.medical_details_added;
+            Promise.all([
+                updatePatientPersonalDetails(patientPersonalDetails, patientPersonalDetails.id),
+                addPatientMedicalDetails(postDataObject, patientPersonalDetails.id)
+            ]).then(res => {
+                setModalData({
+                    open: true,
+                    title: '',
+                    msg: 'Updated!',
+                });
+            }).catch(err => {
+                alert(err);
+            });
+        } else {
+            updatePatientDetails(medicalDetailId, postDataObject).then(res => {
+                setModalData({
+                    open: true,
+                    title: '',
+                    msg: 'Updated!',
+                });
                 navigate("/app/list-patient");
             });
         }
     };
-
-
 
     return (
         <>
@@ -816,11 +864,15 @@ const MedicalFindings = () => {
                     {renderSection3()}
                     {renderSection4()}
                     {majorDisability && renderSection5Questions()}
-                    {renderTestInvestigationVisualQuestions1()}
+                    {visualTestDetails && renderTestInvestigationVisualQuestions1()}
                     {renderTestInvestigationVisualQuestions2()}
                     {testEvaluationsAndFindings && renderTestInvestigationQuestions3()}
             </div>
-            <button onClick={handleSubmit} className="submit-btn position-prescription-btn" >Submit</button>
+            {
+                <button onClick={handleSubmit} className="submit-btn position-prescription-btn" >
+                    {!pid ? "Submit" : "Update"}
+                </button>
+            }
         </>
     )
 }

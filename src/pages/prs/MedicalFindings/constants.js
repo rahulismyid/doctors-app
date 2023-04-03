@@ -170,7 +170,12 @@ export const MAJOR_DISABILITY = {
 };
 
 export const VISION_TEST_DETAILS = [{
-    color_vision: "",
+    options: [{
+        m_key: "no_display",
+        key: "color_vision",
+        value: "",
+    }]
+},{
     options: [{
         m_key: "vision_with_glasses",
         key: "right_eye",

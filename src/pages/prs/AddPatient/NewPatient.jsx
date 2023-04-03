@@ -29,7 +29,7 @@ const NewPatient = () => {
     const [values, setValues] = useState();
     const [showError, setShowError] = useState(false);
     const navigate = useNavigate();
-    const { createPatient } = useDB();
+    const { createPatientPersonalDetails } = useDB();
     const ref = useRef();
     const {setFirstStepData, setModalData } = useContext(GlobalContext);
 
@@ -64,7 +64,7 @@ const NewPatient = () => {
 
     const savePatientDetails = (goToNextStep = false) => {
         if(values.pid) {
-            createPatient(values).then((res) => {
+            createPatientPersonalDetails(values).then((res) => {
                 alert('Saved');
                 setFirstStepData(values);
                 if(goToNextStep) {
