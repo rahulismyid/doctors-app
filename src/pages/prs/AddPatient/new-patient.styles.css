@@ -172,10 +172,6 @@ button {
 	cursor: pointer;
 }
 
-button:hover {
-	background-color: #0666a3;
-}
-
 /* New patient form grid */
 .new-patient-input-fields-wrapper {
 	--auto-grid-min-size: 16rem;

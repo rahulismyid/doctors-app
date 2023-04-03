@@ -1,0 +1,39 @@
+.patient-list-table-container {
+	margin-top: 5%;
+	padding: 0 20px;
+}
+
+.patient-list-table-container > header {
+	justify-content: space-between;
+}
+
+.patient-list-table-header-wrapper > .less-than {
+	font-size: 30px;
+	font-weight: 700;
+}
+
+.patient-list-table-header-wrapper > .less-than:hover {
+	cursor: pointer;
+}
+
+.rdt_Table {
+	border: 2px solid #ccc;
+	border-radius: 4px;
+}
+
+.table-action-btn {
+	background-color: transparent;
+	color: black;
+	margin: 0 5px;
+	padding: 4px 5px;
+	border: 1px solid #ccc;
+	width: 60px;
+    text-align: center;
+	font-size: 14px;
+	border-radius: 4px;
+}
+
+.table-action-btn:hover {
+	cursor: pointer;
+	background-color: aqua;
+}

@@ -2,10 +2,9 @@
 	margin-top: 10%;
 }
 
-.patient-list-table-container > header {
-	justify-content: space-between;
+.patient-list-table-container > header > .patient-list-table-header-wrapper {
+	display: flex;
 }
-
 .patient-list-table-header-wrapper > .less-than {
 	font-size: 30px;
 	font-weight: 700;
@@ -109,4 +108,11 @@
   .patient-list-table {
 	border-collapse: collapse;
   }
-  
+
+  #table-action-btn {
+	color: transparent;
+  }
+
+  .rdt_TableRow {
+	color: firebrick;
+  }

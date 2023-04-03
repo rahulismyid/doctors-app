@@ -26,26 +26,30 @@ export const COLUMNS_HEADER_TITLE = [
     "Gender",
 ];
 
-export const COLUMNS = [{
+export const COLUMNS = (onEditClick, onDeleteClick) => [{
     name: 'PID',
     selector: row => row.pid,
+    width: "80px",
 }, {
     name: 'Name',
     selector: row => row.name,
     sortable: true,
+    width: "150px",
 }, {
     name: 'Age',
     selector: row => row.age,
     sortable: true,
+    width: "80px",
 }, {
     name: 'Gender',
     selector: row => row.gender,
     sortable: true,
-    minWidth: 50
+    width: "90px",
 }, {
     name: 'Code',
     selector: row => row.code,
     sortable: true,
+    width: "90px",
 }, {
     name: 'Mobile',
     selector: row => row.mobile,
@@ -55,11 +59,18 @@ export const COLUMNS = [{
     selector: row => row.department,
     sortable: true,
 }, {
-    name: 'Emergency Mobile',
-    selector: row => row.emergency_mobile,
-    sortable: true,
-}, {
-    name: 'Date Of Joining',
-    selector: row => row.doj,
-    sortable: true,
+    name: 'Actions',
+    sortable: false,
+    cell:(row) => <>
+        <span className="table-action-btn" onClick={() => onEditClick(row)}>Edit</span>
+        <span className="table-action-btn" onClick={onDeleteClick}>Delete</span>
+    </>,
+    ignoreRowClick: true,
+    allowOverflow: true,
+    button: true,
+    style: {
+        margin: '0 10px',
+        width: '100px',
+        minWidth: '150px',
+    },
 }];
