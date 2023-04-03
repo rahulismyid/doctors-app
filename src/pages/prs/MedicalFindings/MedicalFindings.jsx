@@ -395,7 +395,7 @@ const MedicalFindings = () => {
                                     type="checkbox"
                                     name="yes"
                                     id="yes"
-                                    value={majorDisability.yes}
+                                    checked={majorDisability.yes}
                                     onChange={(e) => setMajorDisability({...majorDisability, yes: e.target.checked})}
                                     readOnly
                                 />
@@ -434,7 +434,7 @@ const MedicalFindings = () => {
                                         name="eye_test_done"
                                         id="eye_test_done"
                                         onChange={(e) => handleSection5Input('eye_test_done', e.target.checked)}
-                                        value={majorDisability.eye_test_done}
+                                        checked={majorDisability.eye_test_done}
                                         readOnly
                                     />
                                 </li>
