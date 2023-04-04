@@ -15,6 +15,7 @@ import {
     VISION_TEST_DETAILS,
 } from './constants';
 import "./MedicalFindings.styles.css";
+import { LIST_PATIENT_ROUTE } from '../../../routes/constants';
 
 function capitalizeFirstLetter(string) {
     const new_str = string.charAt(0).toUpperCase() + string.slice(1);
@@ -847,7 +848,7 @@ const MedicalFindings = () => {
                     title: '',
                     msg: 'Updated!',
                 });
-                navigate("/app/list-patient");
+                navigate(LIST_PATIENT_ROUTE);
             });
         }
     };

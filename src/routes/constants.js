@@ -1,8 +1,9 @@
 export const ROOT_ROUTE = "/";
-export const HOME_ROUTE = "/home";
-export const LOGIN_ROUTE = "/login";
+export const APP_ROUTE = "/app";
+export const HOME_ROUTE = "/app/home";
+export const ADD_PATIENT_ROUTE = "/app/add-patient";
+export const EDIT_PATIENT_ROUTE = "/app/edit-patient/:id";
+export const LIST_PATIENT_ROUTE = "/app/list-patient";
+export const MEDICAL_FINDINGS_ROUTE = "/app/medical-findings/:pid?/:id?";
 export const SIGNUP_ROUTE = "/signup";
-export const PRS_ROOT_ROUTE = "/app";
-export const ADD_NEW_PATIENT_ROUTE = "add-patient";
-export const LIST_PATIENTS_ROUTE = "list-patient";
-export const ADD_NEW_PRESCRIPTION_ROUTE = "add-prescription";
+export const LOGIN_ROUTE = "/login";

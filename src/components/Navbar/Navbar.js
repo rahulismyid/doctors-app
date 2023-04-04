@@ -4,6 +4,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import logo from "../../pages/prs/PRSPrintDocument/target001_cropped.png";
 import { GlobalContext } from '../../contexts/GlobalContext';
 import "./styles.css"
+import { HOME_ROUTE, LOGIN_ROUTE, ROOT_ROUTE } from '../../routes/constants';
 
 const Navbar = () => {
 	const { logout } = useAuth();
@@ -12,7 +13,7 @@ const Navbar = () => {
 
     const handleLogout = async () => {
         await logout();
-        navigate('/login', {replace: true});
+        navigate(LOGIN_ROUTE, {replace: true});
     };
 
     const handleModalClick = () => {
@@ -29,14 +30,14 @@ const Navbar = () => {
             <nav id="navbar" className="">
                 <div className="nav-wrapper">
                     <div className="logo">
-                        <a onClick={() => navigate('/app/home', {replace: true})}><i className="fas fa-chess-knight"></i>
+                        <a onClick={() => navigate(HOME_ROUTE, {replace: true})}><i className="fas fa-chess-knight"></i>
                             <img width={55} height={55} src={logo} alt="fireSpot"/>
                         </a>
                     </div>
 
                     <ul id="menu">
                         <ul id="menu">
-                            <li><Link to="/"> Home</Link></li>
+                            <li><Link to={ROOT_ROUTE}> Home</Link></li>
                             <li><a onClick={() => handleModalClick()}>Logout</a></li>
                         </ul>
                         {/* <a href="#myModal" className="trigger-btn" data-toggle="modal">Click to Open Confirm Modal</a> */}

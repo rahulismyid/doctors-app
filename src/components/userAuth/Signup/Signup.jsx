@@ -4,8 +4,8 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useAuth } from '../../../contexts/AuthContext';
 import { useDB } from '../../../contexts/DbContext';
+import { LOGIN_ROUTE, ROOT_ROUTE } from '../../../routes/constants';
 import './styles.css';
-import { PRS_ROOT_ROUTE } from '../../../routes/constants';
 
 const Signup = () => {
     
@@ -62,7 +62,7 @@ const Signup = () => {
             if(signup) {
                 await signup(values.email, values.password, values.firstName, values.lastName, Number(values.phone))
             }
-            navigate(PRS_ROOT_ROUTE, {replace: true});
+            navigate(ROOT_ROUTE, {replace: true});
         } catch (error) {
             setError('Failed to create an account')
         } 
@@ -105,7 +105,7 @@ const Signup = () => {
                     {(props) => (
                         <form className="signup" autoComplete="off">
                             <h1>Create account</h1>
-                            <h2>Already have an account? <span><Link to={'/login'}>Login</Link></span></h2>
+                            <h2>Already have an account? <span><Link to={LOGIN_ROUTE}>Login</Link></span></h2>
 
                             <div className="signup__field">
                                 <input className="signup__input" type="text" name="username" id="username" required />

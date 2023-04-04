@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../../contexts/AuthContext';
 import "./styles.css";
+import { HOME_ROUTE, ROOT_ROUTE, SIGNUP_ROUTE } from '../../../routes/constants';
 
 const initialValues = {
     email: '',
@@ -16,16 +17,16 @@ const Login = () => {
 
     useEffect(() => {
         if(currentUser !== null) {
-            navigate('/app/home',{ replace: true})
+            navigate(HOME_ROUTE,{ replace: true})
         } else {
-            navigate('/')
+            navigate(ROOT_ROUTE)
         }
     }, [currentUser]);
 
     const handleSubmit = async() => {
         try {
             await login(values.email, values.password)
-            navigate('/app/home', { replace: true, state:{ loggedIn: true} })
+            navigate(HOME_ROUTE, { replace: true, state:{ loggedIn: true} })
         } catch (error) {
             alert('Failed to Sign In' + error)
         }
@@ -35,7 +36,7 @@ const Login = () => {
         <>
             <div className="signup" autoComplete="off">
                 <h1>Login</h1>
-                <h2>Don't have an account? <span><Link to={'/signup'}>Sign up</Link></span>
+                <h2>Don't have an account? <span><Link to={SIGNUP_ROUTE}>Sign up</Link></span>
                 </h2>
                 <div className="signup__field">
                     <input value={values.email} onChange={(e) => setValues({...values, email: e.target.value})} className="signup__input" type="text" name="email" id="email" required />

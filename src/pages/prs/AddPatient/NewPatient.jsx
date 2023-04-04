@@ -4,6 +4,7 @@ import { useDB } from '../../../contexts/DbContext';
 import { GlobalContext } from '../../../contexts/GlobalContext';
 import { checkIfObjectHasEmptyProperty } from '../../../utils/utils';
 import "./new-patient.styles.css";
+import { LIST_PATIENT_ROUTE, MEDICAL_FINDINGS_ROUTE, ROOT_ROUTE } from '../../../routes/constants';
 
 const generatePid = () => {
     const timestamp = Date.now().toString();
@@ -82,9 +83,9 @@ const NewPatient = () => {
                 alert('Saved');
                 setFirstStepData(values);
                 if(goToNextStep) {
-                    navigate(`/app/medical-findings/${values.pid}/${id}`, {replace: true});
+                    navigate(MEDICAL_FINDINGS_ROUTE.replace(":pid?", values.pid).replace(":id?", id), {replace: true});
                 } else {
-                    navigate('/app/list-patient', {replace: true});
+                    navigate(LIST_PATIENT_ROUTE, {replace: true});
                 }
             });
         } else {
@@ -116,7 +117,7 @@ const NewPatient = () => {
         if(id) {
             updatePatientPersonalDetails(values, id).then((res) => {
                 alert('Saved');
-                navigate('/app/list-patient', {replace: true});
+                navigate(LIST_PATIENT_ROUTE, {replace: true});
             });
         } else {
             setModalData({
@@ -133,8 +134,8 @@ const NewPatient = () => {
             <div className="new-patient-form-container">
                 {
                     values && (
-                        <form action="/">
-                            <h1><span className='new-patient-form-header-less-than' onClick={() => navigate("/")}>&lt;</span>{!id ? "New" : "Update"} Patient Details</h1>
+                        <form>
+                            <h1><span className='new-patient-form-header-less-than' onClick={() => navigate(ROOT_ROUTE)}>&lt;</span>{!id ? "New" : "Update"} Patient Details</h1>
                             <div className="item">
                                 <p>Patient's Details</p>
                                 <div className="new-patient-input-fields-wrapper">

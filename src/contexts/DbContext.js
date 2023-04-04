@@ -12,6 +12,7 @@ import {
 	where,
 } from "firebase/firestore";
 import { useAuth } from "./AuthContext";
+import { PATIENT_MEDICAL_DETAILS_COLLECTION, PATIENT_PERSONAL_DETAILS_COLLECTION, USERS_COLLECTION } from "./constants.js";
 
 const DbContext = React.createContext();
 export function useDB() {
@@ -21,28 +22,15 @@ export function useDB() {
 export default function DbProvider({ children }) {
 	const { currentUser } = useAuth();
 	const [users, setUsers] = useState([]);
-	const [medicalConsents, setMedicalConsents] = useState([]);
 	const [allPatients, setAllPatients] = useState([]);
-	const usersCollectionRef = collection(db, "users");
-	const patientsPersonalDetailsCollectionRef = collection(db, "patients_personal_details");
-	const consentCollectionRef = collection(db, "medical_consent_questions");
-	const patientMedicalDetailsRef = collection(db, "patient_medical_details");
+	const usersCollectionRef = collection(db, USERS_COLLECTION);
+	const patientsPersonalDetailsCollectionRef = collection(db, PATIENT_PERSONAL_DETAILS_COLLECTION);
+	const patientMedicalDetailsRef = collection(db, PATIENT_MEDICAL_DETAILS_COLLECTION);
 
 	// Fetching data from DB
 	const fetchAllPatients = async () => {
 		const data = await getDocs(patientsPersonalDetailsCollectionRef);
 		setAllPatients(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-	};
-
-	const fetchAllConsents = async () => {
-		const data = await getDocs(consentCollectionRef);
-		let o = [];
-		const obj = data.docs.map((doc) => ({ ...doc.data() }))[0]
-		obj && Object.entries(obj).map((i) => {
-			o.push(i[1])
-			return i;
-		});
-		setMedicalConsents(o);
 	};
 
 	const fetchUsers = async () => {
@@ -74,7 +62,7 @@ export default function DbProvider({ children }) {
 
 	const fetchPatientPersonalDetails = (id) => {
 		return new Promise((resolve, reject) => {
-			const docRef = doc(db, "patients_personal_details", id);
+			const docRef = doc(db, PATIENT_PERSONAL_DETAILS_COLLECTION, id);
 			getDoc(docRef).then(res => {
 				if (res.exists()) {
 					resolve([res.data()]);
@@ -88,7 +76,7 @@ export default function DbProvider({ children }) {
 
 	const updatePatientPersonalDetails = (data, id) => {
 		return new Promise((resolve, reject) => {
-			updateDoc(doc(db, "patients_personal_details", id), {
+			updateDoc(doc(db, PATIENT_PERSONAL_DETAILS_COLLECTION, id), {
 				medical_details_added: true,		// to check if the medical details has to be updated or inserted on next screen.
 				...data
 			}).then(res => {
@@ -101,7 +89,7 @@ export default function DbProvider({ children }) {
 	};
 
 	const deletePatientPersonalDetails = async(id) => {
-        return await deleteDoc(doc(db, "patients_personal_details", id));
+        return await deleteDoc(doc(db, PATIENT_PERSONAL_DETAILS_COLLECTION, id));
     };
 	/* Patient Personal details */
 
@@ -129,7 +117,7 @@ export default function DbProvider({ children }) {
 
 	const updatePatientDetails = (id, data) => {
 		return new Promise((resolve, reject) => {
-			updateDoc(doc(db, "patient_medical_details", id), {
+			updateDoc(doc(db, PATIENT_MEDICAL_DETAILS_COLLECTION, id), {
 				...data
 			}).then(res => {
 				resolve(res);
@@ -138,7 +126,7 @@ export default function DbProvider({ children }) {
     };
 
 	const deletePatientMedicalDetails = async(id) => {
-        return await deleteDoc(doc(db, "patient_medical_details", id));
+        return await deleteDoc(doc(db, PATIENT_MEDICAL_DETAILS_COLLECTION, id));
     };
 	/* Patient Medical details */
 
@@ -146,7 +134,6 @@ export default function DbProvider({ children }) {
 	const value = {
 		users,
 		allPatients,
-		medicalConsents,
 		createUser,
 		createPatientPersonalDetails,
 		fetchPatientPersonalDetails,

@@ -1,20 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useDB } from '../../../contexts/DbContext';
+import React, { useContext, useState } from 'react';
 import { GlobalContext } from '../../../contexts/GlobalContext';
 import "./medical-consent.styles.css";
 
 // eslint-disable
 const MedicalConsent = () => {
     const [values, setValues] = useState();
-    const { medicalConsents } = useDB();
     const { isFirstStepComplete } = useContext(GlobalContext);
-
-    useEffect(() => {
-        // const data = await createPatient({...values, fName: values.name});
-        if(Object.keys(medicalConsents).length > 0) {
-            setValues(medicalConsents);
-        }
-    }, [medicalConsents]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();

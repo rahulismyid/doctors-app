@@ -5,6 +5,7 @@ import { useDB } from '../../../contexts/DbContext';
 import { COLUMNS } from './constants';
 import { GlobalContext } from '../../../contexts/GlobalContext';
 import "./patient-list.-table.styles.css";
+import { EDIT_PATIENT_ROUTE, MEDICAL_FINDINGS_ROUTE } from '../../../routes/constants';
 
 const customStyles = {
     rows: {
@@ -103,9 +104,8 @@ const PatientListTable = () => {
             </>
 		);
 	}, [filterText, resetPaginationToggle]);
-
-    const onEditPrescription = (row) => navigate(`/app/medical-findings/${row.pid}/${row.id}`);
-    const onEditPatientDetails = (row) => navigate(`/app/edit-patient/${row.id}`);
+    const onEditPrescription = (row) => navigate(MEDICAL_FINDINGS_ROUTE.replace(":pid?", row.pid).replace(":id?", row.id));
+    const onEditPatientDetails = (row) => navigate(EDIT_PATIENT_ROUTE.replace(":id", row.id));
 
     const onDeleteClicked = (row) => {
         setModalData({
