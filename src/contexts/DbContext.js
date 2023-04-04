@@ -3,13 +3,13 @@ import { db } from "../config/firebase.js";
 import {
 	addDoc,
 	collection,
+	deleteDoc,
 	doc,
 	getDoc,
 	getDocs,
 	query,
 	updateDoc,
 	where,
-	// deleteDoc,
 } from "firebase/firestore";
 import { useAuth } from "./AuthContext";
 
@@ -61,14 +61,14 @@ export default function DbProvider({ children }) {
 		});
 	};
 
-	// create new Patient in the DB
+	/* Patient Personal details */
 	const createPatientPersonalDetails = (data) => new Promise((resolve, reject) => {
 		addDoc(patientsPersonalDetailsCollectionRef, {
 			uid: currentUser.uid,
 			medical_details_added: false,		// to check if the medical details has to be updated or inserted on next screen.
 			...data
 		}).then(res => {
-			resolve(res);
+			resolve(res.id);
 		}).catch(err => reject(err));
 	});
 
@@ -100,7 +100,13 @@ export default function DbProvider({ children }) {
 		})
 	};
 
-	const addPatientMedicalDetails = (data, pid) => {
+	const deletePatientPersonalDetails = async(id) => {
+        return await deleteDoc(doc(db, "patients_personal_details", id));
+    };
+	/* Patient Personal details */
+
+	/* Patient Medical details */
+	const createPatientMedicalDetails = (data, pid) => {
 		return new Promise((resolve, reject) => {
 			addDoc(patientMedicalDetailsRef, {
 				uid: currentUser.uid,
@@ -131,19 +137,26 @@ export default function DbProvider({ children }) {
 		});
     };
 
+	const deletePatientMedicalDetails = async(id) => {
+        return await deleteDoc(doc(db, "patient_medical_details", id));
+    };
+	/* Patient Medical details */
+
 	// value to return forn useDB();
 	const value = {
 		users,
 		allPatients,
 		medicalConsents,
-		addPatientMedicalDetails,
 		createUser,
 		createPatientPersonalDetails,
+		fetchPatientPersonalDetails,
 		updatePatientPersonalDetails,
+		deletePatientPersonalDetails,
+		createPatientMedicalDetails,
 		fetchAllPatients,
 		fetchPatientMedicalDetails,
-		fetchPatientPersonalDetails,
 		updatePatientDetails,
+		deletePatientMedicalDetails,
 	};
 
 	return <DbContext.Provider value={value}>{children}</DbContext.Provider>;

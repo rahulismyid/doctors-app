@@ -39,7 +39,7 @@ const MedicalFindings = () => {
     const [medicalDetailId, setMedicalDetailId] = useState();
     const { setModalData } = useContext(GlobalContext);
     const {
-        addPatientMedicalDetails,
+        createPatientMedicalDetails,
         fetchPatientMedicalDetails,
         updatePatientDetails,
         updatePatientPersonalDetails,
@@ -829,8 +829,8 @@ const MedicalFindings = () => {
         if(patientPersonalDetails && !patientPersonalDetails.medical_details_added) {
             delete patientPersonalDetails.medical_details_added;
             Promise.all([
-                updatePatientPersonalDetails(patientPersonalDetails, patientPersonalDetails.id),
-                addPatientMedicalDetails(postDataObject, patientPersonalDetails.id)
+                updatePatientPersonalDetails(patientPersonalDetails, id),
+                createPatientMedicalDetails(postDataObject, patientPersonalDetails.pid)
             ]).then(res => {
                 setModalData({
                     open: true,

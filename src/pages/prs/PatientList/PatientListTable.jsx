@@ -3,8 +3,8 @@ import DataTable, { createTheme } from 'react-data-table-component';
 import { useNavigate } from 'react-router-dom';
 import { useDB } from '../../../contexts/DbContext';
 import { COLUMNS } from './constants';
-import "./patient-list.-table.styles.css";
 import { GlobalContext } from '../../../contexts/GlobalContext';
+import "./patient-list.-table.styles.css";
 
 const customStyles = {
     rows: {
@@ -54,7 +54,13 @@ createTheme('solarized', {
 }, 'default');
 
 const PatientListTable = () => {
-    const { allPatients, fetchAllPatients } = useDB();
+    const {
+        allPatients,
+        fetchAllPatients,
+        fetchPatientMedicalDetails,
+        deletePatientPersonalDetails,
+        deletePatientMedicalDetails,
+    } = useDB();
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
     const { setModalData } = useContext(GlobalContext);
@@ -106,9 +112,20 @@ const PatientListTable = () => {
             open: true,
             title: 'Delete Action',
             msg: 'Are you sure you want to delete this patient details?',
+            callback: () => deletePatient(row),
         });
     };
 
+    const deletePatient = async (row) => {
+        const data = await fetchPatientMedicalDetails(row.pid);
+        Promise.all([
+            deletePatientPersonalDetails(row.id),
+            deletePatientMedicalDetails(data[0].id)
+        ]).then(res => {
+            alert('Deleted');
+            fetchAllPatients();
+        }).catch(err => err);
+    };
 
     return (
         <div className='patient-list-table-container'>

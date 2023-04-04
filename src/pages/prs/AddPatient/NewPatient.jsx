@@ -78,11 +78,11 @@ const NewPatient = () => {
 
     const savePatientDetails = (goToNextStep = false) => {
         if(values.pid) {
-            createPatientPersonalDetails(values).then((res) => {
+            createPatientPersonalDetails(values).then((id) => {
                 alert('Saved');
                 setFirstStepData(values);
                 if(goToNextStep) {
-                    navigate('/app/medical-findings', {replace: true});
+                    navigate(`/app/medical-findings/${values.pid}/${id}`, {replace: true});
                 } else {
                     navigate('/app/list-patient', {replace: true});
                 }
