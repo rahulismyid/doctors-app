@@ -4,6 +4,7 @@ import {
 	addDoc,
 	collection,
 	doc,
+	getDoc,
 	getDocs,
 	query,
 	updateDoc,
@@ -73,9 +74,14 @@ export default function DbProvider({ children }) {
 
 	const fetchPatientPersonalDetails = (id) => {
 		return new Promise((resolve, reject) => {
-			getDocs(query(patientsPersonalDetailsCollectionRef, where("id", "==", `${id}`)))
-			.then((res) => {
-				resolve(res.docs.map((doc) => ({...doc.data(), id: doc.id })));
+			const docRef = doc(db, "patients_personal_details", id);
+			getDoc(docRef).then(res => {
+				if (res.exists()) {
+					resolve([res.data()]);
+				} else {
+				  // doc.data() will be undefined in this case
+				  reject([]);
+				}
 			}).catch(err => reject(err));
 		});
     };
@@ -110,8 +116,7 @@ export default function DbProvider({ children }) {
 		return new Promise((resolve, reject) => {
 			getDocs(query(patientMedicalDetailsRef, where("pid", "==", `${pid}`)))
 			.then(res => {
-				const data = res.docs.map((doc) => ({...doc.data(), id: doc.id }));
-				resolve(data);
+				resolve(res.docs.map((doc) => ({...doc.data(), id: doc.id })));
 			}).catch(err => reject(err));
 		});
     };
