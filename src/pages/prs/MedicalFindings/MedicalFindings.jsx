@@ -838,6 +838,7 @@ const MedicalFindings = () => {
                     title: '',
                     msg: 'Updated!',
                 });
+                navigate(LIST_PATIENT_ROUTE);
             }).catch(err => {
                 alert(err);
             });
