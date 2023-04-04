@@ -71,9 +71,9 @@ export default function DbProvider({ children }) {
 		}).catch(err => reject(err));
 	});
 
-	const fetchPatientPersonalDetails = (pid) => {
+	const fetchPatientPersonalDetails = (id) => {
 		return new Promise((resolve, reject) => {
-			getDocs(query(patientsPersonalDetailsCollectionRef, where("pid", "==", `${pid}`)))
+			getDocs(query(patientsPersonalDetailsCollectionRef, where("id", "==", `${id}`)))
 			.then((res) => {
 				resolve(res.docs.map((doc) => ({...doc.data(), id: doc.id })));
 			}).catch(err => reject(err));

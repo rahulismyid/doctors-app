@@ -98,7 +98,8 @@ const PatientListTable = () => {
 		);
 	}, [filterText, resetPaginationToggle]);
 
-    const onEditClicked = (row) => navigate(`/app/medical-findings/${row.pid}`);
+    const onEditPrescription = (row) => navigate(`/app/medical-findings/${row.pid}/${row.id}`);
+    const onEditPatientDetails = (row) => navigate(`/app/edit-patient/${row.id}`);
 
     const onDeleteClicked = (row) => {
         setModalData({
@@ -114,7 +115,7 @@ const PatientListTable = () => {
             <DataTable
                 // title="Patient List"
                 theme="default"
-                columns={COLUMNS(onEditClicked, onDeleteClicked)}
+                columns={COLUMNS(onEditPrescription, onEditPatientDetails, onDeleteClicked)}
                 data={filteredItems}
                 customStyles={customStyles}
                 progressPending={loading}

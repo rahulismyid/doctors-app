@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDB } from '../../../contexts/DbContext';
 import { GlobalContext } from '../../../contexts/GlobalContext';
 import { checkIfObjectHasEmptyProperty } from '../../../utils/utils';
@@ -29,13 +29,27 @@ const NewPatient = () => {
     const [values, setValues] = useState();
     const [showError, setShowError] = useState(false);
     const navigate = useNavigate();
-    const { createPatientPersonalDetails } = useDB();
+    const { id } = useParams();
+    const {
+        createPatientPersonalDetails,
+        fetchPatientPersonalDetails,
+        updatePatientPersonalDetails,
+    } = useDB();
     const ref = useRef();
     const {setFirstStepData, setModalData } = useContext(GlobalContext);
 
     useEffect(() => {
-        setValues(initialValues);
+        if(id) {
+            fetchPatientById(id);
+        } else {
+            setValues(initialValues);
+        }
     }, []);
+
+    const fetchPatientById = async (id) => {
+        const data = await fetchPatientPersonalDetails(id);
+        setValues(data[0]);
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -83,52 +97,95 @@ const NewPatient = () => {
         }
     };
 
+    const handleUpdate = (e) => {
+        e.preventDefault();
+        if(checkIfObjectHasEmptyProperty(values)) {
+            setShowError(true);
+        } else {
+            setShowError(false);
+            setModalData({
+                open: true,
+                title: 'Confirm',
+                msg: 'Are you sure you want to upddate this patient details?',
+                callback: () => updatePatientDetails(id),
+            });
+        }
+    };
+
+    const updatePatientDetails = (id) => {
+        if(id) {
+            updatePatientPersonalDetails(values, id).then((res) => {
+                alert('Saved');
+                navigate('/app/list-patient', {replace: true});
+            });
+        } else {
+            setModalData({
+                open: true,
+                title: 'Error.',
+                msg: 'Error occurred. Please try saving again.',
+                callback: () => savePatientDetails(true)
+            });
+        }
+    };
+
     return (
         <>
             <div className="new-patient-form-container">
-                <form action="/">
-                    <h1><span className='new-patient-form-header-less-than' onClick={() => navigate("/")}>&lt;</span>New Patient Details</h1>
-                    <div className="item">
-                        <p>Patient's Details</p>
-                        <div className="new-patient-input-fields-wrapper">
-                            <input className='new-patient-input-fields' type="text" name="name" placeholder="Name" onChange={(e) => setValues({...values, name: e.target.value})} />
-                            <input className='new-patient-input-fields' type="text" name="code" placeholder="Code" onChange={(e) => setValues({...values, code: e.target.value})} />
-                            <input className='new-patient-input-fields' type="number" name="age" placeholder="Age" onChange={(e) => setValues({...values, age: e.target.value})} />
-                            <input
-                                className='new-patient-input-fields date-field'
-                                ref={ref}
-                                type="date"
-                                name="doj"
-                                placeholder='Date of Joining'
-                                id="doj"
-                                onChange={(e) => setValues({...values, doj: e.target.value})}
-                            />
-                            <input className='new-patient-input-fields' type="text" name="department" placeholder="Department" onChange={(e) => setValues({...values, department: e.target.value})} />
-                            <input className='new-patient-input-fields' type="text" name="son_of" placeholder="Son Of" onChange={(e) => setValues({...values, son_of: e.target.value})} />
-                            <input className='new-patient-input-fields' type="text" name="mobile" placeholder="Mobile" onChange={(e) => setValues({...values, mobile: e.target.value})} />
-                            <select className='new-patient-select-fields' onChange={(e) => setValues({...values, gender: e.target.value})}>
-                                <option value="">Gender</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                            </select>
-                        </div>
-                    </div>
-                    <p>Address</p>
-                    <div className="new-patient-input-fields-wrapper">
-                        <input className='new-patient-input-fields' type="text" name="present_address" placeholder="Present address" onChange={(e) => setValues({...values, present_address: e.target.value})}/>
-                        <input className='new-patient-input-fields' type="text" name="emergency_contact_person" placeholder="Emergency Contact" onChange={(e) => setValues({...values, emergency_contact_person: e.target.value})}/>
-                        <input className='new-patient-input-fields' type="text" name="emergency_mobile" placeholder="Emergency Mobile" onChange={(e) => setValues({...values, emergency_mobile: e.target.value})}/>
-                    </div>
-                    {
-                        showError
-                            ? <p className='new-patient-submit-error'>Error occurred, please fill the form.</p>
-                            : null
-                    }
-                    <div className="new-patient-btn-block">
-                        <button onClick={handleSubmit}>Add new patient</button>
-                        <button onClick={submitForNextStep}>Proceed to add more details</button>
-                    </div>
-                </form>
+                {
+                    values && (
+                        <form action="/">
+                            <h1><span className='new-patient-form-header-less-than' onClick={() => navigate("/")}>&lt;</span>{!id ? "New" : "Update"} Patient Details</h1>
+                            <div className="item">
+                                <p>Patient's Details</p>
+                                <div className="new-patient-input-fields-wrapper">
+                                    <input type="text" name="name" className='new-patient-input-fields' placeholder="Name" value={values.name} onChange={(e) => setValues({...values, name: e.target.value})} />
+                                    <input type="text" name="code" className='new-patient-input-fields' placeholder="Code" value={values.code} onChange={(e) => setValues({...values, code: e.target.value})} />
+                                    <input type="number" name="age" className='new-patient-input-fields' placeholder="Age" value={values.age} onChange={(e) => setValues({...values, age: e.target.value})} />
+                                    <input
+                                        className='new-patient-input-fields date-field'
+                                        ref={ref}
+                                        type="date"
+                                        name="doj"
+                                        placeholder='Date of Joining'
+                                        id="doj"
+                                        value={values.doj} onChange={(e) => setValues({...values, doj: e.target.value})}
+                                    />
+                                    <input type="text" name="department" className='new-patient-input-fields' placeholder="Department" value={values.department} onChange={(e) => setValues({...values, department: e.target.value})} />
+                                    <input type="text" name="son_of" className='new-patient-input-fields' placeholder="Son Of" value={values.son_of} onChange={(e) => setValues({...values, son_of: e.target.value})} />
+                                    <input type="text" name="mobile" className='new-patient-input-fields' placeholder="Mobile" value={values.mobile} onChange={(e) => setValues({...values, mobile: e.target.value})} />
+                                    <select className='new-patient-select-fields' value={values.gender} onChange={(e) => setValues({...values, gender: e.target.value})}>
+                                        <option value="">Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <p>Address</p>
+                            <div className="new-patient-input-fields-wrapper">
+                                <input type="text" name="present_address" className='new-patient-input-fields' placeholder="Present address" value={values.present_address} onChange={(e) => setValues({...values, present_address: e.target.value})}/>
+                                <input type="text" name="emergency_contact_person" className='new-patient-input-fields' placeholder="Emergency Contact" value={values.emergency_contact_person} onChange={(e) => setValues({...values, emergency_contact_person: e.target.value})}/>
+                                <input type="text" name="emergency_mobile" className='new-patient-input-fields' placeholder="Emergency Mobile" value={values.emergency_mobile} onChange={(e) => setValues({...values, emergency_mobile: e.target.value})}/>
+                            </div>
+                            {
+                                showError
+                                    ? <p className='new-patient-submit-error'>Error occurred, please fill the form.</p>
+                                    : null
+                            }
+                            {
+                                !id ? (
+                                    <div className="new-patient-btn-block">
+                                        <button onClick={handleSubmit}>Add new patient</button>
+                                        <button onClick={submitForNextStep}>Proceed to add more details</button>
+                                    </div>
+                                ) : (
+                                    <div className="new-patient-btn-block">
+                                        <button onClick={handleUpdate}>Update</button>
+                                    </div>
+                                )
+                            }
+                        </form>
+                    )
+                }
             </div>
         </>
     )

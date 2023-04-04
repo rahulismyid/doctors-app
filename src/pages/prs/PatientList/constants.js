@@ -1,3 +1,7 @@
+import { ReactComponent as EditDocument } from "../../../components/svg/edit-document.svg";
+import { ReactComponent as DeleteSvg } from "../../../components/svg/delete.svg";
+import { ReactComponent as Prescription } from "../../../components/svg/prescription.svg";
+
 export const COLUMNS_KEYS = [
     "name",
     "age",
@@ -26,30 +30,25 @@ export const COLUMNS_HEADER_TITLE = [
     "Gender",
 ];
 
-export const COLUMNS = (onEditClick, onDeleteClick) => [{
+export const COLUMNS = (onEditPrescription, onEditPatientDetails, onDeleteClick) => [{
     name: 'PID',
     selector: row => row.pid,
-    width: "80px",
 }, {
     name: 'Name',
     selector: row => row.name,
     sortable: true,
-    width: "150px",
 }, {
     name: 'Age',
     selector: row => row.age,
     sortable: true,
-    width: "80px",
 }, {
     name: 'Gender',
     selector: row => row.gender,
     sortable: true,
-    width: "90px",
 }, {
     name: 'Code',
     selector: row => row.code,
     sortable: true,
-    width: "90px",
 }, {
     name: 'Mobile',
     selector: row => row.mobile,
@@ -62,15 +61,21 @@ export const COLUMNS = (onEditClick, onDeleteClick) => [{
     name: 'Actions',
     sortable: false,
     cell:(row) => <>
-        <span className="table-action-btn" onClick={() => onEditClick(row)}>Edit</span>
-        <span className="table-action-btn" onClick={onDeleteClick}>Delete</span>
+        <span className="table-action-btn" title="Edit Personal Details" onClick={() => onEditPatientDetails(row)}>
+            <EditDocument width={18} height={18} style={{margin: '0 5px'}} />
+        </span>
+        <span className="table-action-btn" title="Edit Prescription" onClick={() => onEditPrescription(row)}>
+            <Prescription width={18} height={18} style={{margin: '0 5px'}} />
+        </span>
+        <span className="table-action-btn" title="Delete patient" onClick={onDeleteClick}>
+            <DeleteSvg width={18} height={18} style={{margin: '0 5px'}} />
+        </span>
     </>,
+    width: "150px",
     ignoreRowClick: true,
     allowOverflow: true,
     button: true,
     style: {
         margin: '0 10px',
-        width: '100px',
-        minWidth: '150px',
     },
 }];

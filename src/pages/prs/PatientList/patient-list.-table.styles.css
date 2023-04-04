@@ -25,9 +25,8 @@
 	background-color: transparent;
 	color: black;
 	margin: 0 5px;
-	padding: 4px 5px;
-	border: 1px solid #ccc;
-	width: 60px;
+	padding: 4px 3px;
+	width: auto;
     text-align: center;
 	font-size: 14px;
 	border-radius: 4px;

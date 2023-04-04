@@ -28,8 +28,9 @@ function App() {
                 <Route path='/app' element={<Navigate to={'/app/home'}/>} />
                 <Route path='/app/home' element={<AuthLayout><PRSHomeScreen/></AuthLayout>} />
                 <Route path='/app/add-patient' element={<AuthLayout><NewPatient/></AuthLayout>} />
+                <Route path='/app/edit-patient/:id' element={<AuthLayout><NewPatient/></AuthLayout>} />
                 <Route path='/app/list-patient' element={<AuthLayout><PatientListTable /></AuthLayout>} />
-                <Route key={'finding'} path='/app/medical-findings/:pid?' element={<AuthLayout><MedicalFindings /></AuthLayout>} />
+                <Route key={'finding'} path='/app/medical-findings/:pid?/:id?' element={<AuthLayout><MedicalFindings /></AuthLayout>} />
                 <Route path='/login' element={<Login />}/>
                 <Route path='/signup' element={<Signup />}/>
                 <Route path='*' element={<NotFound/>}/>

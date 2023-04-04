@@ -46,7 +46,7 @@ const MedicalFindings = () => {
         fetchPatientPersonalDetails,
     } = useDB();
     const navigate = useNavigate();
-    const { pid } = useParams();
+    const { pid, id } = useParams();
 
     useEffect(() => {
         setAilmentsHistoryDetails(AILMENT_HISTORY_DETAILS);
@@ -68,15 +68,15 @@ const MedicalFindings = () => {
     },[]);
 
     const fetchPatient = async () => {
-        const data = await fetchPatientPersonalDetails(pid);
+        const data = await fetchPatientPersonalDetails(id);
         setPatientPersonalDetails(data[0]);
     }
 
     const getPatientMedicalDetails = async () => {
         const data = await fetchPatientMedicalDetails(pid);
-        setMedicalDetailId(data[0].id);
         if(data && data[0]) {
             const newData = data[0];
+            setMedicalDetailId(data[0].id);
             setAilmentsHistoryDetails(newData.ailmentsHistoryDetails)
             setBodyExaminationMetrics(newData.bodyExaminationMetrics)
             setBodyExaminationAilments(newData.bodyExaminationAilments)
