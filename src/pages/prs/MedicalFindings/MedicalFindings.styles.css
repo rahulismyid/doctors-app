@@ -1,3 +1,14 @@
+.medicial-findings-container {
+  margin-top: 10%;
+}
+
+@media (max-width:480px)  {
+  /* smartphones, Android phones, landscape iPhone */
+  .medicial-findings-container {
+    margin-top: 30%;
+  }
+}
+
 .findings-visual-details-table,
 .findings-visual-details-table > thead > tr > th,
 .findings-visual-details-table > tbody > tr > td {
@@ -20,3 +31,88 @@
   border: 1px solid #ccc;
   height: 30px;  
 }
+
+
+/* Ailment History */
+.aliment-history-question-container {
+  margin: 0 20px;
+}
+
+.aliment-history-question-container .question-label {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.aliment-history-grid-list-container {
+  padding-bottom: 20px;
+}
+
+.aliment-history-grid-list-wrapper {
+  --auto-grid-min-size: 16rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+  list-style-type: none;
+  grid-gap: 1rem;
+  padding-top: 10px;
+  font-size: 18px;
+  width: 100%;
+}
+
+@media (max-width:480px)  {
+  .aliment-history-question-container .question-label {
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  .aliment-history-grid-list-wrapper {
+    --auto-grid-min-size: 16rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+    list-style-type: none;
+    grid-gap: 1rem;
+    padding-top: 10px;
+    font-size: 15px;
+    width: 100%;
+  }
+}
+
+.aliment-history-grid-list-wrapper > li {
+  display: flex;
+  align-items: center;
+}
+
+.aliment-history-grid-list-wrapper input {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #000;
+  list-style-type: none;
+  text-align: center;
+  text-transform: capitalize;
+  font-weight: 600;
+  margin-right: 10px;
+  transform: scale(1);
+}
+
+
+.aliment-history-grid-list-container > .remark {
+  border: none;
+  padding: 5px;
+  width: 90%;
+  border-bottom: 1px solid #ccc;
+  border-radius: 0;
+  margin: 10px auto;
+}
+
+@media (max-width:480px)  {
+  /* smartphones, Android phones, landscape iPhone */
+  .aliment-history-grid-list-container > .remark {
+    border: none;
+    padding: 5px;
+    width: 340px;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0;
+    margin: 10px 0;
+  }  
+}
+
+/* Ailment History */

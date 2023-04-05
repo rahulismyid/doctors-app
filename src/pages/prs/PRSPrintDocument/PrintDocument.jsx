@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
+import { useReactToPrint } from "react-to-print";
 import { useDB } from "../../../contexts/DbContext";
 import img1 from "./images/642cb406771ff642cb40677200001.png";
 import img2 from "./images/642cb406771ff642cb40677200002.png";
@@ -353,6 +354,8 @@ const MEDICAL = {
 
 const PrintDocument = () => {
 
+	const componentRef = useRef();
+
 	// Page 1
 	const [personalDetails, setPersonalDetails] = useState();
 	const [medicalDetails, setMedicalDetails] = useState();
@@ -408,12 +411,17 @@ const PrintDocument = () => {
 			JSON.stringify(newData.ailmentsHistoryDetails.sort(), undefined, 2);
 	};
 
+	const handlePrint = useReactToPrint({
+		content: () => componentRef.current,
+	});
+
 	return (
-		<>
-		<pre id="json"></pre>
+		<div>
+		{/* <button style={{marginTop: '10%'}} onClick={handlePrint} className="print__button">  Print </button>  */}
+		<pre style={{marginTop: '10%'}} id="json"></pre>
 		{
 			personalDetails && medicalDetails ? (
-				<div bgcolor="#A0A0A0" vlink="blue" link="blue"
+				<div bgcolor="#A0A0A0" vlink="blue" link="blue" ref={componentRef}
 					style={{
 						margin: '0 auto',
 						marginTop: '5%',
@@ -619,7 +627,7 @@ const PrintDocument = () => {
 				</div>
 			) : null
 		}
-		</>
+		</div>
 	)
 }
 

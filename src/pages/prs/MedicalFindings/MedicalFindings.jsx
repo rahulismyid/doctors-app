@@ -92,27 +92,46 @@ const MedicalFindings = () => {
 
     /* MEDICAL_CONSENT */
 
-    const renderConsentQuestions = () => {
+    const handleAilmentRemarkInput = (item, option, value) => {
+        const newData = ailmentsHistoryDetails.map(i => {
+            if(i.q == item.q) {
+                i.options.map(o => {
+                    if(o.remark_key == option.remark_key) {
+                        o[option.remark_key] = value;
+                    }
+                    return o;
+                })
+            }
+            return i;
+        });
+        setAilmentsHistoryDetails([...newData]);
+    };
+
+    const renderAilmentHistoryQuestions = () => {
         return (
             <>
                 {ailmentsHistoryDetails && ailmentsHistoryDetails.map((item, idx) => {
                     return (
-                        <div key={JSON.stringify(item.options)} className='questions-wrapper'>
-                            <span className='question'>
+                        <div key={idx} className='aliment-history-question-container'>
+                            <span className='question-label'>
                                 {idx+1}. {item.q}
                             </span>
-                            <div key={idx} className='options'>
-                                <ul key={idx}>
-                                    {item.options.map((option, index) => {
-                                        return (
-                                            <li key={`${idx}${index}`}>
-                                                {renderMedicalConsentOptions(option)}
-                                                {renderInputFieldForRemark(option)}
-                                            </li>
-                                        )})
-                                    }
-                                </ul>
-                            </div>
+                            {item.options.map((option, index) => {
+                                return (
+                                    <div key={`${idx}${index}`} className='aliment-history-grid-list-container'>
+                                        <ul className='aliment-history-grid-list-wrapper'>
+                                            {renderMedicalConsentOptions(option)}
+                                        </ul>
+                                        <input
+                                            type="text"
+                                            className='remark'
+                                            placeholder="Remark"
+                                            value={option[option.remark_key]}
+                                            onChange={(e) => handleAilmentRemarkInput(item, option, e.target.value)}
+                                        />
+                                    </div>
+                                )})
+                            }
                         </div>
                     )
                 })}
@@ -124,29 +143,21 @@ const MedicalFindings = () => {
         const option = listOfObj[key];
         return (
             <Fragment key={`${key}${idx}`}>
-                <input
-                    id={option.toString()}
-                    type="checkbox"
-                    name={key}
-                    checked={option}
-                    onChange={() => handleCheckbox(listOfObj, key)}
-                />
-                <span key={`${idx}${key}`}>{capitalizeFirstLetter(key).replace(/_/g, " ")}</span>
+                {!key.toString().includes("remark") ? (
+                    <li>
+                        <input
+                            id={key}
+                            type="checkbox"
+                            name={key}
+                            checked={option}
+                            onChange={() => handleCheckbox(listOfObj, key)}
+                        />
+                        <label htmlFor={key} key={`${idx}${key}`}>{capitalizeFirstLetter(key).replace(/_/g, " ")}</label> 
+                    </li>
+                ): null}
             </Fragment>
         )
     });
-
-    const renderInputFieldForRemark = (option) => {
-        const REMARK = "remark";
-        const key = Object.keys(option).find(i => i.includes(REMARK));
-        if(option[key]) {
-            return (
-                // <input className='remark-input' placeholder="Remark" type="text" value={option[key] ? option[key] === true ? "" : option[key] : ""}/>
-                <input key={key} className='remark-input' placeholder="Remark" type="text" />
-            )
-        }
-        return null;
-    };
 
     const handleCheckbox = (obj, key) => {
         const newData = ailmentsHistoryDetails.map(item => {
@@ -856,11 +867,12 @@ const MedicalFindings = () => {
 
     return (
         <>
-            <div className="declaration-consent-container border">
-                <div className="form-description">
+            <div className="medicial-findings-container">
+                {/* <div className="form-description">
                     <h2>Medical declaration consent</h2>
-                </div>
-                    {ailmentsHistoryDetails && renderConsentQuestions()}
+                </div> */}
+                {JSON.stringify(ailmentsHistoryDetails)}
+                    {ailmentsHistoryDetails && renderAilmentHistoryQuestions()}
                     {bodyExaminationMetrics && renderSection1()}
                     {renderSection2()}
                     {renderSection3()}

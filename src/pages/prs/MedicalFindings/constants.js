@@ -6,6 +6,7 @@ export const AILMENT_HISTORY_DETAILS = [{
         running_ear: false,
         epilepsy: false,
         remark_q11: "",
+        remark_key: "remark_q11",
     },{
         heart_disease: false,
         diabetes: false,
@@ -14,16 +15,18 @@ export const AILMENT_HISTORY_DETAILS = [{
         tb: false,
         other_major_illness: false,
         remark_q12: "",
+        remark_key: "remark_q12",
     },{
         allergy_to_any_medicine_or_object: false,
         asthama: false,
         remark_q13: "",
+        remark_key: "remark_q13",
     }],
 }, {
     q: "Does your parent or brother/sister, have from any of above disease?",
     options: [{
-        yes_no_q21: false,
-        remark_q21: ""
+        remark_q21: "",
+        remark_key: "remark_q21",
     }],
 }, {
     q: "Do you have/had?",
@@ -33,22 +36,24 @@ export const AILMENT_HISTORY_DETAILS = [{
         alcohol: false,
         other_addiction: false,
         remark_q31: "",
+        remark_key: "remark_q31",
     },{
         height_phobia: false,
         fear_of_confined_space: false,
         remark_q32: "",
+        remark_key: "remark_q32",
     }],
 }, {
     q: "Have you undergone any surgery (other than family planning)?",
     options: [{
-        yes_no_q41: false,
-        remark_q41: ""
+        remark_q41: "",
+        remark_key: "remark_q41",
     }],
 }, {
     q: "Are you taking any medicine on regular basis?",
     options: [{
-        yes_no_q51: false,
-        remark_q51: ""
+        remark_q51: "",
+        remark_key: "remark_q51",
     }],
 }];
 
