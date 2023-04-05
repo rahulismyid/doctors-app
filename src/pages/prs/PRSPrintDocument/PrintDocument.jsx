@@ -8,17 +8,17 @@ import "./print-document.styles.css";
 
 const PERSONAL = {
 	"name": "Rahul Ajarekar",
-	"mobile": "Est consequatur Ex",
+	"mobile": "0987654321",
 	"gender": "MALE",
 	"age": "55",
 	"uid": "kNC2FCX7pdfPznobces6zn2jTy22",
 	"emergency_mobile": "1234567890",
-	"department": "Ut molestiae est ill",
-	"present_address": "Natus voluptatem Vo",
+	"department": "FINANCE",
+	"present_address": "Chinchwad, Pune",
 	"pid": "64988",
-	"code": "Sed ut nisi eaque qu",
+	"code": "1234",
 	"emergency_contact_person": "0987654321",
-	"son_of": "Consequuntur volupta",
+	"son_of": "Dayanand Ajarekar",
 	"medical_details_added": true,
 	"doj": "2010-09-05"
 };
@@ -353,8 +353,22 @@ const MEDICAL = {
 
 const PrintDocument = () => {
 
+	// Page 1
 	const [personalDetails, setPersonalDetails] = useState();
 	const [medicalDetails, setMedicalDetails] = useState();
+	// Page 1
+
+	// Page 2
+    const [ailmentsHistoryDetails, setAilmentsHistoryDetails] = useState();
+    const [bodyExaminationMetrics, setBodyExaminationMetrics] = useState();
+    const [bodyExaminationAilments, setBodyExaminationAilments] = useState();
+    const [bodyOrgansAndTests, setBodyOrgansAndTests] = useState();
+    const [contagiuosSkinDiseases, setContagiuosSkinDiseases] = useState();
+    const [majorDisability, setMajorDisability] = useState();
+    const [visualTestDetails, setVisualTestDetails] = useState();
+    const [eyeSightDetails, setEyeSightDetails] = useState();
+    const [testEvaluationsAndFindings, setTestEvaluationsAndFindings] = useState();
+	// Page 2
 	const { id, pid } = useParams();
 	const {
 		fetchPatientPersonalDetails,
@@ -363,7 +377,7 @@ const PrintDocument = () => {
 
 	useEffect(() => {    
 		// fetchPersonalDetails();
-		// fetchMedicalDetails();
+		fetchMedicalDetails();
 		setPersonalDetails(PERSONAL);
 		setMedicalDetails(MEDICAL);
 	},[]);
@@ -376,16 +390,39 @@ const PrintDocument = () => {
 
 	const fetchMedicalDetails = async() => {
 		const medicalData = await fetchPatientMedicalDetails(pid);
-		setMedicalDetails(medicalData[0]);
-		console.log('medicalData ',medicalData[0]);
+		// const newData = MEDICAL;
+		const newData = medicalData[0];
+		setMedicalDetails(newData);
+		setAilmentsHistoryDetails(newData.ailmentsHistoryDetails.sort())
+		setBodyExaminationMetrics(newData.bodyExaminationMetrics.sort())
+		setBodyExaminationAilments(newData.bodyExaminationAilments.sort())
+		setBodyOrgansAndTests(newData.bodyOrgansAndTests.sort())
+		setContagiuosSkinDiseases(newData.contagiuosSkinDiseases.sort())
+		setMajorDisability(newData.majorDisability)
+		setVisualTestDetails(newData.visualTestDetails.sort())
+		setEyeSightDetails(newData.eyeSightDetails.sort())
+		setTestEvaluationsAndFindings(newData.testEvaluationsAndFindings)
+		// console.log('medicalData ',medicalData[0]);
+		// document.getElementById("json").textContent = JSON.stringify(newData.bodyExaminationMetrics, undefined, 2);
+		document.getElementById("json").textContent =
+			JSON.stringify(newData.ailmentsHistoryDetails.sort(), undefined, 2);
 	};
 
 	return (
 		<>
-		{JSON.stringify(personalDetails)}
+		<pre id="json"></pre>
 		{
 			personalDetails && medicalDetails ? (
-				<div bgcolor="#A0A0A0" vlink="blue" link="blue" style={{margin: '5%'}}>
+				<div bgcolor="#A0A0A0" vlink="blue" link="blue"
+					style={{
+						margin: '0 auto',
+						marginTop: '5%',
+						position: 'absolute',
+						top: '0%',
+						left: '50%',
+						transform: 'translate(-50%, 0%)',
+					}}
+				>
 					<a name="1"></a>
 					<div id="page1-div" style={{position:'relative',width:'1026px',height:'1350px'}}>
 						<img width="1026" height="1350" src={img1} alt="background image"/>
@@ -411,10 +448,13 @@ const PrintDocument = () => {
 						<p style={{position:'absolute', top:'277px',left:'61px',whiteSpace:'nowrap'}} className="ft11">Date of joining:</p>
 						<p style={{position:'absolute', top:'277px',left:'577px',whiteSpace:'nowrap'}} className="ft11">Department:</p>
 						<p style={{position:'absolute', top:'408px',left:'387px',whiteSpace:'nowrap'}} className="ft12"><b>Medical declaration &amp; Consent</b></p>
-						<p style={{position:'absolute', top:'435px',left:'180px',whiteSpace:'nowrap'}} className="ft11">Please &#34; &#34; mark the appropriate (Yes or No; If yes- please give details below)</p>
+						<p style={{position:'absolute', top:'435px',left:'150px',whiteSpace:'nowrap'}} className="ft11">Please &#34; &#34; mark the appropriate (Yes or No; If yes- please give details below)</p>
 						<p style={{position:'absolute', top:'476px',left:'59px',whiteSpace:'nowrap'}} className="ft11">1</p>
 						<p style={{position:'absolute', top:'462px',left:'81px',whiteSpace:'nowrap'}} className="ft11">Do you suffer / have suffered from:</p>
 						<p style={{position:'absolute', top:'496px',left:'142px',whiteSpace:'nowrap'}} className="ft11">Vertigo</p>
+						<p style={{position:'absolute', top:'497px',left:'112px',whiteSpace:'nowrap'}} className="ft11">
+							<input type="checkbox" name="" style={{transform: 'scale(1.5)'}} checked={true} />
+						</p>
 						<p style={{position:'absolute', top:'496px',left:'304px',whiteSpace:'nowrap'}} className="ft11">Giddiness</p>
 						<p style={{position:'absolute', top:'496px',left:'432px',whiteSpace:'nowrap'}} className="ft11">Running Ear</p>
 						<p style={{position:'absolute', top:'496px',left:'587px',whiteSpace:'nowrap'}} className="ft11">Epilepsy</p>
@@ -448,14 +488,20 @@ const PrintDocument = () => {
 						<p style={{position:'absolute', top:'734px',left:'115px',whiteSpace:'nowrap'}} className="ft11">Remark:</p>
 						<p style={{position:'absolute', top:'822px',left:'115px',whiteSpace:'nowrap'}} className="ft11">Remark:</p>
 						<p style={{position:'absolute', top:'883px',left:'115px',whiteSpace:'nowrap'}} className="ft11">Remark:</p>
-						<p style={{position:'absolute', top:'1220px',left:'81px',whiteSpace:'nowrap'}} className="ft11">Date :-</p>
-						<p style={{position:'absolute', top:'1220px',left:'149px',whiteSpace:'nowrap'}} className="ft12"><b>06-MAR-23</b></p>
+						<p style={{position:'absolute', top:'1230px',left:'81px',whiteSpace:'nowrap'}} className="ft11">Date :-</p>
+						<p style={{position:'absolute', top:'1232px',left:'150px',whiteSpace:'nowrap'}} className="ft12"><b>{new Date().toLocaleString('default', {day: "2-digit", month: "long", year: "numeric"})}</b></p>
 						<p style={{position:'absolute', top:'253px',left:'830px',whiteSpace:'nowrap'}} className="ft12"><b>{personalDetails.gender}</b></p>
 						<p style={{position:'absolute', top:'253px',left:'694px',whiteSpace:'nowrap'}} className="ft12"><b>{personalDetails.age}</b></p>
 						<p style={{position:'absolute', top:'306px',left:'100px',whiteSpace:'nowrap'}} className="ft12"><b>{personalDetails.son_of}</b></p>
-						<p style={{position:'absolute', top:'1220px',left:'527px',whiteSpace:'nowrap'}} className="ft11">Signature / Left Thumb Impression of Candidate</p>
-						<p style={{position:'absolute', top:'280px',left:'698px',whiteSpace:'nowrap'}} className="ft12"><b>{personalDetails.department}</b></p>
-						<p style={{position:'absolute', top:'1085px',left:'81px',whiteSpace:'nowrap'}} className="ft16"><b>I {personalDetails.name} ,the undersigned, declare that information given above is true as per best of my<br/>knowledge. I hereby give the consent to perform medical examination and necessary laboratory investigating<br/>advised by doctor.</b></p>
+						<p style={{position:'absolute', top:'1230px',left:'487px',whiteSpace:'nowrap'}} className="ft11">Signature / Left Thumb Impression of Candidate</p>
+						<p style={{position:'absolute', top:'280px',left:'705px',whiteSpace:'nowrap'}} className="ft12"><b>{personalDetails.department}</b></p>
+						<div style={{position:'absolute', top:'1085px',left:'61px',whiteSpace:'nowrap'}} className="ft16">
+							<p style={{width:'900px',overflow:'hidden', whiteSpace:'initial'}}>
+								<b>I {personalDetails.name} ,the undersigned, declare that information given above is true as per best of my
+								knowledge. I hereby give the consent to perform medical examination and necessary laboratory investigating
+								advised by doctor.</b>
+							</p>
+						</div>
 						<p style={{position:'absolute', top:'957px',left:'115px',whiteSpace:'nowrap'}} className="ft11">Remark:</p>
 						<p style={{position:'absolute', top:'1024px',left:'115px',whiteSpace:'nowrap'}} className="ft11">Remark:</p>
 						<p style={{position:'absolute', top:'304px',left:'88px',whiteSpace:'nowrap'}} className="ft11">:</p>
