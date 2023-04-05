@@ -5,7 +5,7 @@ import { useDB } from '../../../contexts/DbContext';
 import { COLUMNS } from './constants';
 import { GlobalContext } from '../../../contexts/GlobalContext';
 import "./patient-list.-table.styles.css";
-import { EDIT_PATIENT_ROUTE, MEDICAL_FINDINGS_ROUTE } from '../../../routes/constants';
+import { EDIT_PATIENT_ROUTE, MEDICAL_FINDINGS_ROUTE, PRINT_ROUTE } from '../../../routes/constants';
 
 const customStyles = {
     rows: {
@@ -104,6 +104,7 @@ const PatientListTable = () => {
             </>
 		);
 	}, [filterText, resetPaginationToggle]);
+
     const onEditPrescription = (row) => navigate(MEDICAL_FINDINGS_ROUTE.replace(":pid?", row.pid).replace(":id?", row.id));
     const onEditPatientDetails = (row) => navigate(EDIT_PATIENT_ROUTE.replace(":id", row.id));
 
@@ -127,12 +128,14 @@ const PatientListTable = () => {
         }).catch(err => err);
     };
 
+    const onPDFClick = (row) => navigate(PRINT_ROUTE.replace(":pid", row.pid).replace(":id", row.id));
+
     return (
         <div className='patient-list-table-container'>
             <DataTable
                 // title="Patient List"
                 theme="default"
-                columns={COLUMNS(onEditPrescription, onEditPatientDetails, onDeleteClicked)}
+                columns={COLUMNS(onEditPrescription, onEditPatientDetails, onDeleteClicked, onPDFClick)}
                 data={filteredItems}
                 customStyles={customStyles}
                 progressPending={loading}

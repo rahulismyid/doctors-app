@@ -1,6 +1,7 @@
 import { ReactComponent as EditDocument } from "../../../components/svg/edit-document.svg";
 import { ReactComponent as DeleteSvg } from "../../../components/svg/delete.svg";
 import { ReactComponent as Prescription } from "../../../components/svg/prescription.svg";
+import { ReactComponent as PdfSvg } from "../../../components/svg/pdf-svg.svg";
 
 export const COLUMNS_KEYS = [
     "name",
@@ -30,7 +31,7 @@ export const COLUMNS_HEADER_TITLE = [
     "Gender",
 ];
 
-export const COLUMNS = (onEditPrescription, onEditPatientDetails, onDeleteClick) => [{
+export const COLUMNS = (onEditPrescription, onEditPatientDetails, onDeleteClick, onPDFClick) => [{
     name: 'PID',
     selector: row => row.pid,
 }, {
@@ -66,6 +67,9 @@ export const COLUMNS = (onEditPrescription, onEditPatientDetails, onDeleteClick)
         </span>
         <span className="table-action-btn" title="Edit Prescription" onClick={() => onEditPrescription(row)}>
             <Prescription width={18} height={18} style={{margin: '0 5px'}} />
+        </span>
+        <span className="table-action-btn" title="Prescription" onClick={() => onPDFClick(row)}>
+            <PdfSvg width={18} height={18} style={{margin: '0 5px'}} />
         </span>
         <span className="table-action-btn" title="Delete patient" onClick={() => onDeleteClick(row)}>
             <DeleteSvg width={18} height={18} style={{margin: '0 5px'}} />

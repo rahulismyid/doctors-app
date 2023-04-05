@@ -1,10 +1,10 @@
 export const ROOT_ROUTE = "/";
+export const SIGNUP_ROUTE = "/signup";
+export const LOGIN_ROUTE = "/login";
 export const APP_ROUTE = "/app";
 export const HOME_ROUTE = "/app/home";
 export const ADD_PATIENT_ROUTE = "/app/add-patient";
 export const EDIT_PATIENT_ROUTE = "/app/edit-patient/:id";
 export const LIST_PATIENT_ROUTE = "/app/list-patient";
 export const MEDICAL_FINDINGS_ROUTE = "/app/medical-findings/:pid?/:id?";
-export const SIGNUP_ROUTE = "/signup";
-export const LOGIN_ROUTE = "/login";
-export const PRINT_ROUTE = "/app/print";
+export const PRINT_ROUTE = "/app/print/:pid/:id";
