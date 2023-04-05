@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import logo from "../../pages/prs/PRSPrintDocument/target001_cropped.png";
+import logo from "../../components/images/target001_cropped.png";
 import { GlobalContext } from '../../contexts/GlobalContext';
 import "./styles.css"
 import { HOME_ROUTE, LOGIN_ROUTE, ROOT_ROUTE } from '../../routes/constants';

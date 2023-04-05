@@ -7,3 +7,4 @@ export const LIST_PATIENT_ROUTE = "/app/list-patient";
 export const MEDICAL_FINDINGS_ROUTE = "/app/medical-findings/:pid?/:id?";
 export const SIGNUP_ROUTE = "/signup";
 export const LOGIN_ROUTE = "/login";
+export const PRINT_ROUTE = "/app/print";

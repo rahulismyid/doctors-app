@@ -13,6 +13,7 @@ import MedicalConsent from "./pages/prs/MedicalConsent/MedicalConsent";
 import MedicalExamination from "./pages/prs/MedicalExamination/MedicalExamination";
 import PatientListTable from "./pages/prs/PatientList/PatientListTable";
 import MedicalFindings from "./pages/prs/MedicalFindings/MedicalFindings";
+import PrintDocument from "./pages/prs/PRSPrintDocument/PrintDocument";
 import Modal from "./components/Modal/Modal";
 import {
   ADD_PATIENT_ROUTE,
@@ -22,6 +23,7 @@ import {
   LIST_PATIENT_ROUTE,
   LOGIN_ROUTE,
   MEDICAL_FINDINGS_ROUTE,
+  PRINT_ROUTE,
   ROOT_ROUTE,
   SIGNUP_ROUTE,
 } from "./routes/constants";
@@ -42,6 +44,7 @@ function App() {
                 <Route path={EDIT_PATIENT_ROUTE} element={<AuthLayout><NewPatient/></AuthLayout>} />
                 <Route path={LIST_PATIENT_ROUTE} element={<AuthLayout><PatientListTable /></AuthLayout>} />
                 <Route key={'finding'} path={MEDICAL_FINDINGS_ROUTE} element={<AuthLayout><MedicalFindings /></AuthLayout>} />
+                <Route path={PRINT_ROUTE} element={<AuthLayout><PrintDocument /></AuthLayout>}/>
                 <Route path={LOGIN_ROUTE} element={<Login />}/>
                 <Route path={SIGNUP_ROUTE} element={<Signup />}/>
                 <Route path='*' element={<NotFound/>}/>

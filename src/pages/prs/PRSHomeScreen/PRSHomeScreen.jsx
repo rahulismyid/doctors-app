@@ -2,12 +2,13 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../../components/Button/Button';
 import "./prs-homescreen-styles.css";
+import { ADD_PATIENT_ROUTE, LIST_PATIENT_ROUTE } from '../../../routes/constants';
 
 const PRSHomeScreen = () => {
     const navigate = useNavigate();
 
     const handleOnClick = () => {
-        navigate('/app/add-patient', {replace: true});
+        navigate(ADD_PATIENT_ROUTE, {replace: true});
     };
 
     return (
@@ -19,13 +20,16 @@ const PRSHomeScreen = () => {
                     <section className="content">
                         <ul className='home-screen-grid-wrapper'>
                             <li>
-                                <Button navigatingRoute={'/app/add-patient'} callbackFn={handleOnClick} classNames={'homescreen-btn'} btnText={'Add New Patient'}/>
+                                <Button navigatingRoute={ADD_PATIENT_ROUTE} callbackFn={handleOnClick} classNames={'homescreen-btn'} btnText={'Add New Patient'}/>
                             </li>
                             <li>
-                                <Button navigatingRoute={'/app/list-patient'} callbackFn={navigate} classNames={'homescreen-btn'} btnText={'View Patient List'}/>
+                                <Button navigatingRoute={LIST_PATIENT_ROUTE} callbackFn={navigate} classNames={'homescreen-btn'} btnText={'View Patient List'}/>
                             </li>
                             <li>
                                 <Button navigatingRoute={'/app/medical-findings'} callbackFn={navigate} classNames={'homescreen-btn'} btnText={'Mecidal Form'}/>
+                            </li>
+                            <li>
+                                <Button navigatingRoute={'/app/print'} callbackFn={navigate} classNames={'homescreen-btn'} btnText={'Print Form'}/>
                             </li>
                         </ul>
                     </section>
