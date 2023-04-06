@@ -871,7 +871,6 @@ const MedicalFindings = () => {
                 {/* <div className="form-description">
                     <h2>Medical declaration consent</h2>
                 </div> */}
-                {JSON.stringify(ailmentsHistoryDetails)}
                     {ailmentsHistoryDetails && renderAilmentHistoryQuestions()}
                     {bodyExaminationMetrics && renderSection1()}
                     {renderSection2()}

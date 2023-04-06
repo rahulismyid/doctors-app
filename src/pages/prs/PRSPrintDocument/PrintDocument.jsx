@@ -25,114 +25,162 @@ const PERSONAL = {
 };
 
 const MEDICAL = {
-	"visualTestDetails": [
+	"uid": "kNC2FCX7pdfPznobces6zn2jTy22",
+	"pid": "71450",
+	"ailmentsHistoryDetails": [
 	  {
+		"q": "Do you suffer/have suffered from?",
 		"options": [
 		  {
-			"value": "Qui maiores tempore",
-			"key": "color_vision",
-			"m_key": "no_display"
+			"epilepsy": true,
+			"remark_key": "remark_q11",
+			"giddiness": true,
+			"running_ear": false,
+			"vertigo": false,
+			"remark_q11": "Consectetur adipisic"
+		  },
+		  {
+			"tb": false,
+			"hypertension": true,
+			"remark_q12": "Dicta velit impedit",
+			"heart_disease": true,
+			"remark_key": "remark_q12",
+			"paralysis": true,
+			"diabetes": true,
+			"other_major_illness": false
+		  },
+		  {
+			"remark_key": "remark_q13",
+			"allergy_to_any_medicine_or_object": true,
+			"remark_q13": "Quo veniam mollitia",
+			"asthama": false
 		  }
 		]
 	  },
 	  {
 		"options": [
 		  {
-			"key": "right_eye",
-			"value": "Dolor officia occaec",
-			"m_key": "vision_with_glasses"
-		  },
-		  {
-			"value": "Eiusmod fuga Aut cu",
-			"key": "left_eye",
-			"m_key": "vision_with_glasses"
+			"remark_q21": "Incididunt suscipit ",
+			"remark_key": "remark_q21"
 		  }
-		]
+		],
+		"q": "Does your parent or brother/sister, have from any of above disease?"
 	  },
 	  {
 		"options": [
 		  {
-			"key": "right_eye",
-			"m_key": "vision_without_glasses",
-			"value": "Nemo placeat sed qu"
+			"alcohol": false,
+			"smoking": false,
+			"remark_q31": "Officia tenetur recu",
+			"tobacco": true,
+			"other_addiction": false,
+			"remark_key": "remark_q31"
 		  },
 		  {
-			"key": "left_eye",
-			"m_key": "vision_without_glasses",
-			"value": "Natus nulla magna di"
+			"remark_key": "remark_q32",
+			"height_phobia": false,
+			"remark_q32": "Dolor consectetur r",
+			"fear_of_confined_space": true
+		  }
+		],
+		"q": "Do you have/had?"
+	  },
+	  {
+		"q": "Have you undergone any surgery (other than family planning)?",
+		"options": [
+		  {
+			"remark_q41": "Esse cumque consequ",
+			"remark_key": "remark_q41"
+		  }
+		]
+	  },
+	  {
+		"q": "Are you taking any medicine on regular basis?",
+		"options": [
+		  {
+			"remark_key": "remark_q51",
+			"remark_q51": "Et ex at quia placea"
+		  }
+		]
+	  }
+	],
+	"majorDisability": {
+	  "q": "Any major deformity/disability?",
+	  "eye_test_done_q": "Visual Activity:",
+	  "details": "Dolore neque minus d",
+	  "remark": "Sunt aut autem vitae",
+	  "yes": false,
+	  "eye_test_done": false
+	},
+	"contagiuosSkinDiseases": [
+	  {
+		"q": "Contagious skin disease? such as",
+		"remarks_4": "",
+		"options": [
+		  {
+			"scabies": false,
+			"cuts": false,
+			"soars": false,
+			"boils": false,
+			"dermatitis": false
 		  }
 		]
 	  }
 	],
 	"bodyExaminationMetrics": [
 	  {
-		"value": "Suscipit non quia la",
+		"value": "Excepteur necessitat",
 		"key": "height",
 		"label": "Height (in cm)"
 	  },
 	  {
-		"value": "Minus est fugit vol",
-		"label": "Weight(in Kg)",
-		"key": "weight"
+		"key": "weight",
+		"value": "Possimus recusandae",
+		"label": "Weight(in Kg)"
 	  },
 	  {
-		"value": "Velit id elit in qu",
-		"label": "BMI",
-		"key": "bmi"
+		"value": "Cupidatat eos sed e",
+		"key": "bmi",
+		"label": "BMI"
 	  },
 	  {
-		"key": "pulse_rate",
 		"label": "Pulse Rate",
-		"value": "Id nihil officia qui"
+		"value": "Hic provident eiusm",
+		"key": "pulse_rate"
 	  },
 	  {
-		"max_bp": "Max BP",
-		"key": "bp_max",
 		"label": "Max BP (mm of Hg)",
-		"value": "Ab eum voluptate con"
+		"key": "bp_max",
+		"max_bp": "Max BP",
+		"value": "Assumenda culpa con"
 	  },
 	  {
 		"key": "bp_min",
 		"min_bp": "Min BP",
-		"value": "Incididunt vel volup",
+		"value": "Deserunt sed volupta",
 		"label": "Min BP (mm of Hg)"
 	  },
 	  {
 		"label": "Respiratory Rate",
-		"value": "Laudantium ut labor",
+		"value": "Facilis in id est fu",
 		"key": "respiratory_rate"
-	  }
-	],
-	"contagiuosSkinDiseases": [
-	  {
-		"remarks_4": "",
-		"options": [
-		  {
-			"dermatitis": false,
-			"cuts": false,
-			"scabies": true,
-			"soars": true,
-			"boils": false
-		  }
-		],
-		"q": "Contagious skin disease? such as"
 	  }
 	],
 	"eyeSightDetails": [
 	  {
 		"eye_power": [
 		  {
+			"power_type": "dist",
 			"options": {
-			  "r_cyl": "Quibusdam culpa occ",
-			  "r_sph": "Corporis voluptatibu",
-			  "r_vn": "Incididunt qui est ",
-			  "r_axis": "Ipsa do ut eum cupi",
-			  "l_axis": "Omnis lorem obcaecat",
-			  "l_vn": "Eius sunt et sapient",
-			  "l_cyl": "Do ut suscipit hic v",
-			  "l_sph": "Anim accusamus alias"
-			},
-			"power_type": "dist"
+			  "r_cyl": "Ipsam labore nisi eu",
+			  "r_vn": "In rerum sequi quo s",
+			  "l_cyl": "Delectus eum quae n",
+			  "l_vn": "Tempore qui ipsum c",
+			  "r_sph": "Illo laboriosam ut ",
+			  "l_axis": "Labore veritatis ass",
+			  "r_axis": "Qui nemo assumenda p",
+			  "l_sph": "Nisi nesciunt non e"
+			}
 		  }
 		],
 		"eye": "Dist"
@@ -142,195 +190,114 @@ const MEDICAL = {
 		"eye_power": [
 		  {
 			"options": {
-			  "r_axis": "Vel nostrud amet as",
-			  "l_cyl": "Maiores est aut ali",
-			  "l_sph": "Est atque sit repel",
-			  "l_vn": "Error inventore veli",
-			  "l_axis": "Nisi quia eiusmod co",
-			  "r_vn": "Omnis amet sunt ip",
-			  "r_sph": "Maiores tempora inve",
-			  "r_cyl": "Fugit necessitatibu"
+			  "l_vn": "Officia nulla sed na",
+			  "r_axis": "Quod velit quas tota",
+			  "l_axis": "Qui perferendis qui ",
+			  "l_cyl": "Excepturi cupiditate",
+			  "r_vn": "Incidunt laboriosam",
+			  "l_sph": "Inventore quisquam a",
+			  "r_cyl": "Tempore ullam corru",
+			  "r_sph": "Eligendi illum inci"
 			},
 			"power_type": "near"
 		  }
 		]
 	  }
 	],
-	"uid": "kNC2FCX7pdfPznobces6zn2jTy22",
-	"ailmentsHistoryDetails": [
-	  {
-		"options": [
-		  {
-			"giddiness": false,
-			"epilepsy": true,
-			"vertigo": true,
-			"running_ear": true,
-			"remark_q11": ""
-		  },
-		  {
-			"other_major_illness": false,
-			"hypertension": false,
-			"remark_q12": "",
-			"paralysis": false,
-			"tb": false,
-			"heart_disease": false,
-			"diabetes": false
-		  },
-		  {
-			"allergy_to_any_medicine_or_object": false,
-			"remark_q13": "",
-			"asthama": false
-		  }
-		],
-		"q": "Do you suffer/have suffered from?"
-	  },
-	  {
-		"q": "Does your parent or brother/sister, have from any of above disease?",
-		"options": [
-		  {
-			"yes_no_q21": false,
-			"remark_q21": true
-		  }
-		]
-	  },
-	  {
-		"options": [
-		  {
-			"smoking": false,
-			"tobacco": true,
-			"remark_q31": "",
-			"other_addiction": false,
-			"alcohol": false
-		  },
-		  {
-			"remark_q32": "",
-			"height_phobia": false,
-			"fear_of_confined_space": false
-		  }
-		],
-		"q": "Do you have/had?"
-	  },
-	  {
-		"options": [
-		  {
-			"remark_q41": "",
-			"yes_no_q41": true
-		  }
-		],
-		"q": "Have you undergone any surgery (other than family planning)?"
-	  },
-	  {
-		"options": [
-		  {
-			"yes_no_q51": true,
-			"remark_q51": ""
-		  }
-		],
-		"q": "Are you taking any medicine on regular basis?"
-	  }
-	],
-	"majorDisability": {
-	  "eye_test_done": true,
-	  "yes": true,
-	  "details": "Provident sequi adi",
-	  "eye_test_done_q": "Visual Activity:",
-	  "remark": "Id aute fugiat labo",
-	  "q": "Any major deformity/disability?"
-	},
 	"testEvaluationsAndFindings": {
+	  "temporary_unfit": false,
+	  "audiometry_done_q": "Audiometry",
+	  "treatment_q": "Treatment advised (if any)",
+	  "restriction_value": "Reiciendis ipsum ni",
+	  "remark_q": "Remark",
+	  "restriction_q": "Restriction Advised (ifany)",
+	  "evaluation_q": "Further Evaluation (if any)",
+	  "unfit": false,
+	  "fit": false,
+	  "evaluation_value": "Numquam voluptatem i",
+	  "audiometry_done_value": "",
+	  "lab_sample_taken_value": "",
+	  "covid_q": "Covid Vaccination",
+	  "ecg_done_remark": "",
 	  "audiometry_done_checked": true,
+	  "deworming_remark": "Enim nulla exercitat",
+	  "treatment_value": "Assumenda cupiditate",
+	  "abnormal_reports_value": "Ad ea dolor non sit ",
+	  "follow_up_value": "Architecto fugiat ut",
+	  "fit_with_restrictions": true,
+	  "covid_value": "Sunt et adipisicing",
+	  "deworming_q": "Deworming (with Albendazole 400mg):",
+	  "ecg_done": false,
+	  "deworming_value": "Cupidatat nostrum ev",
 	  "abnormal_reports_q": "Abnormal Reports if any",
 	  "lab_sample_taken": true,
-	  "treatment_q": "Treatment advised (if any)",
-	  "fit_with_restrictions": false,
-	  "ecg_done": false,
-	  "remark_value": "Deserunt illo nisi i",
-	  "covid_value": "Facilis eum doloremq",
-	  "evaluation_value": "Sed sunt quidem sus",
-	  "fit": true,
-	  "follow_up_value": "Incididunt pariatur",
-	  "audiometry_done_value": "",
-	  "deworming_q": "Deworming (with Albendazole 400mg):",
-	  "ecg_done_remark": "",
-	  "covid_q": "Covid Vaccination",
-	  "unfit": true,
-	  "abnormal_reports_value": "Aliquam voluptate ha",
-	  "treatment_value": "Rerum soluta natus d",
-	  "deworming_value": "Vel quod totam simil",
-	  "temporary_unfit": true,
-	  "ecg_q": "Ecg Findings:",
-	  "audiometry_done_q": "Audiometry",
-	  "lab_sample_taken_value": "",
 	  "follow_up_q": "Follow-up advised (If any)",
-	  "restriction_q": "Restriction Advised (ifany)",
 	  "lab_sample_taken_q": "Lab Test Report No.",
-	  "evaluation_q": "Further Evaluation (if any)",
-	  "remark_q": "Remark",
-	  "deworming_remark": "Temporibus rem vel a",
-	  "restriction_value": "Ut incidunt laborum"
+	  "remark_value": "Inventore sunt magna",
+	  "ecg_q": "Ecg Findings:"
 	},
 	"bodyOrgansAndTests": [
 	  {
 		"key": "cvs",
-		"value": "Molestiae eligendi u",
-		"label": "CVS"
+		"label": "CVS",
+		"value": "Nobis qui irure quis"
 	  },
 	  {
+		"label": "R.S.",
 		"key": "rs",
-		"value": "Veniam molestias qu",
-		"label": "R.S."
+		"value": "Ut sit do eiusmod au"
 	  },
 	  {
-		"value": "Vitae reprehenderit ",
+		"value": "Omnis non laborum L",
 		"label": "P/A",
 		"key": "pa"
 	  },
 	  {
-		"value": "Nulla voluptas id d",
 		"label": "CNS",
-		"key": "cns"
+		"key": "cns",
+		"value": "Deleniti nostrud nos"
 	  },
 	  {
-		"label": "ENT",
 		"key": "ent",
-		"value": "Dolore beatae atque "
+		"label": "ENT",
+		"value": "Sunt magni dolorem "
 	  },
 	  {
-		"value": "Pariatur Eveniet u",
-		"label": "Musculoskeletal System",
-		"key": "musculoskeletal_system"
+		"key": "musculoskeletal_system",
+		"value": "Dolore sunt a tenetu",
+		"label": "Musculoskeletal System"
 	  },
 	  {
-		"label": "Genitourinary System",
 		"key": "genitourinary_system",
-		"value": "Repudiandae magnam u"
+		"value": "Deleniti perferendis",
+		"label": "Genitourinary System"
 	  }
 	],
 	"bodyExaminationAilments": [
 	  {
 		"key": "pallor",
-		"value": true,
+		"value": false,
 		"label": "Pallor"
 	  },
 	  {
-		"value": false,
+		"key": "lnpathy",
 		"label": "Lnpathy",
-		"key": "lnpathy"
+		"value": false
 	  },
 	  {
 		"label": "Cynosis",
-		"value": true,
+		"value": false,
 		"key": "cynosis"
 	  },
 	  {
 		"label": "Clubbing",
-		"key": "clubbing",
-		"value": false
+		"value": false,
+		"key": "clubbing"
 	  },
 	  {
-		"key": "edema",
-		"value": true,
-		"label": "Edema"
+		"label": "Edema",
+		"value": false,
+		"key": "edema"
 	  },
 	  {
 		"label": "Icterus",
@@ -339,18 +306,56 @@ const MEDICAL = {
 	  },
 	  {
 		"key": "other",
-		"label": "Other",
-		"value": true
+		"value": false,
+		"label": "Other"
 	  },
 	  {
-		"key": "remarks_2",
 		"label": "Remarks",
-		"value": "Minim qui et dolorib"
+		"value": "Quo consectetur vol",
+		"key": "remarks_2"
 	  }
 	],
-	"pid": "64988",
-	"id": "7nJ6zv9rkigO4D2FmKto"
-};
+	"visualTestDetails": [
+	  {
+		"options": [
+		  {
+			"value": "Et et aut sint qui a",
+			"key": "color_vision",
+			"m_key": "no_display"
+		  }
+		]
+	  },
+	  {
+		"options": [
+		  {
+			"m_key": "vision_with_glasses",
+			"key": "right_eye",
+			"value": "Consequatur modi el"
+		  },
+		  {
+			"m_key": "vision_with_glasses",
+			"value": "Blanditiis veritatis",
+			"key": "left_eye"
+		  }
+		]
+	  },
+	  {
+		"options": [
+		  {
+			"value": "Ipsa voluptate vero",
+			"m_key": "vision_without_glasses",
+			"key": "right_eye"
+		  },
+		  {
+			"value": "Animi vel quis repu",
+			"key": "left_eye",
+			"m_key": "vision_without_glasses"
+		  }
+		]
+	  }
+	],
+	"id": "lhD5UalqoRk9pdl5yToY"
+  };
 
 const PrintDocument = () => {
 
@@ -378,7 +383,7 @@ const PrintDocument = () => {
 		fetchPatientMedicalDetails,
 	} = useDB();
 
-	useEffect(() => {    
+	useEffect(() => {
 		// fetchPersonalDetails();
 		fetchMedicalDetails();
 		setPersonalDetails(PERSONAL);
@@ -392,9 +397,9 @@ const PrintDocument = () => {
 	};
 
 	const fetchMedicalDetails = async() => {
-		const medicalData = await fetchPatientMedicalDetails(pid);
-		// const newData = MEDICAL;
-		const newData = medicalData[0];
+		// const medicalData = await fetchPatientMedicalDetails(pid);
+		const newData = MEDICAL;
+		// const newData = medicalData[0];
 		setMedicalDetails(newData);
 		setAilmentsHistoryDetails(newData.ailmentsHistoryDetails.sort())
 		setBodyExaminationMetrics(newData.bodyExaminationMetrics.sort())
@@ -406,7 +411,7 @@ const PrintDocument = () => {
 		setEyeSightDetails(newData.eyeSightDetails.sort())
 		setTestEvaluationsAndFindings(newData.testEvaluationsAndFindings)
 		// console.log('medicalData ',medicalData[0]);
-		// document.getElementById("json").textContent = JSON.stringify(newData.bodyExaminationMetrics, undefined, 2);
+		// document.getElementById("json").textContent = JSON.stringify(newData, undefined, 2);
 		document.getElementById("json").textContent =
 			JSON.stringify(newData.ailmentsHistoryDetails.sort(), undefined, 2);
 	};
@@ -415,10 +420,147 @@ const PrintDocument = () => {
 		content: () => componentRef.current,
 	});
 
+	const renderPersonalDetails = () => {
+		return (
+			<>
+				<p style={{position:'absolute', top:'307px',left:'687px',whiteSpace:'nowrap'}} className="ft10"><b>{personalDetails.mobile}</b></p>
+				<p style={{position:'absolute', top:'304px',left:'577px',whiteSpace:'nowrap'}} className="ft11">Mobile No.:</p>
+				<p style={{position:'absolute', top:'252px',left:'188px',whiteSpace:'nowrap'}} className="ft12"><b>{personalDetails.name}/ {personalDetails.code}</b></p>
+				<p style={{position:'absolute', top:'250px',left:'61px',whiteSpace:'nowrap'}} className="ft11">Name/Code:</p>
+				<p style={{position:'absolute', top:'304px',left:'61px',whiteSpace:'nowrap'}} className="ft11">SO</p>
+				<p style={{position:'absolute', top:'334px',left:'222px',whiteSpace:'nowrap'}} className="ft12"><b>{personalDetails.present_address}</b></p>
+				<p style={{position:'absolute', top:'331px',left:'61px',whiteSpace:'nowrap'}} className="ft15">Present Address:<br/>Emergency Contact Person:</p>
+				<p style={{position:'absolute', top:'361px',left:'797px',whiteSpace:'nowrap'}} className="ft12"><b>{personalDetails.emergency_mobile}</b></p>
+				<p style={{position:'absolute', top:'359px',left:'577px',whiteSpace:'nowrap'}} className="ft11">Emergency Mobile No.:</p>
+				<p style={{position:'absolute', top:'364px',left:'327px',whiteSpace:'nowrap'}} className="ft12"><b>{personalDetails.emergency_contact_person}</b></p>
+				<p style={{position:'absolute', top:'280px',left:'209px',whiteSpace:'nowrap'}} className="ft12"><b>{personalDetails.doj}</b></p>
+				<p style={{position:'absolute', top:'41px',left:'699px',whiteSpace:'nowrap'}} className="ft11">Reg. No. CL/8462/FEB-2019&#160;</p>
+				<p style={{position:'absolute', top:'61px',left:'220px',whiteSpace:'nowrap'}} className="ft13"><b>Aaradhya Polyclinic and Diagnostic Center</b></p>
+				<p style={{position:'absolute', top:'108px',left:'439px',whiteSpace:'nowrap'}} className="ft14"><b>&#160;ISO 9001 : 2015 Certified</b></p>
+				<p style={{position:'absolute', top:'135px',left:'241px',whiteSpace:'nowrap'}} className="ft14"><b>177, Priyadarshini Colony, phase-2, Bagsevaniya, Bhopal (M.P.)</b></p>
+				<p style={{position:'absolute', top:'162px',left:'263px',whiteSpace:'nowrap'}} className="ft14"><b>E-mail: sudheersharma108@gmail.com, Mob.:8770538618</b></p>
+				<p style={{position:'absolute', top:'216px',left:'443px',whiteSpace:'nowrap'}} className="ft12"><b>Personal details</b></p>
+				<p style={{position:'absolute', top:'250px',left:'577px',whiteSpace:'nowrap'}} className="ft11">Age (in yrs):</p>
+				<p style={{position:'absolute', top:'250px',left:'746px',whiteSpace:'nowrap'}} className="ft11">Gender :</p>
+				<p style={{position:'absolute', top:'277px',left:'61px',whiteSpace:'nowrap'}} className="ft11">Date of joining:</p>
+				<p style={{position:'absolute', top:'277px',left:'577px',whiteSpace:'nowrap'}} className="ft11">Department:</p>
+				<p style={{position:'absolute', top:'1230px',left:'81px',whiteSpace:'nowrap'}} className="ft11">Date :-</p>
+				<p style={{position:'absolute', top:'1232px',left:'150px',whiteSpace:'nowrap'}} className="ft12"><b>{new Date().toLocaleString('default', {day: "2-digit", month: "long", year: "numeric"})}</b></p>
+				<p style={{position:'absolute', top:'253px',left:'830px',whiteSpace:'nowrap'}} className="ft12"><b>{personalDetails.gender}</b></p>
+				<p style={{position:'absolute', top:'253px',left:'694px',whiteSpace:'nowrap'}} className="ft12"><b>{personalDetails.age}</b></p>
+				<p style={{position:'absolute', top:'306px',left:'100px',whiteSpace:'nowrap'}} className="ft12"><b>{personalDetails.son_of}</b></p>
+				<p style={{position:'absolute', top:'304px',left:'88px',whiteSpace:'nowrap'}} className="ft11">:</p>
+				<p style={{position:'absolute', top:'280px',left:'705px',whiteSpace:'nowrap'}} className="ft12"><b>{personalDetails.department}</b></p>
+			</>
+		);
+	};
+
+	const renderAilmentHistoryCheckboxesQ11 = () => {
+		return (
+			<>
+				<p style={{position:'absolute', top:'464px',left:'59px',whiteSpace:'nowrap'}} className="ft11">1</p>
+				<p style={{position:'absolute', top:'464px',left:'81px',whiteSpace:'nowrap'}} className="ft11">Do you suffer / have suffered from:</p>
+				<p style={{position:'absolute', top:'493px',left:'114px',whiteSpace:'nowrap'}} className="ft11">Vertigo</p>
+				<p style={{position:'absolute', top:'492px',left:'90px',whiteSpace:'nowrap'}} className="ft11">
+					{ailmentsHistoryDetails && (
+						<input type="checkbox" name="" style={{transform: 'scale(1.5)'}} checked={ailmentsHistoryDetails[0].options[0]['vertigo']} readOnly />
+					)}
+				</p>
+				<p style={{position:'absolute', top:'493px',left:'334px',whiteSpace:'nowrap'}} className="ft11">Giddiness</p>
+				<p style={{position:'absolute', top:'492px',left:'305px',whiteSpace:'nowrap'}} className="ft11">
+					{ailmentsHistoryDetails && (
+						<input type="checkbox" name="" style={{transform: 'scale(1.5)'}} checked={ailmentsHistoryDetails[0].options[0]['giddiness']} readOnly />
+					)}
+				</p>
+				<p style={{position:'absolute', top:'493px',left:'542px',whiteSpace:'nowrap'}} className="ft11">Running Ear</p>
+				<p style={{position:'absolute', top:'492px',left:'513px',whiteSpace:'nowrap'}} className="ft11">
+					{ailmentsHistoryDetails && (
+						<input type="checkbox" name="" style={{transform: 'scale(1.5)'}} checked={ailmentsHistoryDetails[0].options[0]['running_ear']} readOnly />
+					)}
+				</p>
+				<p style={{position:'absolute', top:'493px',left:'770px',whiteSpace:'nowrap'}} className="ft11">Epilepsy</p>
+				<p style={{position:'absolute', top:'492px',left:'739px',whiteSpace:'nowrap'}} className="ft11">
+					{ailmentsHistoryDetails && (
+						<input type="checkbox" name="" style={{transform: 'scale(1.5)'}} checked={ailmentsHistoryDetails[0].options[0]['epilepsy']} readOnly />
+					)}
+				</p>
+				<p style={{position:'absolute', top:'520px',left:'87px',whiteSpace:'nowrap'}} className="ft11">Remark:</p>
+				{ailmentsHistoryDetails && (
+					<p style={{position:'absolute', top:'520px',left:'175px',whiteSpace:'nowrap'}} className="ft11">{ailmentsHistoryDetails[0].options[0]['remark_q11']}</p>
+				)}
+			</>
+		);
+	};
+
+	const renderAilmentHistoryCheckboxesQ12 = () => {
+		return (
+			<>
+				<p style={{position:'absolute', top:'554px',left:'114px',whiteSpace:'nowrap'}} className="ft11">Heart Disease</p>
+				<p style={{position:'absolute', top:'554px',left:'90px',whiteSpace:'nowrap'}} className="ft11">
+					{ailmentsHistoryDetails && (
+						<input type="checkbox" name="" style={{transform: 'scale(1.5)'}} checked={ailmentsHistoryDetails[0].options[1]['heart_disease']} readOnly />
+					)}
+				</p>
+				<p style={{position:'absolute', top:'554px',left:'334px',whiteSpace:'nowrap'}} className="ft11">Diabetes</p>
+				<p style={{position:'absolute', top:'554px',left:'305px',whiteSpace:'nowrap'}} className="ft11">
+					{ailmentsHistoryDetails && (
+						<input type="checkbox" name="" style={{transform: 'scale(1.5)'}} checked={ailmentsHistoryDetails[0].options[1]['diabetes']} readOnly />
+					)}
+				</p>
+				<p style={{position:'absolute', top:'554px',left:'542px',whiteSpace:'nowrap'}} className="ft11">Hypertension</p>
+				<p style={{position:'absolute', top:'554px',left:'513px',whiteSpace:'nowrap'}} className="ft11">
+					{ailmentsHistoryDetails && (
+						<input type="checkbox" name="" style={{transform: 'scale(1.5)'}} checked={ailmentsHistoryDetails[0].options[1]['hypertension']} readOnly />
+					)}
+				</p>
+				<p style={{position:'absolute', top:'554px',left:'770px',whiteSpace:'nowrap'}} className="ft11">Paralysis</p>
+				<p style={{position:'absolute', top:'554px',left:'739px',whiteSpace:'nowrap'}} className="ft11">
+					{ailmentsHistoryDetails && (
+						<input type="checkbox" name="" style={{transform: 'scale(1.5)'}} checked={ailmentsHistoryDetails[0].options[1]['paralysis']} readOnly />
+					)}
+				</p>
+				<p style={{position:'absolute', top:'586px',left:'114px',whiteSpace:'nowrap'}} className="ft11">TB</p>
+				<p style={{position:'absolute', top:'586px',left:'90px',whiteSpace:'nowrap'}} className="ft11">
+					{ailmentsHistoryDetails && (
+						<input type="checkbox" name="" style={{transform: 'scale(1.5)'}} checked={ailmentsHistoryDetails[0].options[1]['tb']} readOnly />
+					)}
+				</p>
+				<p style={{position:'absolute', top:'586px',left:'334px',whiteSpace:'nowrap'}} className="ft11">Other Major Illness</p>
+				<p style={{position:'absolute', top:'586px',left:'305px',whiteSpace:'nowrap'}} className="ft11">
+					{ailmentsHistoryDetails && (
+						<input type="checkbox" name="" style={{transform: 'scale(1.5)'}} checked={ailmentsHistoryDetails[0].options[1]['other_major_illness']} readOnly />
+					)}
+				</p>
+				other_major_illness
+				<p style={{position:'absolute', top:'614px',left:'90px',whiteSpace:'nowrap'}} className="ft11">Remark:</p>
+				{ailmentsHistoryDetails && (
+					<p style={{position:'absolute', top:'614px',left:'175px',whiteSpace:'nowrap'}} className="ft11">{ailmentsHistoryDetails[0].options[0]['remark_q12']}</p>
+				)}
+
+				<p style={{position:'absolute', top:'645px',left:'114px',whiteSpace:'nowrap'}} className="ft11">Allergy to any medicine or object</p>
+				<p style={{position:'absolute', top:'645px',left:'90px',whiteSpace:'nowrap'}} className="ft11">
+					{ailmentsHistoryDetails && (
+						<input type="checkbox" name="" style={{transform: 'scale(1.5)'}} checked={ailmentsHistoryDetails[0].options[2]['allergy_to_any_medicine_or_object']} readOnly />
+					)}
+				</p>
+				<p style={{position:'absolute', top:'645px',left:'542px',whiteSpace:'nowrap'}} className="ft11">Asthma</p>
+				<p style={{position:'absolute', top:'645px',left:'513px',whiteSpace:'nowrap'}} className="ft11">
+					{ailmentsHistoryDetails && (
+						<input type="checkbox" name="" style={{transform: 'scale(1.5)'}} checked={ailmentsHistoryDetails[0].options[2]['asthama']} readOnly />
+					)}
+				</p>
+				<p style={{position:'absolute', top:'673px',left:'90px',whiteSpace:'nowrap'}} className="ft11">Remark:</p>
+				{ailmentsHistoryDetails && (
+					<p style={{position:'absolute', top:'673px',left:'175px',whiteSpace:'nowrap'}} className="ft11">{ailmentsHistoryDetails[0].options[0]['remark_q13']}</p>
+				)}
+			</>
+		);
+	};
+	
 	return (
 		<div>
 		{/* <button style={{marginTop: '10%'}} onClick={handlePrint} className="print__button">  Print </button>  */}
-		<pre style={{marginTop: '10%'}} id="json"></pre>
+		<pre style={{height: '100vh', marginLeft: '5%', marginTop: '10%'}} id="json"></pre>
 		{
 			personalDetails && medicalDetails ? (
 				<div bgcolor="#A0A0A0" vlink="blue" link="blue" ref={componentRef}
@@ -430,50 +572,27 @@ const PrintDocument = () => {
 						left: '50%',
 						transform: 'translate(-50%, 0%)',
 					}}
-				>
+					>
 					<a name="1"></a>
 					<div id="page1-div" style={{position:'relative',width:'1026px',height:'1350px'}}>
 						<img width="1026" height="1350" src={img1} alt="background image"/>
-						<p style={{position:'absolute', top:'307px',left:'687px',whiteSpace:'nowrap'}} className="ft10"><b>{personalDetails.mobile}</b></p>
-						<p style={{position:'absolute', top:'304px',left:'577px',whiteSpace:'nowrap'}} className="ft11">Mobile No.:</p>
-						<p style={{position:'absolute', top:'252px',left:'188px',whiteSpace:'nowrap'}} className="ft12"><b>{personalDetails.name}/ {personalDetails.code}</b></p>
-						<p style={{position:'absolute', top:'250px',left:'61px',whiteSpace:'nowrap'}} className="ft11">Name/Code:</p>
-						<p style={{position:'absolute', top:'304px',left:'61px',whiteSpace:'nowrap'}} className="ft11">SO</p>
-						<p style={{position:'absolute', top:'334px',left:'222px',whiteSpace:'nowrap'}} className="ft12"><b>{personalDetails.present_address}</b></p>
-						<p style={{position:'absolute', top:'331px',left:'61px',whiteSpace:'nowrap'}} className="ft15">Present Address:<br/>Emergency Contact Person:</p>
-						<p style={{position:'absolute', top:'361px',left:'797px',whiteSpace:'nowrap'}} className="ft12"><b>{personalDetails.emergency_mobile}</b></p>
-						<p style={{position:'absolute', top:'359px',left:'577px',whiteSpace:'nowrap'}} className="ft11">Emergency Mobile No.:</p>
-						<p style={{position:'absolute', top:'364px',left:'327px',whiteSpace:'nowrap'}} className="ft12"><b>{personalDetails.emergency_contact_person}</b></p>
-						<p style={{position:'absolute', top:'280px',left:'209px',whiteSpace:'nowrap'}} className="ft12"><b>{personalDetails.doj}</b></p>
-						<p style={{position:'absolute', top:'41px',left:'699px',whiteSpace:'nowrap'}} className="ft11">Reg. No. CL/8462/FEB-2019&#160;</p>
-						<p style={{position:'absolute', top:'61px',left:'220px',whiteSpace:'nowrap'}} className="ft13"><b>Aaradhya Polyclinic and Diagnostic Center</b></p>
-						<p style={{position:'absolute', top:'108px',left:'439px',whiteSpace:'nowrap'}} className="ft14"><b>&#160;ISO 9001 : 2015 Certified</b></p>
-						<p style={{position:'absolute', top:'135px',left:'241px',whiteSpace:'nowrap'}} className="ft14"><b>177, Priyadarshini Colony, phase-2, Bagsevaniya, Bhopal (M.P.)</b></p>
-						<p style={{position:'absolute', top:'162px',left:'263px',whiteSpace:'nowrap'}} className="ft14"><b>E-mail: sudheersharma108@gmail.com, Mob.:8770538618</b></p>
-						<p style={{position:'absolute', top:'216px',left:'443px',whiteSpace:'nowrap'}} className="ft12"><b>Personal details</b></p>
-						<p style={{position:'absolute', top:'250px',left:'577px',whiteSpace:'nowrap'}} className="ft11">Age (in yrs):</p>
-						<p style={{position:'absolute', top:'250px',left:'746px',whiteSpace:'nowrap'}} className="ft11">Gender :</p>
-						<p style={{position:'absolute', top:'277px',left:'61px',whiteSpace:'nowrap'}} className="ft11">Date of joining:</p>
-						<p style={{position:'absolute', top:'277px',left:'577px',whiteSpace:'nowrap'}} className="ft11">Department:</p>
+						{/* Personal Details */}
+						{renderPersonalDetails()}
+						{/* Personal Details */}
+
+						{/* Medical Details */}
 						<p style={{position:'absolute', top:'408px',left:'387px',whiteSpace:'nowrap'}} className="ft12"><b>Medical declaration &amp; Consent</b></p>
 						<p style={{position:'absolute', top:'435px',left:'150px',whiteSpace:'nowrap'}} className="ft11">Please &#34; &#34; mark the appropriate (Yes or No; If yes- please give details below)</p>
-						<p style={{position:'absolute', top:'476px',left:'59px',whiteSpace:'nowrap'}} className="ft11">1</p>
-						<p style={{position:'absolute', top:'462px',left:'81px',whiteSpace:'nowrap'}} className="ft11">Do you suffer / have suffered from:</p>
-						<p style={{position:'absolute', top:'496px',left:'142px',whiteSpace:'nowrap'}} className="ft11">Vertigo</p>
-						<p style={{position:'absolute', top:'497px',left:'112px',whiteSpace:'nowrap'}} className="ft11">
-							<input type="checkbox" name="" style={{transform: 'scale(1.5)'}} checked={true} />
-						</p>
-						<p style={{position:'absolute', top:'496px',left:'304px',whiteSpace:'nowrap'}} className="ft11">Giddiness</p>
-						<p style={{position:'absolute', top:'496px',left:'432px',whiteSpace:'nowrap'}} className="ft11">Running Ear</p>
-						<p style={{position:'absolute', top:'496px',left:'587px',whiteSpace:'nowrap'}} className="ft11">Epilepsy</p>
-						<p style={{position:'absolute', top:'577px',left:'142px',whiteSpace:'nowrap'}} className="ft11">Heart Disease</p>
-						<p style={{position:'absolute', top:'577px',left:'311px',whiteSpace:'nowrap'}} className="ft11">Diabetes</p>
-						<p style={{position:'absolute', top:'577px',left:'425px',whiteSpace:'nowrap'}} className="ft11">Hypertension</p>
-						<p style={{position:'absolute', top:'577px',left:'587px',whiteSpace:'nowrap'}} className="ft11">Paralysis</p>
-						<p style={{position:'absolute', top:'577px',left:'702px',whiteSpace:'nowrap'}} className="ft11">TB</p>
-						<p style={{position:'absolute', top:'577px',left:'770px',whiteSpace:'nowrap'}} className="ft11">Other Major Illness</p>
-						<p style={{position:'absolute', top:'638px',left:'115px',whiteSpace:'nowrap'}} className="ft11">Allergy to any medicine or object</p>
-						<p style={{position:'absolute', top:'638px',left:'770px',whiteSpace:'nowrap'}} className="ft11">Asthma</p>
+
+						{/* Ailment Question 1 checkboxes */}
+						{renderAilmentHistoryCheckboxesQ11()}
+						{/* Ailment Question 1 checkboxes */}
+
+						{/* Ailment Question 2 checkboxes */}
+						{renderAilmentHistoryCheckboxesQ12()}
+						{/* Ailment Question 2 checkboxes */}
+
+
 						<p style={{position:'absolute', top:'700px',left:'59px',whiteSpace:'nowrap'}} className="ft11">2&#160;Does your parent or brother/sister, have from any of above disease&#160;</p>
 						<p style={{position:'absolute', top:'700px',left:'807px',whiteSpace:'nowrap'}} className="ft12"><b>Yes</b></p>
 						<p style={{position:'absolute', top:'761px',left:'59px',whiteSpace:'nowrap'}} className="ft11">3&#160;Do you have /had: &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160;&#160;</p>
@@ -490,19 +609,10 @@ const PrintDocument = () => {
 						<p style={{position:'absolute', top:'991px',left:'809px',whiteSpace:'nowrap'}} className="ft12"><b>No</b></p>
 						<p style={{position:'absolute', top:'734px',left:'196px',whiteSpace:'nowrap'}} className="ft12"><b>FATHER DM MOTHER ASTHMA</b></p>
 						<p style={{position:'absolute', top:'883px',left:'203px',whiteSpace:'nowrap'}} className="ft12"><b>N</b></p>
-						<p style={{position:'absolute', top:'604px',left:'115px',whiteSpace:'nowrap'}} className="ft11">Remark:</p>
-						<p style={{position:'absolute', top:'530px',left:'115px',whiteSpace:'nowrap'}} className="ft11">Remark:</p>
-						<p style={{position:'absolute', top:'665px',left:'115px',whiteSpace:'nowrap'}} className="ft11">Remark:</p>
 						<p style={{position:'absolute', top:'734px',left:'115px',whiteSpace:'nowrap'}} className="ft11">Remark:</p>
 						<p style={{position:'absolute', top:'822px',left:'115px',whiteSpace:'nowrap'}} className="ft11">Remark:</p>
 						<p style={{position:'absolute', top:'883px',left:'115px',whiteSpace:'nowrap'}} className="ft11">Remark:</p>
-						<p style={{position:'absolute', top:'1230px',left:'81px',whiteSpace:'nowrap'}} className="ft11">Date :-</p>
-						<p style={{position:'absolute', top:'1232px',left:'150px',whiteSpace:'nowrap'}} className="ft12"><b>{new Date().toLocaleString('default', {day: "2-digit", month: "long", year: "numeric"})}</b></p>
-						<p style={{position:'absolute', top:'253px',left:'830px',whiteSpace:'nowrap'}} className="ft12"><b>{personalDetails.gender}</b></p>
-						<p style={{position:'absolute', top:'253px',left:'694px',whiteSpace:'nowrap'}} className="ft12"><b>{personalDetails.age}</b></p>
-						<p style={{position:'absolute', top:'306px',left:'100px',whiteSpace:'nowrap'}} className="ft12"><b>{personalDetails.son_of}</b></p>
 						<p style={{position:'absolute', top:'1230px',left:'487px',whiteSpace:'nowrap'}} className="ft11">Signature / Left Thumb Impression of Candidate</p>
-						<p style={{position:'absolute', top:'280px',left:'705px',whiteSpace:'nowrap'}} className="ft12"><b>{personalDetails.department}</b></p>
 						<div style={{position:'absolute', top:'1085px',left:'61px',whiteSpace:'nowrap'}} className="ft16">
 							<p style={{width:'900px',overflow:'hidden', whiteSpace:'initial'}}>
 								<b>I {personalDetails.name} ,the undersigned, declare that information given above is true as per best of my
@@ -512,8 +622,7 @@ const PrintDocument = () => {
 						</div>
 						<p style={{position:'absolute', top:'957px',left:'115px',whiteSpace:'nowrap'}} className="ft11">Remark:</p>
 						<p style={{position:'absolute', top:'1024px',left:'115px',whiteSpace:'nowrap'}} className="ft11">Remark:</p>
-						<p style={{position:'absolute', top:'304px',left:'88px',whiteSpace:'nowrap'}} className="ft11">:</p>
-					</div>
+						</div>
 					<a name="2"></a>
 					<div id="page2-div" style={{position:'relative',width:'1026px',height:'1350px'}}>
 						<img width="1026" height="1350" src={img2} alt="background image"/>
