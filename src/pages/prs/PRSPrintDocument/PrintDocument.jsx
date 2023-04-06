@@ -60,7 +60,7 @@ const MEDICAL = {
 	  {
 		"options": [
 		  {
-			"remark_q21": "Incididunt suscipit ",
+			"remark_q21": "Incididunt suscipit",
 			"remark_key": "remark_q21"
 		  }
 		],
@@ -355,7 +355,7 @@ const MEDICAL = {
 	  }
 	],
 	"id": "lhD5UalqoRk9pdl5yToY"
-  };
+};
 
 const PrintDocument = () => {
 
@@ -413,7 +413,7 @@ const PrintDocument = () => {
 		// console.log('medicalData ',medicalData[0]);
 		// document.getElementById("json").textContent = JSON.stringify(newData, undefined, 2);
 		document.getElementById("json").textContent =
-			JSON.stringify(newData.ailmentsHistoryDetails.sort(), undefined, 2);
+			JSON.stringify(newData.bodyExaminationMetrics.sort(), undefined, 2);
 	};
 
 	const handlePrint = useReactToPrint({
@@ -486,7 +486,7 @@ const PrintDocument = () => {
 				</p>
 				<p style={{position:'absolute', top:'520px',left:'87px',whiteSpace:'nowrap'}} className="ft11">Remark:</p>
 				{ailmentsHistoryDetails && (
-					<p style={{position:'absolute', top:'520px',left:'175px',whiteSpace:'nowrap'}} className="ft11">{ailmentsHistoryDetails[0].options[0]['remark_q11']}</p>
+					<p style={{position:'absolute', top:'520px',left:'175px',whiteSpace:'nowrap'}} className="ft11"><b>{ailmentsHistoryDetails[0].options[0]['remark_q11']}</b></p>
 				)}
 			</>
 		);
@@ -534,7 +534,7 @@ const PrintDocument = () => {
 				other_major_illness
 				<p style={{position:'absolute', top:'614px',left:'90px',whiteSpace:'nowrap'}} className="ft11">Remark:</p>
 				{ailmentsHistoryDetails && (
-					<p style={{position:'absolute', top:'614px',left:'175px',whiteSpace:'nowrap'}} className="ft11">{ailmentsHistoryDetails[0].options[0]['remark_q12']}</p>
+					<p style={{position:'absolute', top:'614px',left:'175px',whiteSpace:'nowrap'}} className="ft11"><b>{ailmentsHistoryDetails[0].options[0]['remark_q12']}</b></p>
 				)}
 
 				<p style={{position:'absolute', top:'645px',left:'114px',whiteSpace:'nowrap'}} className="ft11">Allergy to any medicine or object</p>
@@ -551,12 +551,124 @@ const PrintDocument = () => {
 				</p>
 				<p style={{position:'absolute', top:'673px',left:'90px',whiteSpace:'nowrap'}} className="ft11">Remark:</p>
 				{ailmentsHistoryDetails && (
-					<p style={{position:'absolute', top:'673px',left:'175px',whiteSpace:'nowrap'}} className="ft11">{ailmentsHistoryDetails[0].options[0]['remark_q13']}</p>
+					<p style={{position:'absolute', top:'673px',left:'175px',whiteSpace:'nowrap'}} className="ft11"><b>{ailmentsHistoryDetails[0].options[0]['remark_q13']}</b></p>
 				)}
 			</>
 		);
 	};
-	
+
+	const renderAilmentHistoryCheckboxesQ21 = () => {
+		return (
+			<>
+				<p style={{position:'absolute', top:'700px',left:'59px',whiteSpace:'nowrap'}} className="ft11">2</p>
+				<p style={{position:'absolute', top:'700px',left:'81px',whiteSpace:'nowrap'}} className="ft11">Does your parent or brother/sister, have from any of above disease&#160;</p>
+				<p style={{position:'absolute', top:'702px',left:'887px',whiteSpace:'nowrap'}} className="ft12"><b>{!ailmentsHistoryDetails[1].options[0]['remark_q21'] ? "No" : "Yes"}</b></p>
+				<p style={{position:'absolute', top:'700px',left:'857px',whiteSpace:'nowrap'}} className="ft11">
+					{ailmentsHistoryDetails && (
+						<input type="checkbox" name="" style={{transform: 'scale(1.5)'}} checked={ailmentsHistoryDetails[1].options[0]['remark_q21']} readOnly />
+					)}
+				</p>
+				<p style={{position:'absolute', top:'730px',left:'90px',whiteSpace:'nowrap'}} className="ft11">Remark:</p>
+				{ailmentsHistoryDetails && (
+					<p style={{position:'absolute', top:'730px',left:'175px',whiteSpace:'nowrap'}} className="ft11"><b>{ailmentsHistoryDetails[1].options[0]['remark_q21']}</b></p>
+				)}
+			</>
+		);
+	};
+
+	const renderAilmentHistoryCheckboxesQ31 = () => {
+		return (
+			<>
+				<p style={{position:'absolute', top:'760px',left:'59px',whiteSpace:'nowrap'}} className="ft11">3</p>
+				<p style={{position:'absolute', top:'760px',left:'81px',whiteSpace:'nowrap'}} className="ft11">Do you have/had:</p>
+				<p style={{position:'absolute', top:'784px',left:'114px',whiteSpace:'nowrap'}} className="ft11">Smoking</p>
+				<p style={{position:'absolute', top:'784px',left:'90px',whiteSpace:'nowrap'}} className="ft11">
+					{ailmentsHistoryDetails && (
+						<input type="checkbox" name="" style={{transform: 'scale(1.5)'}} checked={ailmentsHistoryDetails[2].options[0]['smoking']} readOnly />
+					)}
+				</p>
+				<p style={{position:'absolute', top:'784px',left:'334px',whiteSpace:'nowrap'}} className="ft11">Tobacco</p>
+				<p style={{position:'absolute', top:'784px',left:'305px',whiteSpace:'nowrap'}} className="ft11">
+					{ailmentsHistoryDetails && (
+						<input type="checkbox" name="" style={{transform: 'scale(1.5)'}} checked={ailmentsHistoryDetails[2].options[0]['tobacco']} readOnly />
+					)}
+				</p>
+				<p style={{position:'absolute', top:'784px',left:'542px',whiteSpace:'nowrap'}} className="ft11">Alcohol</p>
+				<p style={{position:'absolute', top:'784px',left:'513px',whiteSpace:'nowrap'}} className="ft11">
+					{ailmentsHistoryDetails && (
+						<input type="checkbox" name="" style={{transform: 'scale(1.5)'}} checked={ailmentsHistoryDetails[2].options[0]['alcohol']} readOnly />
+					)}
+				</p>
+				<p style={{position:'absolute', top:'784px',left:'770px',whiteSpace:'nowrap'}} className="ft11">Other Addiction</p>
+				<p style={{position:'absolute', top:'784px',left:'739px',whiteSpace:'nowrap'}} className="ft11">
+					{ailmentsHistoryDetails && (
+						<input type="checkbox" name="" style={{transform: 'scale(1.5)'}} checked={ailmentsHistoryDetails[2].options[0]['other_addiction']} readOnly />
+					)}
+				</p>
+				<p style={{position:'absolute', top:'815px',left:'90px',whiteSpace:'nowrap'}} className="ft11">Remark:</p>
+				{ailmentsHistoryDetails && (
+					<p style={{position:'absolute', top:'815px',left:'175px',whiteSpace:'nowrap'}} className="ft11"><b>{ailmentsHistoryDetails[2].options[0]['remark_q31']}</b></p>
+				)}
+				<p style={{position:'absolute', top:'856px',left:'114px',whiteSpace:'nowrap'}} className="ft11">Height Phobia</p>
+				<p style={{position:'absolute', top:'856px',left:'90px',whiteSpace:'nowrap'}} className="ft11">
+					{ailmentsHistoryDetails && (
+						<input type="checkbox" name="" style={{transform: 'scale(1.5)'}} checked={ailmentsHistoryDetails[2].options[1]['height_phobia']} readOnly />
+					)}
+				</p>
+				<p style={{position:'absolute', top:'856px',left:'334px',whiteSpace:'nowrap'}} className="ft11">Fear Of Confined Space</p>
+				<p style={{position:'absolute', top:'856px',left:'305px',whiteSpace:'nowrap'}} className="ft11">
+					{ailmentsHistoryDetails && (
+						<input type="checkbox" name="" style={{transform: 'scale(1.5)'}} checked={ailmentsHistoryDetails[2].options[1]['fear_of_confined_space']} readOnly />
+					)}
+				</p>
+				<p style={{position:'absolute', top:'888px',left:'90px',whiteSpace:'nowrap'}} className="ft11">Remark:</p>
+				{ailmentsHistoryDetails && (
+					<p style={{position:'absolute', top:'888px',left:'175px',whiteSpace:'nowrap'}} className="ft11"><b>{ailmentsHistoryDetails[2].options[1]['remark_q32']}</b></p>
+				)}
+			</>
+		);
+	};
+
+	const renderAilmentHistoryCheckboxesQ41 = () => {
+		return (
+			<>
+				<p style={{position:'absolute', top:'925px',left:'59px',whiteSpace:'nowrap'}} className="ft11">4</p>
+				<p style={{position:'absolute', top:'925px',left:'81px',whiteSpace:'nowrap'}} className="ft11">Have you undergone any surgery (other than family planning)?</p>
+				<p style={{position:'absolute', top:'925px',left:'887px',whiteSpace:'nowrap'}} className="ft12"><b>{!ailmentsHistoryDetails[3].options[0]['remark_q41'] ? "No" : "Yes"}</b></p>
+				<p style={{position:'absolute', top:'925px',left:'857px',whiteSpace:'nowrap'}} className="ft11">
+					{ailmentsHistoryDetails && (
+						<input type="checkbox" name="" style={{transform: 'scale(1.5)'}} checked={ailmentsHistoryDetails[3].options[0]['remark_q41']} readOnly />
+					)}
+				</p>
+				<p style={{position:'absolute', top:'957px',left:'90px',whiteSpace:'nowrap'}} className="ft11">Remark:</p>
+				{ailmentsHistoryDetails && (
+					<p style={{position:'absolute', top:'957px',left:'175px',whiteSpace:'nowrap'}} className="ft11"><b>{ailmentsHistoryDetails[3].options[0]['remark_q41']}</b></p>
+				)}
+			</>
+		);
+	};
+
+	const renderAilmentHistoryCheckboxesQ51 = () => {
+		return (
+			<>
+				<p style={{position:'absolute', top:'991px',left:'55px',whiteSpace:'nowrap'}} className="ft11">5</p>
+				<p style={{position:'absolute', top:'991px',left:'81px',whiteSpace:'nowrap'}} className="ft11">Are you taking any medicine on regular basis?&#160;</p>
+				<p style={{position:'absolute', top:'991px',left:'887px',whiteSpace:'nowrap'}} className="ft12"><b>{!ailmentsHistoryDetails[4].options[0]['remark_q51'] ? "No" : "Yes"}</b></p>
+				<p style={{position:'absolute', top:'991px',left:'857px',whiteSpace:'nowrap'}} className="ft11">
+					{ailmentsHistoryDetails && (
+						<input type="checkbox" name="" style={{transform: 'scale(1.5)'}} checked={ailmentsHistoryDetails[4].options[0]['remark_q51']} readOnly />
+					)}
+				</p>
+				<p style={{position:'absolute', top:'1024px',left:'90px',whiteSpace:'nowrap'}} className="ft11">Remark:</p>
+				{/* <p style={{position:'absolute', top:'991px',left:'809px',whiteSpace:'nowrap'}} className="ft12"><b>No</b></p> */}
+
+				{ailmentsHistoryDetails && (
+					<p style={{position:'absolute', top:'1024px',left:'175px',whiteSpace:'nowrap'}} className="ft11"><b>{ailmentsHistoryDetails[4].options[0]['remark_q51']}</b></p>
+				)}
+			</>
+		);
+	};
+
 	return (
 		<div>
 		{/* <button style={{marginTop: '10%'}} onClick={handlePrint} className="print__button">  Print </button>  */}
@@ -592,26 +704,22 @@ const PrintDocument = () => {
 						{renderAilmentHistoryCheckboxesQ12()}
 						{/* Ailment Question 2 checkboxes */}
 
+						{/* Ailment Question 2 checkboxes */}
+						{renderAilmentHistoryCheckboxesQ21()}
+						{/* Ailment Question 2 checkboxes */}
 
-						<p style={{position:'absolute', top:'700px',left:'59px',whiteSpace:'nowrap'}} className="ft11">2&#160;Does your parent or brother/sister, have from any of above disease&#160;</p>
-						<p style={{position:'absolute', top:'700px',left:'807px',whiteSpace:'nowrap'}} className="ft12"><b>Yes</b></p>
-						<p style={{position:'absolute', top:'761px',left:'59px',whiteSpace:'nowrap'}} className="ft11">3&#160;Do you have /had: &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160;&#160;</p>
-						<p style={{position:'absolute', top:'795px',left:'149px',whiteSpace:'nowrap'}} className="ft11">Smoking</p>
-						<p style={{position:'absolute', top:'795px',left:'297px',whiteSpace:'nowrap'}} className="ft11">Tobacco</p>
-						<p style={{position:'absolute', top:'795px',left:'439px',whiteSpace:'nowrap'}} className="ft11">Alcohol</p>
-						<p style={{position:'absolute', top:'795px',left:'601px',whiteSpace:'nowrap'}} className="ft11">Other Addiction</p>
-						<p style={{position:'absolute', top:'856px',left:'148px',whiteSpace:'nowrap'}} className="ft11">Height Phobia</p>
-						<p style={{position:'absolute', top:'856px',left:'439px',whiteSpace:'nowrap'}} className="ft11">Fear Of Confined Space</p>
-						<p style={{position:'absolute', top:'930px',left:'55px',whiteSpace:'nowrap'}} className="ft11">4&#160;Have you undergone any surgery (other than family planning) ?</p>
-						<p style={{position:'absolute', top:'923px',left:'809px',whiteSpace:'nowrap'}} className="ft12"><b>No</b></p>
-						<p style={{position:'absolute', top:'991px',left:'81px',whiteSpace:'nowrap'}} className="ft11">Are you taking any medicine on regular basis?&#160;</p>
-						<p style={{position:'absolute', top:'991px',left:'55px',whiteSpace:'nowrap'}} className="ft11">5</p>
-						<p style={{position:'absolute', top:'991px',left:'809px',whiteSpace:'nowrap'}} className="ft12"><b>No</b></p>
-						<p style={{position:'absolute', top:'734px',left:'196px',whiteSpace:'nowrap'}} className="ft12"><b>FATHER DM MOTHER ASTHMA</b></p>
-						<p style={{position:'absolute', top:'883px',left:'203px',whiteSpace:'nowrap'}} className="ft12"><b>N</b></p>
-						<p style={{position:'absolute', top:'734px',left:'115px',whiteSpace:'nowrap'}} className="ft11">Remark:</p>
-						<p style={{position:'absolute', top:'822px',left:'115px',whiteSpace:'nowrap'}} className="ft11">Remark:</p>
-						<p style={{position:'absolute', top:'883px',left:'115px',whiteSpace:'nowrap'}} className="ft11">Remark:</p>
+						{/* Ailment Question 3 checkboxes */}
+						{renderAilmentHistoryCheckboxesQ31()}
+						{/* Ailment Question 3 checkboxes */}
+
+						{/* Ailment Question 4 checkboxes */}
+						{renderAilmentHistoryCheckboxesQ41()}
+						{/* Ailment Question 4 checkboxes */}
+
+						{/* Ailment Question 5 checkboxes */}
+						{renderAilmentHistoryCheckboxesQ51()}
+						{/* Ailment Question 5 checkboxes */}
+
 						<p style={{position:'absolute', top:'1230px',left:'487px',whiteSpace:'nowrap'}} className="ft11">Signature / Left Thumb Impression of Candidate</p>
 						<div style={{position:'absolute', top:'1085px',left:'61px',whiteSpace:'nowrap'}} className="ft16">
 							<p style={{width:'900px',overflow:'hidden', whiteSpace:'initial'}}>
@@ -620,9 +728,7 @@ const PrintDocument = () => {
 								advised by doctor.</b>
 							</p>
 						</div>
-						<p style={{position:'absolute', top:'957px',left:'115px',whiteSpace:'nowrap'}} className="ft11">Remark:</p>
-						<p style={{position:'absolute', top:'1024px',left:'115px',whiteSpace:'nowrap'}} className="ft11">Remark:</p>
-						</div>
+					</div>
 					<a name="2"></a>
 					<div id="page2-div" style={{position:'relative',width:'1026px',height:'1350px'}}>
 						<img width="1026" height="1350" src={img2} alt="background image"/>
