@@ -128,18 +128,18 @@ a {
 }
 
 @media only screen and (max-width: 700px) {
-    html {
+    /* html {
         font-size: 54.5%;
-   }
+   } */
 }
 @media only screen and (max-width: 600px) {
-    .home-screen-container {
+    /* .home-screen-container {
         padding: 5rem;
-   }
+   } */
 }
 @media only screen and (max-width: 400px) {
     html {
-        font-size: 48.5%;
+        /* font-size: 48.5%; */
    }
     .input-text:not(:placeholder-shown) + .label, .input-text:focus + .label {
         top: 0.6rem;
@@ -181,7 +181,7 @@ a {
 	border-color: #37474f;
 }
 
-.homescreen-btn::before {
+/* .homescreen-btn::before {
 	content: '';
 	position: absolute;
 	top: 0;
@@ -197,16 +197,14 @@ a {
 	transition: transform 0.4s, opacity 0.4s;
 	-webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 	transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-}
+} */
 
 .homescreen-btn {
-    font-size: 14px;
+    /* font-size: 14px;
     float: left;
     min-width: 150px;
     max-width: 250px;
     display: block;
-    margin: 1em;
-    padding: 1em 1em;
     border: 1px solid;
     border-radius: 4px;
     background: none;
@@ -214,22 +212,24 @@ a {
     vertical-align: middle;
     position: relative;
     z-index: 1;
-    -webkit-backface-visibility: hidden;    
+    -webkit-backface-visibility: hidden; */
+    margin: 1em;
+    padding: 1em 1em;
 }
 /* Homescreen buttons */
 
-.container {
+/* .container {
     display: grid;
     grid-template-rows: minmax(min-content, 100vh);
     grid-template-columns: repeat(2, 50vw);
-}
+} */
 
 @media (max-width: 480px) {
-    .container {
+    /* .container {
         display: block;
         grid-template-rows: minmax(min-content, 100vh);
         grid-template-columns: repeat(2, 50vw);
-    }
+    } */
 }
 
 .home-screen-banner-text {

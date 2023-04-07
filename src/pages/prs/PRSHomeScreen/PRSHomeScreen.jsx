@@ -25,12 +25,12 @@ const PRSHomeScreen = () => {
                             <li>
                                 <Button navigatingRoute={LIST_PATIENT_ROUTE} callbackFn={navigate} classNames={'homescreen-btn'} btnText={'View Patient List'}/>
                             </li>
-                            <li>
+                            {/* <li>
                                 <Button navigatingRoute={'/app/medical-findings'} callbackFn={navigate} classNames={'homescreen-btn'} btnText={'Mecidal Form'}/>
                             </li>
                             <li>
                                 <Button navigatingRoute={'/app/print'} callbackFn={navigate} classNames={'homescreen-btn'} btnText={'Print Form'}/>
-                            </li>
+                            </li> */}
                         </ul>
                     </section>
                 </div>

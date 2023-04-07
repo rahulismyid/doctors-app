@@ -1,12 +1,4 @@
-form,
-select,
-p {
-	padding: 0;
-	margin: 0;
-	outline: none;
-	font-family: Roboto, Arial, sans-serif;
-	/* color: #666; */
-}
+
 
 .medical-examination-form > div {
 	font-size: 14px;
@@ -30,13 +22,6 @@ h1 {
 
 .medical-examination-form > form {
 	padding-top: 0;
-}
-
-form {
-	width: 100%;
-	padding: 20px;
-	background: #fff;
-	box-shadow: 0 2px 5px #ccc;
 }
 
 .medical-exam-input-fields,
@@ -111,20 +96,6 @@ textarea:hover {
 	margin-top: 20px;
 	text-align: center;
 }
-
-button {
-	width: auto;
-	padding: 10px;
-	border: none;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-	background-color: #095484;
-	font-size: 16px;
-	color: #fff;
-	cursor: pointer;
-}
-
 
 @media (min-width: 568px) {
 

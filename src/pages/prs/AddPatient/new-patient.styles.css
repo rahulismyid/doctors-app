@@ -1,14 +1,95 @@
-div,
-form,
-input,
-select,
-p {
-	padding: 0;
-	margin: 0;
-	outline: none;
-	font-family: Roboto, Arial, sans-serif;
-	/* color: #666; */
+.new-patient-input-fields {
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	padding: 5px;
 }
+
+.new-patient-input-fields > input {
+	font-weight: 600;
+
+	color: #000;	
+}
+
+.new-patient-input-fields[type="date"]::-webkit-inner-spin-button {
+	display: none;
+}
+
+.new-patient-input-fields[type="time"]::-webkit-inner-spin-button {
+	margin: 2px 22px 0 0;
+}
+
+.new-patient-input-fields[type="date"]::-webkit-calendar-picker-indicator {
+	position: absolute;
+	font-size: 20px;
+	color: #000;
+}
+
+.input-wrapper {
+	display: grid;
+}
+
+.input-wrapper label {
+	margin-top: 5px;
+}
+
+.date-field {
+	text-transform: uppercase;
+}
+
+form {
+	width: 100%;
+	padding: 20px;
+	background: #fff;
+	border: 3px solid #f5ba1a;
+	/* box-shadow: 0 2px 5px #ccc; */
+}
+
+.new-patient-form-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: inherit;
+	padding: 30px;
+	margin: 0 auto;
+	margin-top: 5%;
+	width: 60%;
+}
+
+@media (max-width: 480px) {
+	.new-patient-form-container {
+		width: 100%;
+		margin-top: 20%;
+	}
+}
+
+.new-patient-input-fields,
+select,
+textarea {
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+
+
+.new-patient-select-fields {
+	width: calc(50% - 0px);
+	padding: 7px 0;
+	background: transparent;
+	border: 1px solid #ccc;
+}
+
+@media (min-width: 568px) {
+
+	.new-patient-input-fields-wrapper,
+	.city-item {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+}
+
 
 .new-patient-form-container > div{
 	font-size: 14px;
@@ -21,8 +102,9 @@ p {
 }
 
 .new-patient-form-header-less-than {
-	color: #ccc;
+	color: #f5ba1a;
     font-size: 30px;
+	font-weight: 700;
     margin: 0 10px 0 0;
 }
 
@@ -39,117 +121,8 @@ h1 {
     opacity: 1;
 }
 
-.new-patient-form-container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: inherit;
-	padding: 30px;
-	margin: 0 auto;
-	margin-top: 5%;
-	width: 50%;
-}
+/*  */
 
-@media (max-width: 480px) {
-	.new-patient-form-container {
-		width: 100%;
-		margin-top: 20%;
-	}
-}
-
-form {
-	width: 100%;
-	padding: 20px;
-	background: #fff;
-	box-shadow: 0 2px 5px #ccc;
-}
-
-.new-patient-input-fields,
-select,
-textarea {
-	margin-bottom: 10px;
-	border: 1px solid #ccc;
-	border-radius: 3px;
-}
-
-.new-patient-input-fields {
-	/* width: calc(100% - 10px);
-	line-height: 22px; */
-	padding: 5px;
-}
-
-.new-patient-select-fields {
-	width: calc(30% - 0px);
-	padding: 7px 0;
-	background: transparent;
-}
-
-@media (min-width: 568px) {
-
-	.new-patient-input-fields-wrapper,
-	.city-item {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-between;
-	}
-
-	.new-patient-input-fields-wrapper input,
-	.city-item input {
-		/* width: calc(30% - 0px); */
-	}
-
-	.city-item select {
-		/* width: calc(50% - 8px); */
-	}
-}
-
-textarea {
-	width: calc(100% - 6px);
-}
-
-.item {
-	position: relative;
-	margin: 10px 0;
-}
-
-.item:hover p,
-.item:hover i {
-	color: #095484;
-}
-
-.new-patient-input-fields:hover,
-select:hover,
-textarea:hover {
-	/* box-shadow: 0 0 5px 0 #095484; */
-}
-
-.new-patient-input-fields[type="date"]::-webkit-inner-spin-button {
-	display: none;
-}
-
-.new-patient-input-fields[type="time"]::-webkit-inner-spin-button {
-	margin: 2px 22px 0 0;
-}
-
-.item i,
-.new-patient-input-fields[type="date"]::-webkit-calendar-picker-indicator {
-	position: absolute;
-	font-size: 20px;
-	color: #000;
-}
-
-.item i {
-	right: 1%;
-	top: 30px;
-	z-index: 1;
-}
-
-[type="date"]::-webkit-calendar-picker-indicator {
-	right: 0;
-	z-index: 2;
-	opacity: 0;
-	cursor: pointer;
-}
 
 .new-patient-btn-block {
 	display: flex;
@@ -157,19 +130,6 @@ textarea:hover {
 	text-align: center;
 	justify-content: center;
 	gap: 20px;
-}
-
-button {
-	width: auto;
-	padding: 10px;
-	border: none;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-	background-color: #095484;
-	font-size: 16px;
-	color: #fff;
-	cursor: pointer;
 }
 
 /* New patient form grid */
@@ -185,13 +145,7 @@ button {
 }
 
 .new-patient-input-fields {
-	/* background-color: #ef4444; */
-	/* color: #ffffff; */
-	/* font-size: 24px; */
 	list-style-type: none;
-	/* padding: 5rem 1rem; */
-	text-align: center;
-	/* text-transform: capitalize; */
 	font-weight: 600;
 }
 
