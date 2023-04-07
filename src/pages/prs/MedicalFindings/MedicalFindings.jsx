@@ -13,6 +13,7 @@ import {
     MAJOR_DISABILITY,
     TEST_EVALUATIONS_AND_FINDINGS,
     VISION_TEST_DETAILS,
+    EYE_SIGHT_REMARK,
 } from './constants';
 import "./MedicalFindings.styles.css";
 import { LIST_PATIENT_ROUTE } from '../../../routes/constants';
@@ -38,6 +39,7 @@ const MedicalFindings = () => {
     const [testEvaluationsAndFindings, setTestEvaluationsAndFindings] = useState();
     const [patientPersonalDetails, setPatientPersonalDetails] = useState();
     const [medicalDetailId, setMedicalDetailId] = useState();
+    const [eyeSightRemark, setEyeSightRemark] = useState();
     const { setModalData } = useContext(GlobalContext);
     const {
         createPatientMedicalDetails,
@@ -87,6 +89,7 @@ const MedicalFindings = () => {
             setVisualTestDetails(newData.visualTestDetails)
             setEyeSightDetails(newData.eyeSightDetails)
             setTestEvaluationsAndFindings(newData.testEvaluationsAndFindings)
+            setEyeSightRemark(newData.eyeSightRemark)
         }
     };
 
@@ -606,6 +609,10 @@ const MedicalFindings = () => {
         )
     };
 
+    const handleEyeSightRemark = (value) => {
+        setEyeSightRemark(value);
+    };
+
     const renderTestInvestigationVisualQuestions2 = () => {
         return (
             <>
@@ -632,6 +639,15 @@ const MedicalFindings = () => {
                         {renderTable()}
                     </tbody>
                 </table>
+                <label htmlFor="eyeRemark">Eye Remark</label>
+                <input
+                    id='eyeRemark'
+                    type="text"
+                    className='medical-exam-input-fields'
+                    placeholder='Remark'
+                    value={eyeSightRemark}
+                    onChange={(e) => handleEyeSightRemark(e.target.value)}
+                />
             </>
         );
     };
@@ -837,6 +853,7 @@ const MedicalFindings = () => {
             visualTestDetails,
             eyeSightDetails,
             testEvaluationsAndFindings,
+            eyeSightRemark,
         };
         if(patientPersonalDetails && !patientPersonalDetails.medical_details_added) {
             delete patientPersonalDetails.medical_details_added;

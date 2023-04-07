@@ -234,6 +234,10 @@ export const EYE_SIGHT_DETAILS = [{
     }],
 }];
 
+export const EYE_SIGHT_REMARK = {
+    eye_remark: "",
+};
+
 export const TEST_EVALUATIONS_AND_FINDINGS = {
     ecg_q: "Ecg Findings:",
     ecg_done: false,
