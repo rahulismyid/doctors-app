@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../../components/Button/Button';
-import "./prs-homescreen-styles.css";
 import { ADD_PATIENT_ROUTE, LIST_PATIENT_ROUTE } from '../../../routes/constants';
+import "./homescreen-styles.css";
 
 const PRSHomeScreen = () => {
     const navigate = useNavigate();

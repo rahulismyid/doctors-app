@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../contexts/AuthContext';
 import "./styles.css";
 import { HOME_ROUTE, ROOT_ROUTE, SIGNUP_ROUTE } from '../../../routes/constants';
@@ -36,8 +36,6 @@ const Login = () => {
         <>
             <div className="signup" autoComplete="off">
                 <h1>Login</h1>
-                <h2>Don't have an account? <span><Link to={SIGNUP_ROUTE}>Sign up</Link></span>
-                </h2>
                 <div className="signup__field">
                     <input value={values.email} onChange={(e) => setValues({...values, email: e.target.value})} className="signup__input" type="text" name="email" id="email" required />
                     <label className="signup__label" htmlFor="email">Email</label>
@@ -48,7 +46,7 @@ const Login = () => {
                     <label className="signup__label" htmlFor="password">Password</label>
                 </div>
 
-                <button className='signup-btn' onClick={handleSubmit}>Login</button>
+                <button onClick={handleSubmit}>Login</button>
             </div>
         </>
     )

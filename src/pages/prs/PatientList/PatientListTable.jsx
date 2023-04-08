@@ -20,12 +20,14 @@ const customStyles = {
             paddingLeft: '8px', // override the cell padding for head cells
             paddingRight: '8px',
             textAlign: 'center',
+            color: '#34327a',
         },
     },
     cells: {
         style: {
             paddingLeft: '8px', // override the cell padding for data cells
             paddingRight: '8px',
+            color: '#34327a',
             // borderRight: '1px solid #ccc',
         },
     },

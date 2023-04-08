@@ -34,5 +34,6 @@
 
 .table-action-btn:hover {
 	cursor: pointer;
-	background-color: aqua;
+	color: white;
+	background-color: #e31e31;
 }

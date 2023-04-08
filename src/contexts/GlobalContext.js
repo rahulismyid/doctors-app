@@ -6,7 +6,7 @@ export default function GlobalContextProvider({ children }) {
 	const [isFirstStepComplete, setIsFirstStepComplete] = useState(false);
 	const [firstStepData, setFirstStepData] = useState({});
 	const [modalData, setModalData] = useState({
-		open: false, title: '', msg: '', callback: null
+		open: false, title: '', msg: '', callback: null, okBtn: false
 	});
 
 	const values = {

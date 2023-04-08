@@ -1,16 +1,13 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
 import Login from "./components/userAuth/Login/Login";
-import Signup from "./components/userAuth/Signup/Signup";
 import AuthProvider from "./contexts/AuthContext";
 import DbProvider from "./contexts/DbContext";
 import NotFound from "./pages/404/404";
-import PRSHomeScreen from "./pages/prs/PRSHomeScreen/PRSHomeScreen";
+import HomeScreen from "./pages/prs/HomeScreen/HomeScreen";
 import NewPatient from "./pages/prs/AddPatient/NewPatient";
 
 import AuthLayout from "./Layout/AuthLayout";
 import GlobalContextProvider from "./contexts/GlobalContext";
-import MedicalConsent from "./pages/prs/MedicalConsent/MedicalConsent";
-import MedicalExamination from "./pages/prs/MedicalExamination/MedicalExamination";
 import PatientListTable from "./pages/prs/PatientList/PatientListTable";
 import MedicalFindings from "./pages/prs/MedicalFindings/MedicalFindings";
 import PrintDocument from "./pages/prs/PRSPrintDocument/PrintDocument";
@@ -25,7 +22,6 @@ import {
   MEDICAL_FINDINGS_ROUTE,
   PRINT_ROUTE,
   ROOT_ROUTE,
-  SIGNUP_ROUTE,
 } from "./routes/constants";
 
 function App() {
@@ -39,14 +35,13 @@ function App() {
               <Routes>
                 <Route path={ROOT_ROUTE} element={<Login/>}/>
                 <Route path={APP_ROUTE} element={<Navigate to={HOME_ROUTE}/>} />
-                <Route path={HOME_ROUTE} element={<AuthLayout><PRSHomeScreen/></AuthLayout>} />
+                <Route path={HOME_ROUTE} element={<AuthLayout><HomeScreen/></AuthLayout>} />
                 <Route path={ADD_PATIENT_ROUTE} element={<AuthLayout><NewPatient/></AuthLayout>} />
                 <Route path={EDIT_PATIENT_ROUTE} element={<AuthLayout><NewPatient/></AuthLayout>} />
                 <Route path={LIST_PATIENT_ROUTE} element={<AuthLayout><PatientListTable /></AuthLayout>} />
                 <Route key={'finding'} path={MEDICAL_FINDINGS_ROUTE} element={<AuthLayout><MedicalFindings /></AuthLayout>} />
                 <Route path={PRINT_ROUTE} element={<AuthLayout><PrintDocument /></AuthLayout>}/>
                 <Route path={LOGIN_ROUTE} element={<Login />}/>
-                <Route path={SIGNUP_ROUTE} element={<Signup />}/>
                 <Route path='*' element={<NotFound/>}/>
               </Routes>
             </GlobalContextProvider>

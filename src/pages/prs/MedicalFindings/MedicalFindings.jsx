@@ -863,8 +863,9 @@ const MedicalFindings = () => {
             ]).then(res => {
                 setModalData({
                     open: true,
-                    title: '',
-                    msg: 'Updated!',
+                    title: 'Success!',
+                    msg: 'Updated medical details!',
+                    okBtn: true,
                 });
                 navigate(LIST_PATIENT_ROUTE);
             }).catch(err => {
@@ -874,8 +875,9 @@ const MedicalFindings = () => {
             updatePatientDetails(medicalDetailId, postDataObject).then(res => {
                 setModalData({
                     open: true,
-                    title: '',
-                    msg: 'Updated!',
+                    title: 'Success!',
+                    msg: 'Updated medical details!',
+                    okBtn: true,
                 });
                 navigate(LIST_PATIENT_ROUTE);
             });

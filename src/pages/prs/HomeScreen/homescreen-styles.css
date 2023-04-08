@@ -11,6 +11,7 @@ a {
     font-size: 3rem;
     width: 100%;
     text-align: center;
+    color: #34327a;
 }
 .span-blue {
     color: #2196f3;
@@ -125,22 +126,11 @@ a {
 
 .lg {
     font-size: 2.5rem;
+    color: #34327a;
 }
 
-@media only screen and (max-width: 700px) {
-    /* html {
-        font-size: 54.5%;
-   } */
-}
-@media only screen and (max-width: 600px) {
-    /* .home-screen-container {
-        padding: 5rem;
-   } */
-}
 @media only screen and (max-width: 400px) {
-    html {
-        /* font-size: 48.5%; */
-   }
+
     .input-text:not(:placeholder-shown) + .label, .input-text:focus + .label {
         top: 0.6rem;
         transform: scale(0.75);
@@ -166,8 +156,6 @@ a {
     display: flex;
     justify-content: center;
     width: 100%;
-}
-.homescreen-box { 
 }
 
 .homescreen-btn:hover::before {
@@ -250,6 +238,7 @@ a {
     justify-content: center;
     grid-column: 1 / 2;
     grid-row: 1;
+    height: 50%;
 }
 
 @media (max-width: 480px) {
@@ -269,9 +258,10 @@ a {
     grid-row: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 7rem;
+    justify-content: start;
+    align-items: center;
+    padding: 6.5rem;
+    height: 50%;
 }
 
 @media (min-width: 480px) {

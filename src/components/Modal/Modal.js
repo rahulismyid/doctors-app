@@ -5,7 +5,7 @@ import "./styles.css";
 const Modal = () => {
 
     const {modalData, setModalData} = useContext(GlobalContext);
-    const { open, title, msg, callback } = modalData;
+    const { open, title, msg, callback, okBtn } = modalData;
 
     const handleYesClick = () => {
         callback && callback();
@@ -28,8 +28,14 @@ const Modal = () => {
                             <p>{msg}</p>
                         </div>
                         <div className='modal-btnGrp'>
-                            <div className="modal-footer"> <a onClick={() => handleYesClick()} className="btn">Yes</a></div>
-                            <div className="modal-footer"> <a onClick={() => setModalData({open: false})} className="btn">No</a></div>
+                            {okBtn ? (
+                                <div className="modal-footer"> <button onClick={() => setModalData({open: false})}>OK</button></div>
+                            ): (
+                                <>
+                                    <div className="modal-footer"> <button onClick={() => handleYesClick()}>Yes</button></div>
+                                    <div className="modal-footer"> <button onClick={() => setModalData({open: false})}>No</button></div>
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>
