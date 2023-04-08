@@ -1,5 +1,6 @@
 .medicial-findings-container {
-  margin-top: 10%;
+  margin: 0 20px;
+  margin-top: 5%;
 }
 
 @media (max-width:480px)  {
@@ -35,7 +36,7 @@
 
 /* Ailment History */
 .aliment-history-question-container {
-  margin: 0 20px;
+  color: #34327a;
 }
 
 .aliment-history-question-container .question-label {
@@ -65,7 +66,7 @@
   }
 
   .aliment-history-grid-list-wrapper {
-    --auto-grid-min-size: 16rem;
+    --auto-grid-min-size: 9rem;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
     list-style-type: none;
@@ -116,3 +117,72 @@
 }
 
 /* Ailment History */
+
+
+/* Body Examination Metrics */
+@media (max-width:480px)  {
+  .body-examination-metrics-container {
+    padding: 0 20px;
+    color: #34327a;
+    --auto-grid-min-size: 9rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+    list-style-type: none;
+    grid-gap: 0.5rem;
+    padding-top: 10px;
+    width: 100%;
+  }
+
+  .body-examination-metrics-input-wrapper {
+    /* padding-top: 10px; */
+    font-size: 18px;
+    width: 100%;
+  }
+
+  .body-examination-metrics-label-input-container {
+    display: grid;
+    text-transform: capitalize;
+  }
+
+  .body-examination-metrics-label-input-container > input {
+    color: #000;
+    margin-bottom: 10px;
+    width: 150px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px;
+  }
+}
+
+.body-examination-metrics-container {
+  /* padding: 0 20px; */
+  color: #34327a;
+  --auto-grid-min-size: 9rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+  list-style-type: none;
+  grid-gap: 2rem;
+  padding-top: 10px;
+  width: 100%;
+}
+
+.body-examination-metrics-input-wrapper {
+  /* padding-top: 10px; */
+  font-size: 18px;
+  width: 100%;
+}
+
+.body-examination-metrics-label-input-container {
+  display: grid;
+  text-transform: capitalize;
+}
+
+.body-examination-metrics-label-input-container > input {
+  color: #000;
+  margin-bottom: 10px;
+  width: 150px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 5px;
+}
+/* Body Examination Metrics */

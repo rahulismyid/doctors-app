@@ -15,8 +15,8 @@ import {
     VISION_TEST_DETAILS,
     EYE_SIGHT_REMARK,
 } from './constants';
-import "./MedicalFindings.styles.css";
 import { LIST_PATIENT_ROUTE } from '../../../routes/constants';
+import "./medical-findings.styles.css";
 
 function capitalizeFirstLetter(string) {
     const new_str = string.charAt(0).toUpperCase() + string.slice(1);
@@ -61,6 +61,7 @@ const MedicalFindings = () => {
         setVisualTestDetails(VISION_TEST_DETAILS);
         setEyeSightDetails(EYE_SIGHT_DETAILS);
         setTestEvaluationsAndFindings(TEST_EVALUATIONS_AND_FINDINGS);
+        setEyeSightRemark(EYE_SIGHT_REMARK)
     }, []);
 
     useEffect(() => {
@@ -191,25 +192,30 @@ const MedicalFindings = () => {
         setBodyExaminationMetrics([...newData]);
     };
 
-    const renderSection1 = () => {
+    const renderBodyExaminationMetrics = () => {
         return (
-            <div className="item">
-                <p>Details</p>
-                <div className="name-item">
+            <div className="body-examination-metrics-container">
                     {
                         bodyExaminationMetrics.map((item, idx) => {
-                            return <input
-                                    key={idx}
-                                    className='medical-exam-input-fields'
-                                    type="text"
-                                    name={item.key}
-                                    placeholder={item.label}
-                                    value={item.value}
-                                    onChange={(e) => handleMedicalExam1Change(item, e.target.value)}
-                                />
+                            return (
+                                <div className="body-examination-metrics-input-wrapper">
+                                    <div className='body-examination-metrics-label-input-container'>
+                                        <label htmlFor={item.key}>{item.key.toString().replace("_", " ")}</label>
+                                        <input
+                                            id={item.key}
+                                            key={idx}
+                                            className='medical-exam-input-fields'
+                                            type="text"
+                                            name={item.key}
+                                            placeholder={item.label}
+                                            value={item.value}
+                                            onChange={(e) => handleMedicalExam1Change(item, e.target.value)}
+                                        />
+                                    </div>
+                                </div>
+                            )
                         })
                     }
-                </div>
             </div>
         );
     };
@@ -234,7 +240,7 @@ const MedicalFindings = () => {
         setBodyExaminationAilments([...newData]);
     };
 
-    const renderSection2 = () => {
+    const renderBodyExaminationAilments = () => {
         return (
             <>
                 <div className="item questions-wrapper">
@@ -610,7 +616,7 @@ const MedicalFindings = () => {
     };
 
     const handleEyeSightRemark = (value) => {
-        setEyeSightRemark(value);
+        setEyeSightRemark({eye_remark: value});
     };
 
     const renderTestInvestigationVisualQuestions2 = () => {
@@ -640,14 +646,18 @@ const MedicalFindings = () => {
                     </tbody>
                 </table>
                 <label htmlFor="eyeRemark">Eye Remark</label>
-                <input
-                    id='eyeRemark'
-                    type="text"
-                    className='medical-exam-input-fields'
-                    placeholder='Remark'
-                    value={eyeSightRemark}
-                    onChange={(e) => handleEyeSightRemark(e.target.value)}
-                />
+                {
+                    eyeSightRemark && (
+                        <input
+                            id='eyeRemark'
+                            type="text"
+                            className='medical-exam-input-fields'
+                            placeholder='Remark'
+                            value={eyeSightRemark.eye_remark}
+                            onChange={(e) => handleEyeSightRemark(e.target.value)}
+                        />
+                    )
+                }
             </>
         );
     };
@@ -890,15 +900,17 @@ const MedicalFindings = () => {
                 {/* <div className="form-description">
                     <h2>Medical declaration consent</h2>
                 </div> */}
+                    <h1><u>Medical Declaration & Consent</u></h1>
                     {ailmentsHistoryDetails && renderAilmentHistoryQuestions()}
-                    {bodyExaminationMetrics && renderSection1()}
-                    {renderSection2()}
-                    {renderSection3()}
+                    <h1><u>Medical Examination</u></h1>
+                    {bodyExaminationMetrics && renderBodyExaminationMetrics()}
+                    {renderBodyExaminationAilments()}
+                    {/* {renderSection3()}
                     {renderSection4()}
                     {majorDisability && renderSection5Questions()}
                     {visualTestDetails && renderTestInvestigationVisualQuestions1()}
                     {renderTestInvestigationVisualQuestions2()}
-                    {testEvaluationsAndFindings && renderTestInvestigationQuestions3()}
+                    {testEvaluationsAndFindings && renderTestInvestigationQuestions3()} */}
             </div>
             {
                 <button onClick={handleSubmit} className="submit-btn position-prescription-btn" >

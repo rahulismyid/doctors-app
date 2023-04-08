@@ -10,7 +10,7 @@ import AuthLayout from "./Layout/AuthLayout";
 import GlobalContextProvider from "./contexts/GlobalContext";
 import PatientListTable from "./pages/prs/PatientList/PatientListTable";
 import MedicalFindings from "./pages/prs/MedicalFindings/MedicalFindings";
-import PrintDocument from "./pages/prs/PRSPrintDocument/PrintDocument";
+import PrintDocument from "./pages/prs/PrintDocument/PrintDocument";
 import Modal from "./components/Modal/Modal";
 import {
   ADD_PATIENT_ROUTE,
@@ -26,7 +26,7 @@ import {
 
 function App() {
   return (
-    <div className="app">
+    <div id="scrollbar" className="app">
       <Router>
         <AuthProvider>
           <DbProvider>
