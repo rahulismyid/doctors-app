@@ -38,6 +38,18 @@ button:hover {
   cursor: pointer !important;
 }
 
+h1 {
+    font-size: 30px;
+    margin-bottom: 40px;
+}
+
+@media (max-width:480px)  {
+	h1 {
+		font-size: 30px;
+		margin-bottom: 20px;
+	}	
+}
+
 ::selection {
   color: darkblue;
   background: aqua;

@@ -68,9 +68,11 @@ export const COLUMNS = (onEditPrescription, onEditPatientDetails, onDeleteClick,
         <span className="table-action-btn" title="Edit Prescription" onClick={() => onEditPrescription(row)}>
             <Prescription width={18} height={18} style={{margin: '0 5px'}} />
         </span>
-        <span className="table-action-btn" title="Prescription" onClick={() => onPDFClick(row)}>
-            <PdfSvg width={18} height={18} style={{margin: '0 5px'}} />
-        </span>
+        {row.medical_details_added ? (
+            <span className="table-action-btn" title="Prescription" onClick={() => onPDFClick(row)}>
+                    <PdfSvg width={18} height={18} style={{margin: '0 5px'}} />
+            </span>) : null
+        }
         <span className="table-action-btn" title="Delete patient" onClick={() => onDeleteClick(row)}>
             <DeleteSvg width={18} height={18} style={{margin: '0 5px'}} />
         </span>

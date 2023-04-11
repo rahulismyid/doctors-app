@@ -40,6 +40,9 @@ const MedicalFindings = () => {
     const [patientPersonalDetails, setPatientPersonalDetails] = useState();
     const [medicalDetailId, setMedicalDetailId] = useState();
     const [eyeSightRemark, setEyeSightRemark] = useState();
+    const [bodyExaminationAilmentsRemark, setBodyExaminationAilmentsRemark] = useState('');
+    const [contagiuosSkinDiseaseRemark, setContagiuosSkinDiseaseRemark] = useState('');
+
     const { setModalData } = useContext(GlobalContext);
     const {
         createPatientMedicalDetails,
@@ -52,14 +55,14 @@ const MedicalFindings = () => {
     const { pid, id } = useParams();
 
     useEffect(() => {
-        setAilmentsHistoryDetails(AILMENT_HISTORY_DETAILS);
-        setBodyExaminationMetrics(BODY_EXAMINATION_METRICS);
-        setBodyExaminationAilments(BODY_EXAMINATION_AILMENTS);
-        setBodyOrgansAndTests(BODY_ORGANS_AND_TESTS);
-        setContagiuosSkinDiseases(CONTAGIOUS_SKIN_DISEASES);
+        setAilmentsHistoryDetails(AILMENT_HISTORY_DETAILS.sort());
+        setBodyExaminationMetrics(BODY_EXAMINATION_METRICS.sort());
+        setBodyExaminationAilments(BODY_EXAMINATION_AILMENTS.sort());
+        setBodyOrgansAndTests(BODY_ORGANS_AND_TESTS.sort());
+        setContagiuosSkinDiseases(CONTAGIOUS_SKIN_DISEASES.sort());
         setMajorDisability(MAJOR_DISABILITY);
-        setVisualTestDetails(VISION_TEST_DETAILS);
-        setEyeSightDetails(EYE_SIGHT_DETAILS);
+        setVisualTestDetails(VISION_TEST_DETAILS.sort());
+        setEyeSightDetails(EYE_SIGHT_DETAILS.sort());
         setTestEvaluationsAndFindings(TEST_EVALUATIONS_AND_FINDINGS);
         setEyeSightRemark(EYE_SIGHT_REMARK)
     }, []);
@@ -81,16 +84,21 @@ const MedicalFindings = () => {
         if(data && data[0]) {
             const newData = data[0];
             setMedicalDetailId(data[0].id);
-            setAilmentsHistoryDetails(newData.ailmentsHistoryDetails)
-            setBodyExaminationMetrics(newData.bodyExaminationMetrics)
-            setBodyExaminationAilments(newData.bodyExaminationAilments)
-            setBodyOrgansAndTests(newData.bodyOrgansAndTests)
-            setContagiuosSkinDiseases(newData.contagiuosSkinDiseases)
+            setAilmentsHistoryDetails(newData.ailmentsHistoryDetails.sort())
+            setBodyExaminationMetrics(newData.bodyExaminationMetrics.sort())
+            setBodyExaminationAilments(newData.bodyExaminationAilments.sort())
+            setBodyOrgansAndTests(newData.bodyOrgansAndTests.sort())
+            setContagiuosSkinDiseases(newData.contagiuosSkinDiseases.sort())
             setMajorDisability(newData.majorDisability)
-            setVisualTestDetails(newData.visualTestDetails)
-            setEyeSightDetails(newData.eyeSightDetails)
+            setVisualTestDetails(newData.visualTestDetails.sort())
+            setEyeSightDetails(newData.eyeSightDetails.sort())
             setTestEvaluationsAndFindings(newData.testEvaluationsAndFindings)
-            setEyeSightRemark(newData.eyeSightRemark)
+            setEyeSightRemark({eye_remark: newData.eyeSightRemark.eye_remark})
+            setBodyExaminationAilmentsRemark(newData.bodyExaminationAilments.sort().filter(i => i.key == "remarks_2")[0].value)
+            newData.contagiuosSkinDiseases.forEach(i => {
+                setContagiuosSkinDiseaseRemark(i.remarks_4);
+                return i;
+            });
         }
     };
 
@@ -198,14 +206,13 @@ const MedicalFindings = () => {
                     {
                         bodyExaminationMetrics.map((item, idx) => {
                             return (
-                                <div className="body-examination-metrics-input-wrapper">
+                                <div key={idx} className="body-examination-metrics-input-wrapper">
                                     <div className='body-examination-metrics-label-input-container'>
                                         <label htmlFor={item.key}>{item.key.toString().replace("_", " ")}</label>
                                         <input
-                                            id={item.key}
                                             key={idx}
                                             className='medical-exam-input-fields'
-                                            type="text"
+                                            type="number"
                                             name={item.key}
                                             placeholder={item.label}
                                             value={item.value}
@@ -230,10 +237,11 @@ const MedicalFindings = () => {
         setBodyExaminationAilments([...newData]);
     };
 
-    const handkeMedicalExam2Remark = (value) => {
+    const handleMedicalExam2Remark = (value) => {
         const newData = bodyExaminationAilments.map(i => {
             if(i.key == "remarks_2") {
                 i.value = value;
+                setBodyExaminationAilmentsRemark(value);
             };
             return i;
         })
@@ -243,42 +251,42 @@ const MedicalFindings = () => {
     const renderBodyExaminationAilments = () => {
         return (
             <>
-                <div className="item questions-wrapper">
-                    <p>Details</p>
-                    <div className='options'>
-                        <ul>
-                            {bodyExaminationAilments && bodyExaminationAilments.map((item, idx) => {
-                                return (
-                                    <Fragment key={idx}>
-                                    {!checkIfObjectHasRemarksKey(item) ?
-                                        <>
-                                            <li key={idx}>
-                                                <input
-                                                    key={item.key}
-                                                    id={item.key}
-                                                    type="checkbox"
-                                                    name={item.key}
-                                                    onChange={(e) => handleMedicalExam2Change(item, e.target.checked)}
-                                                    checked={item.value}
-                                                    readOnly
-                                                />
-                                                <span key={item.label}>
-                                                    {capitalizeFirstLetter(item.key).replace(/_/g, " ")}
-                                                </span>
-                                            </li>
-                                        </> : <li>
+                <div className='body-examination-ailments-container'>
+                    <ul>
+                        {bodyExaminationAilments && bodyExaminationAilments.map((item, idx) => {
+                            return (
+                                <Fragment key={idx}>
+                                {!checkIfObjectHasRemarksKey(item) ?
+                                    <>
+                                        <li key={idx}>
                                             <input
-                                                type="text"
-                                                className='medical-exam-input-fields remark-input'
-                                                placeholder="Remark"
-                                                value={item.value}
-                                                onChange={(e) => handkeMedicalExam2Remark(e.target.value)}
+                                                key={item.key}
+                                                id={item.key}
+                                                type="checkbox"
+                                                name={item.key}
+                                                onChange={(e) => handleMedicalExam2Change(item, e.target.checked)}
+                                                checked={item.value}
+                                                readOnly
                                             />
-                                        </li>}
-                                    </Fragment>
-                                )
-                            })}
-                        </ul>
+                                            <label htmlFor={item.key} key={item.label}>
+                                                {capitalizeFirstLetter(item.key).replace(/_/g, " ")}
+                                            </label>
+                                        </li>
+                                    </> : null}
+                                </Fragment>
+                            )
+                        })}
+                    </ul>
+                    <div className='body-examination-ailments-remark'>
+                        {/* <label htmlFor='bodyExaminationAilmentsRemark'>Remark</label> */}
+                        <input
+                            id='bodyExaminationAilmentsRemark'
+                            type="text"
+                            className='medical-exam-input-fields remark-input'
+                            placeholder="Remark"
+                            value={bodyExaminationAilmentsRemark}
+                            onChange={(e) => handleMedicalExam2Remark(e.target.value)}
+                        />
                     </div>
                 </div>
             </>
@@ -295,78 +303,77 @@ const MedicalFindings = () => {
         setBodyOrgansAndTests([...newData]);
     };
 
-    const renderSection3 = () => {
+    const renderBodyOrgansAndTests = () => {
         return (
-            <div className="item">
-                <p>Details</p>
-                <div className="name-item">
-                    {
-                        bodyOrgansAndTests && bodyOrgansAndTests.map((item, idx) => {
-                            return (
+            <div className='body-organs-and-tests-container'>
+                {
+                    bodyOrgansAndTests && bodyOrgansAndTests.map((item, idx) => {
+                        return (
+                            <div className='body-organs-and-tests-input-wrapper' key={idx}>
+                                <label htmlFor={item.key}>{item.label}</label>
                                 <input
-                                    key={idx}
+                                    id={item.key}
                                     type="text"
                                     name={item.key}
-                                    className='medical-exam-input-fields'
                                     placeholder={item.label}
                                     value={item.value}
                                     onChange={(e) => handleSection3Input(item, e.target.value)}
                                 />
-                            )
-                        })
-                    }
-                </div>
+                            </div>
+                        )
+                    })
+                }
             </div>
         );
     };
 
-    const handleSection4Remark = (value) => {
+    const handleContagiousSkinDiseaseRemark = (value) => {
         const newData = contagiuosSkinDiseases.map(i => {
             i.remarks_4 = value;
+            setContagiuosSkinDiseaseRemark(value);
             return i;
         });
         setContagiuosSkinDiseases([...newData]);
     };
 
-    const renderSection4 = () => {
+    const renderContagiousSkinDisease = () => {
         return (
             <>
-                <div className='questions-wrapper'>
+            {/* .body-examination-ailments-container { */}
+
+                <div className='contagiuos-skin-disease-container'>
                     <span className='question'>
                         Contagious skin disease?
                     </span>
-                    <div className='options'>
+                    <div className='contagiuos-skin-disease-options-wrapper'>
                         {contagiuosSkinDiseases && contagiuosSkinDiseases.map((item, idx) => {
                             return (
                                 <ul key={idx}>
                                     {item.options.map((item, index) => {
                                         return (
-                                            <li key={index}>
-                                                {renderSection4Options(item)}
-                                            </li>
+                                            <Fragment key={index}>
+                                                {renderContagiousSkinDiseaseOptions(item)}
+                                            </Fragment>
                                         )})
-                                    }
-                                    {
-                                        item.remarks_4 ? (
-                                            <input
-                                                type="text"
-                                                className="medical-exam-input-fields remark-input"
-                                                placeholder="Remark"
-                                                value={item.remarks_4}
-                                                onChange={(e) => handleSection4Remark(e.target.value)}
-                                            />
-                                        ) : null
                                     }
                                 </ul>
                             )
                         })}
+                        <div className='contagiuos-skin-disease-remark'>
+                            <input
+                                type="text"
+                                placeholder="Remark"
+                                value={contagiuosSkinDiseaseRemark}
+                                onChange={(e) => handleContagiousSkinDiseaseRemark(e.target.value)}
+                            />
+                        </div>
                     </div>
                 </div>
             </>
         );
     };
 
-    const handleSection4Change = (obj, key, value) => {
+    const handleContagiousSkinDiseaseChange = (obj, key, value) => {
         const newOptionsData = contagiuosSkinDiseases.map(i => {
             i.options.find(i => {
                 if(i[key] === obj[key]) {
@@ -379,19 +386,21 @@ const MedicalFindings = () => {
         setContagiuosSkinDiseases([...newOptionsData]);
     };
 
-    const renderSection4Options = (listOfObj) => Object.entries(listOfObj).map(([key,value], idx) => {
+    const renderContagiousSkinDiseaseOptions = (listOfObj) => Object.entries(listOfObj).map(([key,value], idx) => {
         const option = listOfObj[key];
         return (
             <Fragment key={key}>
-                <input
-                    id={option.toString()}
-                    type="checkbox"
-                    name={key}
-                    checked={option}
-                    onChange={(e) => handleSection4Change(listOfObj, key, e.target.checked)}
-                    readOnly
-                />
-                <span key={option.toString()}>{capitalizeFirstLetter(key).replace(/_/g, " ")}</span>
+                <li>
+                    <input
+                        id={key}
+                        type="checkbox"
+                        name={key}
+                        checked={option}
+                        onChange={(e) => handleContagiousSkinDiseaseChange(listOfObj, key, e.target.checked)}
+                        readOnly
+                    />
+                    <label key={option.toString()} htmlFor={key}>{capitalizeFirstLetter(key).replace(/_/g, " ")}</label>
+                </li>
             </Fragment>
         )
     });
@@ -402,64 +411,60 @@ const MedicalFindings = () => {
         setMajorDisability({...section5Data});
     };
 
-    const renderSection5Questions = () => {
+    const renderMajorDisability = () => {
         return (
             <>
-                <div className='questions-wrapper'>
+                <div className='major-disability-container'>
                     <span className='question'>
                         {majorDisability.q}
                     </span>
-                    <div className='options'>
-                        <ul>
-                            <li>Have Details?
-                                <input
-                                    type="checkbox"
-                                    name="yes"
-                                    id="yes"
-                                    checked={majorDisability.yes}
-                                    onChange={(e) => setMajorDisability({...majorDisability, yes: e.target.checked})}
-                                    readOnly
-                                />
-                            </li>
-                            <li>
-                                <input
-                                    id="details"
-                                    type="text"
-                                    className='medical-exam-input-fields'
-                                    placeholder='Details'
-                                    onChange={(e) => handleSection5Input('details', e.target.value)}
-                                    value={majorDisability.details}
-                                />
-                            </li>
-                            <li>
-                                <input
-                                    id="remark"
-                                    type="text"
-                                    className='medical-exam-input-fields'
-                                    placeholder='Remark'
-                                    onChange={(e) => handleSection5Input('remark', e.target.value)}
-                                    value={majorDisability.remark}
-                                />
-                            </li>
-                        </ul>
+                    <div className='major-disability-checkbox-wrapper'>
+                        <div className='major-disability-have-details-checkbox-wrapper'>
+                            <label htmlFor="yes"><u>Have Details?</u></label>
+                            <input
+                                id="yes"
+                                name="yes"
+                                type="checkbox"
+                                className='yes-checkbox'
+                                checked={majorDisability.yes}
+                                onChange={(e) => setMajorDisability({...majorDisability, yes: e.target.checked})}
+                                readOnly
+                            />
+                        </div>
                     </div>
-                    <div className='questions-wrapper'>
-                        <div className='options'>
-                            <ul>
-                                <li>
-                                    <span className='question'>
-                                        {majorDisability.eye_test_done_q}
-                                    </span>
-                                    <input
-                                        type="checkbox"
-                                        name="eye_test_done"
-                                        id="eye_test_done"
-                                        onChange={(e) => handleSection5Input('eye_test_done', e.target.checked)}
-                                        checked={majorDisability.eye_test_done}
-                                        readOnly
-                                    />
-                                </li>
-                            </ul>
+                    <div className='major-disability-details-wrapper'>
+                        <label htmlFor="details">Details</label>
+                        <input
+                            id="details"
+                            type="text"
+                            className='major-disability-details-input'
+                            placeholder='Details'
+                            onChange={(e) => handleSection5Input('details', e.target.value)}
+                            value={majorDisability.details}
+                            disabled={!majorDisability.yes}
+                        />
+                    </div>
+                    <div className='major-disability-input-wrapper'>
+                        <label htmlFor="remark">Remark</label>
+                        <input
+                            id="remark"
+                            type="text"
+                            placeholder='Remark'
+                            onChange={(e) => handleSection5Input('remark', e.target.value)}
+                            value={majorDisability.remark}
+                        />
+                    </div>
+                    <div className='visual-activity-checkbox-wrapper'>
+                        <div className='major-disability-have-details-checkbox-wrapper'>
+                            <label htmlFor="eye_test_done">{majorDisability.eye_test_done_q}</label>
+                            <input
+                                id="eye_test_done"
+                                type="checkbox"
+                                name="eye_test_done"
+                                onChange={(e) => handleSection5Input('eye_test_done', e.target.checked)}
+                                checked={majorDisability.eye_test_done}
+                                readOnly
+                            />
                         </div>
                     </div>
                 </div>
@@ -471,87 +476,81 @@ const MedicalFindings = () => {
 
     /* TEST_INVESTIGATION */
 
-    const handleTITableData = (key, eye, options, value) => {
+    const handleTITableData = (key, eye, value) => {
         const newData = visualTestDetails.map((item) => {
-            if(key == "color_vision") {
-                item[key] = value;
-            } else {
-                item.options.map(i => {
-                    if(i['m_key'] == key && i['key'] == eye) {
-                        i.value = value;
-                    } else if(i['m_key'] == key && i['key'] == eye) {
-                        i.value = value;
-                    }
-                    return i;
-                });
+            if(item['m_key'] == key && item['key'] == eye) {
+                item.value = value;
             }
             return item;
         });
-        setVisualTestDetails([...newData]);
+        setVisualTestDetails([...newData].sort());
     };
 
-    const renderTestInvestigationVisualQuestions1 = () => {
+    const renderVisualTestDetails = () => {
         return (
-            <>
-                <table className='findings-visual-details-table'>
-                    <thead>
-                        <tr>
-                            <th colSpan={1}>Color Vision</th>
-                            <th colSpan={2}>Vision With Glasses</th>
-                            <th colSpan={2}>Vision Without Glasses</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <input
-                                    type="text"
-                                    className='findings-table-input'
-                                    onChange={(e) => handleTITableData('no_display',"color_vision", false, e.target.value)}
-                                    value={visualTestDetails[0].options[0].value}
-                                />
-                            </td>
-                            <td>Right Eye</td>
-                            <td>
-                                <input
-                                    type="text"
-                                    className='findings-table-input'
-                                    onChange={(e) => handleTITableData('vision_with_glasses',"right_eye", true, e.target.value)}
-                                    value={visualTestDetails[1].options[0].value}
-                                />
-                            </td>
-                            <td>
-                                <input
-                                    type="text"
-                                    className='findings-table-input'
-                                    onChange={(e) => handleTITableData('vision_without_glasses',"right_eye", true, e.target.value)}
-                                    value={visualTestDetails[1].options[1].value}
-                                />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>Left Eye</td>
-                            <td>
-                                <input
-                                    type="text"
-                                    className='findings-table-input'
-                                    onChange={(e) => handleTITableData('vision_with_glasses',"left_eye", true, e.target.value)}
-                                    value={visualTestDetails[2].options[0].value}
-                                />
-                            </td>
-                            <td>
-                                <input
-                                    type="text"
-                                    className='findings-table-input'
-                                    onChange={(e) => handleTITableData('vision_without_glasses',"left_eye", true, e.target.value)}
-                                    value={visualTestDetails[2].options[1].value}
-                                />
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </>
+            <table className='findings-visual-details-table'>
+                <thead>
+                    <tr>
+                        <th colSpan={1}>Color Vision</th>
+                        <th colSpan={2}>Vision With Glasses</th>
+                        <th colSpan={2}>Vision Without Glasses</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input
+                                type="text"
+                                className='findings-table-input'
+                                onChange={(e) => handleTITableData('no_display',"color_vision", e.target.value)}
+                                value={visualTestDetails[0].value}
+                                disabled={!majorDisability.eye_test_done}
+                            />
+                        </td>
+                        <td>Right Eye</td>
+                        <td>
+                            <input
+                                type="text"
+                                className='findings-table-input'
+                                onChange={(e) => handleTITableData('vision_with_glasses',"right_eye", e.target.value)}
+                                value={visualTestDetails[1].value}
+                                disabled={!majorDisability.eye_test_done}
+                            />
+                        </td>
+                        <td>
+                            <input
+                                type="text"
+                                className='findings-table-input'
+                                onChange={(e) => handleTITableData('vision_without_glasses',"right_eye", e.target.value)}
+                                value={visualTestDetails[3].value}
+                                disabled={!majorDisability.eye_test_done}
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Left Eye</td>
+                        <td>
+                            <input
+                                type="text"
+                                className='findings-table-input'
+                                onChange={(e) => handleTITableData('vision_with_glasses',"left_eye", e.target.value)}
+                                value={visualTestDetails[2].value}
+                                disabled={!majorDisability.eye_test_done}
+                            />
+                        </td>
+                        <td>
+                            <input
+                                type="text"
+                                className='findings-table-input'
+                                onChange={(e) => handleTITableData('vision_without_glasses',"left_eye", e.target.value)}
+                                value={visualTestDetails[4].value}
+                                disabled={!majorDisability.eye_test_done}
+                            />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         );
     };
 
@@ -581,28 +580,28 @@ const MedicalFindings = () => {
                                     return (
                                         <Fragment key={index}>
                                             <td>
-                                                <input type="text"  className='findings-table-input' value={cell.r_sph} onChange={(e) => handleTableChange(i.power_type, "r_sph", e.target.value)} />
+                                                <input type="text"  className='findings-table-input' value={cell.r_sph} onChange={(e) => handleTableChange(i.power_type, "r_sph", e.target.value)} disabled={!majorDisability.eye_test_done} />
                                             </td>
                                             <td>
-                                                <input type="text" className='findings-table-input' value={cell.r_cyl}  onChange={(e) => handleTableChange(i.power_type, "r_cyl", e.target.value)} />
+                                                <input type="text" className='findings-table-input' value={cell.r_cyl}  onChange={(e) => handleTableChange(i.power_type, "r_cyl", e.target.value)} disabled={!majorDisability.eye_test_done} />
                                             </td>
                                             <td>
-                                                <input type="text" className='findings-table-input' value={cell.r_axis} onChange={(e) => handleTableChange(i.power_type, "r_axis", e.target.value)} />
+                                                <input type="text" className='findings-table-input' value={cell.r_axis} onChange={(e) => handleTableChange(i.power_type, "r_axis", e.target.value)} disabled={!majorDisability.eye_test_done} />
                                             </td>
                                             <td>
-                                                <input type="text" className='findings-table-input' value={cell.r_vn} onChange={(e) => handleTableChange(i.power_type, "r_vn", e.target.value)} />
+                                                <input type="text" className='findings-table-input' value={cell.r_vn} onChange={(e) => handleTableChange(i.power_type, "r_vn", e.target.value)} disabled={!majorDisability.eye_test_done} />
                                             </td>
                                             <td>
-                                                <input type="text"  className='findings-table-input' value={cell.l_sph} onChange={(e) => handleTableChange(i.power_type, "l_sph", e.target.value)} />
+                                                <input type="text"  className='findings-table-input' value={cell.l_sph} onChange={(e) => handleTableChange(i.power_type, "l_sph", e.target.value)} disabled={!majorDisability.eye_test_done} />
                                             </td>
                                             <td>
-                                                <input type="text" className='findings-table-input' value={cell.l_cyl}  onChange={(e) => handleTableChange(i.power_type, "l_cyl", e.target.value)} />
+                                                <input type="text" className='findings-table-input' value={cell.l_cyl}  onChange={(e) => handleTableChange(i.power_type, "l_cyl", e.target.value)} disabled={!majorDisability.eye_test_done} />
                                             </td>
                                             <td>
-                                                <input type="text" className='findings-table-input' value={cell.l_axis} onChange={(e) => handleTableChange(i.power_type, "l_axis", e.target.value)} />
+                                                <input type="text" className='findings-table-input' value={cell.l_axis} onChange={(e) => handleTableChange(i.power_type, "l_axis", e.target.value)} disabled={!majorDisability.eye_test_done} />
                                             </td>
                                             <td>
-                                                <input type="text" className='findings-table-input' value={cell.l_vn} onChange={(e) => handleTableChange(i.power_type, "l_vn", e.target.value)} />
+                                                <input type="text" className='findings-table-input' value={cell.l_vn} onChange={(e) => handleTableChange(i.power_type, "l_vn", e.target.value)} disabled={!majorDisability.eye_test_done} />
                                             </td>
                                         </Fragment>
                                     )
@@ -619,10 +618,10 @@ const MedicalFindings = () => {
         setEyeSightRemark({eye_remark: value});
     };
 
-    const renderTestInvestigationVisualQuestions2 = () => {
+    const renderEyeSightDetails = () => {
         return (
             <>
-                <table className='findings-visual-details-table'>
+                <table className='findings-visual-details-table eye-sight-details-table'>
                     <thead>
                         <tr key={1234}>
                             <th key={1} colSpan={1}></th>
@@ -645,206 +644,251 @@ const MedicalFindings = () => {
                         {renderTable()}
                     </tbody>
                 </table>
-                <label htmlFor="eyeRemark">Eye Remark</label>
                 {
                     eyeSightRemark && (
-                        <input
-                            id='eyeRemark'
-                            type="text"
-                            className='medical-exam-input-fields'
-                            placeholder='Remark'
-                            value={eyeSightRemark.eye_remark}
-                            onChange={(e) => handleEyeSightRemark(e.target.value)}
-                        />
+                        <div className='visual-test-details-input-wrapper'>
+                            <label htmlFor="eyeRemark">Remark</label>
+                            <input
+                                id='eyeRemark'
+                                type="text"
+                                className='medical-exam-input-fields'
+                                placeholder='Remark'
+                                value={eyeSightRemark.eye_remark}
+                                onChange={(e) => handleEyeSightRemark(e.target.value)}
+                            />
+                        </div>
                     )
                 }
             </>
         );
     };
 
-    const handleTiCheckboxQuestion = (key, value) => {
+    const handleTestEvaluationsAndFindingsCheckboxQuestion = (key, value) => {
         const newData = testEvaluationsAndFindings;
         newData[key] = value;
         setTestEvaluationsAndFindings({...newData});
     };
 
-    const renderTestInvestigationQuestions3 = () => {
+    const handleTestEvaluationsAndFindingsRadioBtn = (radioKey, value) => {
+        const newData = testEvaluationsAndFindings;
+        const radioValues = {
+            fit: false,
+            fit_with_restrictions: false,
+            temporary_unfit: false,
+            unfit: false,
+        };
+        Object.entries(radioValues).map(([key], i) => {
+            if(key == radioKey) {
+                radioValues[radioKey] = value;
+            } else {
+                radioValues[key] = false;
+            }
+        });
+        setTestEvaluationsAndFindings({...newData, ...radioValues});
+    };
+
+    const renderTestEvaluationsAndFindings = () => {
         return (
-            <>
-                <div className="item questions-wrapper">
-                    <p>Details</p>
-                    <div className='options'>
-                        <ul>
-                            <li>
-                                <label>ECG Findings</label>
-                                <input
-                                    type="checkbox"
-                                    name='ecg_findings'
-                                    checked={testEvaluationsAndFindings.ecg_done}
-                                    onChange={(e) => handleTiCheckboxQuestion("ecg_done", e.target.checked)}
-                                />
-                                <input
-                                    type="text"
-                                    className="ti3-input-fields"
-                                    value={testEvaluationsAndFindings.ecg_done_remark}
-                                    onChange={(e) => handleTiCheckboxQuestion("ecg_done_remark", e.target.value)}
-                                    disabled={!testEvaluationsAndFindings.ecg_done}
-                                />
-                            </li>
-                            <li>
-                                <label>Lab Test Report No.</label>
-                                <input
-                                    type="checkbox"
-                                    name='ecg_findings'
-                                    checked={testEvaluationsAndFindings.lab_sample_taken}
-                                    onChange={(e) => handleTiCheckboxQuestion("lab_sample_taken", e.target.checked)}
-                                />
-                                <input
-                                    type="text"
-                                    className="ti3-input-fields"
-                                    value={testEvaluationsAndFindings.lab_sample_taken_value}
-                                    onChange={(e) => handleTiCheckboxQuestion("lab_sample_taken_value", e.target.value)}
-                                    disabled={!testEvaluationsAndFindings.lab_sample_taken}
-                                />
-                            </li>
-                            <li>
-                                <label>Audiometry</label>
-                                <input
-                                    type="checkbox"
-                                    name='ecg_findings'
-                                    checked={testEvaluationsAndFindings.audiometry_done_checked}
-                                    onChange={(e) => handleTiCheckboxQuestion("audiometry_done_checked", e.target.checked)}
-                                />
-                                <input
-                                    type="text"
-                                    className="ti3-input-fields"
-                                    value={testEvaluationsAndFindings.audiometry_done_value}
-                                    onChange={(e) => handleTiCheckboxQuestion("audiometry_done_value", e.target.value)}
-                                    disabled={!testEvaluationsAndFindings.audiometry_done_checked}
-                                    placeholder='Remark'
-                                />
-                            </li>
-                            <li>
-                                <label>Abnormal Reports if any</label>
-                                <input
-                                    type="text"
-                                    className="ti3-input-fields"
-                                    value={testEvaluationsAndFindings.abnormal_reports_value}
-                                    onChange={(e) => handleTiCheckboxQuestion("abnormal_reports_value", e.target.value)}
-                                    placeholder='Remark'
-                                />
-                            </li>
-                            <li>
-                                <label>Deworming (with Albendazole 400mg):</label>
-                                <input
-                                    type="text"
-                                    className="ti3-input-fields"
-                                    value={testEvaluationsAndFindings.deworming_value}
-                                    onChange={(e) => handleTiCheckboxQuestion("deworming_value", e.target.value)}
-                                />
-                                <input
-                                    type="text"
-                                    className="ti3-input-fields"
-                                    value={testEvaluationsAndFindings.deworming_remark}
-                                    onChange={(e) => handleTiCheckboxQuestion("deworming_remark", e.target.value)}
-                                    placeholder='Remark'
-                                />
-                            </li>
-                            <li>
-                                <label>Covid Vaccination</label>
-                                <input
-                                    type="text"
-                                    className="ti3-input-fields"
-                                    value={testEvaluationsAndFindings.covid_value}
-                                    onChange={(e) => handleTiCheckboxQuestion("covid_value", e.target.value)}
-                                />
-                            </li>
-                            <li>
-                                <label>Further Evaluation (if any)</label>
-                                <input
-                                    type="text"
-                                    className="ti3-input-fields"
-                                    value={testEvaluationsAndFindings.evaluation_value}
-                                    onChange={(e) => handleTiCheckboxQuestion("evaluation_value", e.target.value)}
-                                />
-                            </li>
-                            <li>
-                                <label>Treatment advised (if any)</label>
-                                <input
-                                    type="text"
-                                    className="ti3-input-fields"
-                                    value={testEvaluationsAndFindings.treatment_value}
-                                    onChange={(e) => handleTiCheckboxQuestion("treatment_value", e.target.value)}
-                                />
-                            </li>
-                            <li>
-                                <label>Restriction Advised (if any)</label>
-                                <input
-                                    type="text"
-                                    className="ti3-input-fields"
-                                    value={testEvaluationsAndFindings.restriction_value}
-                                    onChange={(e) => handleTiCheckboxQuestion("restriction_value", e.target.value)}
-                                />
-                            </li>
-                            <li>
-                                <label>Follow-up advised (If any)</label>
-                                <input
-                                    type="text"
-                                    className="ti3-input-fields"
-                                    value={testEvaluationsAndFindings.follow_up_value}
-                                    onChange={(e) => handleTiCheckboxQuestion("follow_up_value", e.target.value)}
-                                />
-                            </li>
-                            <li>
-                                <label>Remark</label>
-                                <input
-                                    type="text"
-                                    className="ti3-input-fields"
-                                    value={testEvaluationsAndFindings.remark_value}
-                                    onChange={(e) => handleTiCheckboxQuestion("remark_value", e.target.value)}
-                                />
-                            </li>
-                        </ul>
-                        <div>
-                            <label htmlFor="">Opinion Checked: </label>
-                            <ul>
-                                <li>Fit
-                                    <input
-                                        type="checkbox"
-                                        name='ecg_findings'
-                                        checked={testEvaluationsAndFindings.fit}
-                                        onChange={(e) => handleTiCheckboxQuestion("fit", e.target.checked)}
-                                    />
-                                </li>
-                                <li>Fit With Restrictions
-                                    <input
-                                        type="checkbox"
-                                        name='ecg_findings'
-                                        checked={testEvaluationsAndFindings.fit_with_restrictions}
-                                        onChange={(e) => handleTiCheckboxQuestion("fit_with_restrictions", e.target.checked)}
-                                    />
-                                </li>
-                                <li>Temporary Unfit
-                                    <input
-                                        type="checkbox"
-                                        name='ecg_findings'
-                                        checked={testEvaluationsAndFindings.temporary_unfit}
-                                        onChange={(e) => handleTiCheckboxQuestion("temporary_unfit", e.target.checked)}
-                                    />
-                                </li>
-                                <li>Unfit
-                                    <input
-                                        type="checkbox"
-                                        name='ecg_findings'
-                                        checked={testEvaluationsAndFindings.unfit}
-                                        onChange={(e) => handleTiCheckboxQuestion("unfit", e.target.checked)}
-                                    />
-                                </li>
-                            </ul>
-                        </div>
+            <div className="test-evaluations-and-findings-container">
+                <div className='test-evaluations-and-findings-input-checkbox-container'>
+                    <div className='input-label-container'>
+                        <label htmlFor='ecg_findings'>ECG Findings</label>
+                        <input
+                            id='ecg_findings'
+                            type="checkbox"
+                            name='ecg_findings'
+                            checked={testEvaluationsAndFindings.ecg_done}
+                            onChange={(e) => handleTestEvaluationsAndFindingsCheckboxQuestion("ecg_done", e.target.checked)}
+                        />
                     </div>
+                    <input
+                        type="text"
+                        className='test-evaluations-and-findings-text-input'
+                        value={testEvaluationsAndFindings.ecg_done_remark}
+                        onChange={(e) => handleTestEvaluationsAndFindingsCheckboxQuestion("ecg_done_remark", e.target.value)}
+                        disabled={!testEvaluationsAndFindings.ecg_done}
+                    />
                 </div>
-            </>
+                <div className='test-evaluations-and-findings-input-checkbox-container'>
+                    <div className='input-label-container'>
+                        <label htmlFor='lab_sample_taken'>Lab Test Report No.</label>
+                        <input
+                            id='lab_sample_taken'
+                            type="checkbox"
+                            name='lab_sample_taken'
+                            checked={testEvaluationsAndFindings.lab_sample_taken}
+                            onChange={(e) => handleTestEvaluationsAndFindingsCheckboxQuestion("lab_sample_taken", e.target.checked)}
+                        />
+                    </div>
+                    <input
+                        type="text"
+                        className='test-evaluations-and-findings-text-input'
+                        value={testEvaluationsAndFindings.lab_sample_taken_value}
+                        onChange={(e) => handleTestEvaluationsAndFindingsCheckboxQuestion("lab_sample_taken_value", e.target.value)}
+                        disabled={!testEvaluationsAndFindings.lab_sample_taken}
+                    />
+                </div>
+                <div className='test-evaluations-and-findings-input-checkbox-container'>
+                    <div className='input-label-container'>
+                        <label htmlFor='audiometry_done_checked'>Audiometry</label>
+                        <input
+                            id='audiometry_done_checked'
+                            type="checkbox"
+                            name='audiometry_done_checked'
+                            checked={testEvaluationsAndFindings.audiometry_done_checked}
+                            onChange={(e) => handleTestEvaluationsAndFindingsCheckboxQuestion("audiometry_done_checked", e.target.checked)}
+                        />
+                    </div>
+                    <input
+                        type="text"
+                        className='test-evaluations-and-findings-text-input'
+                        placeholder='Remark'
+                        value={testEvaluationsAndFindings.audiometry_done_value}
+                        onChange={(e) => handleTestEvaluationsAndFindingsCheckboxQuestion("audiometry_done_value", e.target.value)}
+                        disabled={!testEvaluationsAndFindings.audiometry_done_checked}
+                    />
+                </div>
+                <div className='test-evaluations-and-findings-input-checkbox-container'>
+                    <div className='deworming-input-label-container'>
+                        <label htmlFor='deworming_value'>Deworming (with Albendazole 400mg):</label>
+                        <input
+                            id='deworming_value'
+                            type="text"
+                            value={testEvaluationsAndFindings.deworming_value}
+                            onChange={(e) => handleTestEvaluationsAndFindingsCheckboxQuestion("deworming_value", e.target.value)}
+                        />
+                    </div>
+                    <label htmlFor='deworming_remark'>Remark</label>
+                    <input
+                        id='deworming_remark'
+                        type="text"
+                        className='deworming-input-remark'
+                        placeholder='Remark'
+                        value={testEvaluationsAndFindings.deworming_remark}
+                        onChange={(e) => handleTestEvaluationsAndFindingsCheckboxQuestion("deworming_remark", e.target.value)}
+                    />
+                </div>
+
+                <ul className='test-evaluations-and-findings-label-input-container'>
+                    <li>
+                        <label htmlFor='abnormal_reports_value'>Abnormal Reports if any</label>
+                        <input
+                            id='abnormal_reports_value'
+                            type="text"
+                            className="test-evaluations-and-findings-input"
+                            value={testEvaluationsAndFindings.abnormal_reports_value}
+                            onChange={(e) => handleTestEvaluationsAndFindingsCheckboxQuestion("abnormal_reports_value", e.target.value)}
+                            placeholder='Remark'
+                        />
+                    </li>
+                    <li>
+                        <label htmlFor='covid_value'>Covid Vaccination</label>
+                        <input
+                            id='covid_value'
+                            type="text"
+                            className="test-evaluations-and-findings-input"
+                            value={testEvaluationsAndFindings.covid_value}
+                            onChange={(e) => handleTestEvaluationsAndFindingsCheckboxQuestion("covid_value", e.target.value)}
+                        />
+                    </li>
+                    <li>
+                        <label htmlFor='evaluation_value'>Further Evaluation (if any)</label>
+                        <input
+                            id='evaluation_value'
+                            type="text"
+                            className="test-evaluations-and-findings-input"
+                            value={testEvaluationsAndFindings.evaluation_value}
+                            onChange={(e) => handleTestEvaluationsAndFindingsCheckboxQuestion("evaluation_value", e.target.value)}
+                        />
+                    </li>
+                    <li>
+                        <label htmlFor='treatment_value'>Treatment advised (if any)</label>
+                        <input
+                            id='treatment_value'
+                            type="text"
+                            className="test-evaluations-and-findings-input"
+                            value={testEvaluationsAndFindings.treatment_value}
+                            onChange={(e) => handleTestEvaluationsAndFindingsCheckboxQuestion("treatment_value", e.target.value)}
+                        />
+                    </li>
+                    <li>
+                        <label htmlFor='restriction_value'>Restriction Advised (if any)</label>
+                        <input
+                            id='restriction_value'
+                            type="text"
+                            className="test-evaluations-and-findings-input"
+                            value={testEvaluationsAndFindings.restriction_value}
+                            onChange={(e) => handleTestEvaluationsAndFindingsCheckboxQuestion("restriction_value", e.target.value)}
+                        />
+                    </li>
+                    <li>
+                        <label htmlFor='follow_up_value'>Follow-up advised (If any)</label>
+                        <input
+                            id='follow_up_value'
+                            type="text"
+                            className="test-evaluations-and-findings-input"
+                            value={testEvaluationsAndFindings.follow_up_value}
+                            onChange={(e) => handleTestEvaluationsAndFindingsCheckboxQuestion("follow_up_value", e.target.value)}
+                        />
+                    </li>
+                    <li>
+                        <label htmlFor='remark_value'>Remark</label>
+                        <input
+                            id='remark_value'
+                            type="text"
+                            className="test-evaluations-and-findings-remark-input"
+                            placeholder='Remark'
+                            value={testEvaluationsAndFindings.remark_value}
+                            onChange={(e) => handleTestEvaluationsAndFindingsCheckboxQuestion("remark_value", e.target.value)}
+                        />
+                    </li>
+                </ul>
+                <div className='test-evaluations-and-findings-opinion-checked-container'>
+                    <label htmlFor="">Opinion Checked: </label>
+                    <ul>
+                        <li>
+                            <input
+                                id='temporary_unfit'
+                                type="radio"
+                                name='temporary_unfit'
+                                checked={testEvaluationsAndFindings.temporary_unfit}
+                                onChange={(e) => handleTestEvaluationsAndFindingsRadioBtn("temporary_unfit", e.target.checked)}
+                            />
+                            <label htmlFor="temporary_unfit">Temporary Unfit</label>
+                        </li>
+                        <li>
+                            <input
+                                id='fit_with_restrictions'
+                                type="radio"
+                                name='fit_with_restrictionsecg_findings'
+                                checked={testEvaluationsAndFindings.fit_with_restrictions}
+                                onChange={(e) => handleTestEvaluationsAndFindingsRadioBtn("fit_with_restrictions", e.target.checked)}
+                            />
+                            <label htmlFor="fit_with_restrictions">Fit With Restrictions</label>
+                        </li>
+                        <li>
+                            <input
+                                id='unfit'
+                                type="radio"
+                                name='unfit'
+                                checked={testEvaluationsAndFindings.unfit}
+                                onChange={(e) => handleTestEvaluationsAndFindingsRadioBtn("unfit", e.target.checked)}
+                            />
+                            <label htmlFor="unfit">Unfit</label>
+                        </li>
+                        <li>
+                            <input
+                                id='fit'
+                                type="radio"
+                                name='fit'
+                                checked={testEvaluationsAndFindings.fit}
+                                onChange={(e) => handleTestEvaluationsAndFindingsRadioBtn("fit", e.target.checked)}
+                            />
+                            <label htmlFor="fit">Fit</label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         );
     };
 
@@ -897,26 +941,24 @@ const MedicalFindings = () => {
     return (
         <>
             <div className="medicial-findings-container">
-                {/* <div className="form-description">
-                    <h2>Medical declaration consent</h2>
-                </div> */}
-                    <h1><u>Medical Declaration & Consent</u></h1>
-                    {ailmentsHistoryDetails && renderAilmentHistoryQuestions()}
-                    <h1><u>Medical Examination</u></h1>
-                    {bodyExaminationMetrics && renderBodyExaminationMetrics()}
-                    {renderBodyExaminationAilments()}
-                    {/* {renderSection3()}
-                    {renderSection4()}
-                    {majorDisability && renderSection5Questions()}
-                    {visualTestDetails && renderTestInvestigationVisualQuestions1()}
-                    {renderTestInvestigationVisualQuestions2()}
-                    {testEvaluationsAndFindings && renderTestInvestigationQuestions3()} */}
+                <h1><u>Medical Declaration & Consent</u></h1>
+                {ailmentsHistoryDetails && renderAilmentHistoryQuestions()}
+                <h1><u>Medical Examination</u></h1>
+                {bodyExaminationMetrics && renderBodyExaminationMetrics()}
+                {renderBodyExaminationAilments()}
+                {renderBodyOrgansAndTests()}
+                {renderContagiousSkinDisease()}
+                {majorDisability && renderMajorDisability()}
+                {visualTestDetails && renderVisualTestDetails()}
+                {renderEyeSightDetails()}
+                {testEvaluationsAndFindings && renderTestEvaluationsAndFindings()}
+
+                <div className='medical-findings-submit-button-container'>
+                    <button onClick={handleSubmit} className="submit-btn position-prescription-btn" >
+                        {!pid ? "Submit" : "Update"}
+                    </button>
+                </div>
             </div>
-            {
-                <button onClick={handleSubmit} className="submit-btn position-prescription-btn" >
-                    {!pid ? "Submit" : "Update"}
-                </button>
-            }
         </>
     )
 }

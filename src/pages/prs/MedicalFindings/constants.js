@@ -175,31 +175,25 @@ export const MAJOR_DISABILITY = {
 };
 
 export const VISION_TEST_DETAILS = [{
-    options: [{
-        m_key: "no_display",
-        key: "color_vision",
-        value: "",
-    }]
-},{
-    options: [{
-        m_key: "vision_with_glasses",
-        key: "right_eye",
-        value: "",
-    }, {
-        m_key: "vision_with_glasses",
-        key: "left_eye",
-        value: "",
-    }]
+    key: "color_vision",
+    m_key: "no_display",
+    value: ""
 }, {
-    options: [{
-        m_key: "vision_without_glasses",
-        key: "right_eye",
-        value: "",
-    }, {
-        m_key: "vision_without_glasses",
-        key: "left_eye",
-        value: "",
-    }]
+    key: "right_eye",
+    m_key: "vision_with_glasses",
+    value: ""
+}, {
+    key: "left_eye",
+    m_key: "vision_with_glasses",
+    value: ""
+}, {
+    value: "",
+    key: "right_eye",
+    m_key: "vision_without_glasses"
+}, {
+    key: "left_eye",
+    m_key: "vision_without_glasses",
+    value: ""
 }];
 
 export const EYE_SIGHT_DETAILS = [{

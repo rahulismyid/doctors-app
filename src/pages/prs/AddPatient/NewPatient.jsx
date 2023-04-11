@@ -144,7 +144,7 @@ const NewPatient = () => {
                 {
                     values && (
                         <form>
-                            <h1><span className='new-patient-form-header-less-than' onClick={() => navigate(ROOT_ROUTE)}>&lt;</span>{!id ? "New" : "Update"} Patient Details</h1>
+                            <h1><span className='new-patient-form-header-less-than' onClick={() => navigate(ROOT_ROUTE)}>&lt;</span>Patient Details</h1>
                             <div className="item">
                                 <p>Patient's Details</p>
                                 <div className="new-patient-input-fields-wrapper">
@@ -182,7 +182,7 @@ const NewPatient = () => {
                                     </div>
                                     <div className='input-wrapper'>
                                         <label htmlFor="mobile">Mobile</label>
-                                        <input id='mobile' type="tel" name="mobile" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" maxlength="10" className='new-patient-input-fields' placeholder="Mobile" value={values.mobile} onChange={(e) => setValues({...values, mobile: e.target.value})} />
+                                        <input id='mobile' type="tel" name="mobile" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" maxLength="10" className='new-patient-input-fields' placeholder="Mobile" value={values.mobile} onChange={(e) => setValues({...values, mobile: e.target.value})} />
                                     </div>
                                     <div className='input-wrapper'>
                                         <label htmlFor="gender">Gender</label>
@@ -218,12 +218,11 @@ const NewPatient = () => {
                             {
                                 !id ? (
                                     <div className="new-patient-btn-block">
-                                        <button onClick={handleSubmit}>Add new patient</button>
-                                        <button onClick={submitForNextStep}>Proceed to add more details</button>
+                                        <button onClick={submitForNextStep}>Submit</button>
                                     </div>
                                 ) : (
                                     <div className="new-patient-btn-block">
-                                        <button onClick={handleUpdate}>Update</button>
+                                        <button onClick={handleUpdate}>Submit</button>
                                     </div>
                                 )
                             }

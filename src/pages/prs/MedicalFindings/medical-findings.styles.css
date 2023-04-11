@@ -3,28 +3,25 @@
   margin-top: 5%;
 }
 
-@media (max-width:480px)  {
-  /* smartphones, Android phones, landscape iPhone */
+@media (max-width:1200px)  {
   .medicial-findings-container {
-    margin-top: 30%;
+    margin: 0 20px;
+    margin-top: 6%;
   }
 }
 
-.findings-visual-details-table,
-.findings-visual-details-table > thead > tr > th,
-.findings-visual-details-table > tbody > tr > td {
-  font: 96% Helvetica;
-  color: #555;
-  text-align: center;
-  padding: 0.5em;
-  border: thin solid #ccc;
-  border-collapse: collapse;
+@media (max-width:950px)  {
+  .medicial-findings-container {
+    margin: 0 20px;
+    margin-top: 8%;
+  }
 }
 
-.findings-table-input {
-    width: fit-content;
-    border: 1px solid #ccc;
-    height: 30px;
+@media (max-width:480px)  {
+  /* smartphones, Android phones, landscape iPhone */
+  .medicial-findings-container {
+    margin-top: 20%;
+  }
 }
 
 .ti3-input-fields {
@@ -57,24 +54,6 @@
   padding-top: 10px;
   font-size: 18px;
   width: 100%;
-}
-
-@media (max-width:480px)  {
-  .aliment-history-question-container .question-label {
-    font-weight: 700;
-    font-size: 16px;
-  }
-
-  .aliment-history-grid-list-wrapper {
-    --auto-grid-min-size: 9rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
-    list-style-type: none;
-    grid-gap: 1rem;
-    padding-top: 10px;
-    font-size: 15px;
-    width: 100%;
-  }
 }
 
 .aliment-history-grid-list-wrapper > li {
@@ -113,28 +92,77 @@
     border-bottom: 1px solid #ccc;
     border-radius: 0;
     margin: 10px 0;
-  }  
+  }
+
+  .aliment-history-question-container .question-label {
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  .aliment-history-grid-list-wrapper {
+    --auto-grid-min-size: 9rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+    list-style-type: none;
+    grid-gap: 1rem;
+    padding-top: 10px;
+    font-size: 15px;
+    width: 100%;
+  }
+  .aliment-history-grid-list-wrapper > li {
+    display: flex;
+    align-items: center;
+    width: auto;
+  }
 }
 
 /* Ailment History */
 
 
 /* Body Examination Metrics */
+.body-examination-metrics-container {
+  color: #34327a;
+  --auto-grid-min-size: 16rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+  list-style-type: none;
+  grid-gap: 2rem;
+  padding-top: 10px;
+  width: 100%;
+}
+
+.body-examination-metrics-input-wrapper {
+  font-size: 18px;
+  width: 100%;
+}
+
+.body-examination-metrics-label-input-container {
+  display: grid;
+  text-transform: capitalize;
+}
+
+.body-examination-metrics-label-input-container > input {
+  color: #000;
+  margin-bottom: 10px;
+  width: 150px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 5px;
+}
+
 @media (max-width:480px)  {
   .body-examination-metrics-container {
-    padding: 0 20px;
     color: #34327a;
     --auto-grid-min-size: 9rem;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
     list-style-type: none;
-    grid-gap: 0.5rem;
-    padding-top: 10px;
+    grid-gap: 1rem;
+    padding-top: 0;
     width: 100%;
   }
 
   .body-examination-metrics-input-wrapper {
-    /* padding-top: 10px; */
     font-size: 18px;
     width: 100%;
   }
@@ -154,35 +182,600 @@
   }
 }
 
-.body-examination-metrics-container {
+/* Body Examination Metrics */
+
+/* Body Examination Ailments */
+
+.body-examination-ailments-container {
+  color: #34327a;
+  margin-top: 30px;
+}
+
+.body-examination-ailments-container > ul {
   /* padding: 0 20px; */
+  color: #34327a;
+  --auto-grid-min-size: 16rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+  list-style-type: none;
+  grid-gap: 2rem;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.body-examination-ailments-container > ul > li > input {
+  margin-right: 10px;
+}
+
+.body-examination-ailments-remark {
+  display: grid;
+  padding: 10px 0;
+}
+
+.body-examination-ailments-remark > input {
+  border: none;
+  width: 90%;
+  border-bottom: 1px solid #ccc;
+  border-radius: 0;
+  margin: 10px 0;
+}
+
+@media (max-width:480px)  {
+  .body-examination-ailments-container > ul {
+    color: #34327a;
+    --auto-grid-min-size: 9rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+    list-style-type: none;
+    grid-gap: 1rem;
+    margin-top: 30px;
+    width: 100%;
+  }
+  .body-examination-ailments-remark > input {
+    width: 340px;
+  }
+}
+
+/* Body Examination Ailments */
+
+
+/* Body Organs And Tests */
+.body-organs-and-tests-container {
+  color: #34327a;
+  --auto-grid-min-size: 16rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+  list-style-type: none;
+  grid-gap: 2rem;
+  margin-top: 30px;
+  width: 100%;
+}
+
+.body-organs-and-tests-input-wrapper {
+  display: grid;
+}
+
+.body-organs-and-tests-input-wrapper > input {
+  color: #000;
+  margin-bottom: 10px;
+  width: 200px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 5px;
+}
+
+@media (max-width:480px)  {
+  .body-organs-and-tests-input-wrapper > input {
+    width: 100%;
+  }
+}
+/* Body Organs And Tests */
+
+
+/* Contagious Skin Disease */
+
+.contagiuos-skin-disease-container {
+  color: #34327a;
+  margin-top: 30px;
+}
+
+.contagiuos-skin-disease-container > .question {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.contagiuos-skin-disease-options-wrapper > ul {
+  /* padding: 0 20px; */
+  color: #34327a;
+  --auto-grid-min-size: 16rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+  list-style-type: none;
+  grid-gap: 2rem;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.contagiuos-skin-disease-options-wrapper > ul > li > input {
+  margin-right: 7px;
+}
+
+.contagiuos-skin-disease-remark {
+  border: none;
+  width: 90%;
+  border-bottom: 1px solid #ccc;
+  border-radius: 0;
+  margin: 10px 0;
+}
+
+@media (max-width:480px)  {
+  .contagiuos-skin-disease-container > .question {
+    font-weight: 700;
+    font-size: 16px;
+    color: #34327a;
+    margin-top: 30px;
+  }
+
+  .contagiuos-skin-disease-options-wrapper > ul {
+    /* padding: 0 20px; */
+    color: #34327a;
+    --auto-grid-min-size: 9rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+    list-style-type: none;
+    grid-gap: 1rem;
+    margin-top: 20px;
+    width: 100%;
+  }
+
+  .contagiuos-skin-disease-options-wrapper > ul > li > input {
+    margin-right: 7px;
+  }
+
+  .contagiuos-skin-disease-remark {
+    border: none;
+    width: 340px;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0;
+    margin: 10px 0;
+  }
+}
+/* Contagious Skin Disease */
+
+/* Major Disability */
+
+.major-disability-container {
+  color: #34327a;
+  margin-top: 30px;
+}
+
+.major-disability-container > .question {
+  font-weight: 700;
+  font-size: 16px;
+  color: #34327a;
+  margin-top: 30px;    
+}
+
+.major-disability-checkbox-wrapper {
   color: #34327a;
   --auto-grid-min-size: 9rem;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
   list-style-type: none;
-  grid-gap: 2rem;
-  padding-top: 10px;
+  grid-gap: 1rem;
+  margin-top: 10px;
   width: 100%;
 }
 
-.body-examination-metrics-input-wrapper {
-  /* padding-top: 10px; */
-  font-size: 18px;
-  width: 100%;
+.major-disability-have-details-checkbox-wrapper > label {
+  margin-right: 6px;
+  font-weight: 700;
 }
 
-.body-examination-metrics-label-input-container {
+.visual-activity-checkbox-wrapper > .major-disability-have-details-checkbox-wrapper {
+  margin-top: 30px;
+  text-decoration: underline;
+}
+
+.major-disability-container > .major-disability-input-wrapper, .major-disability-details-wrapper {
   display: grid;
-  text-transform: capitalize;
+  margin: 15px 0;
 }
 
-.body-examination-metrics-label-input-container > input {
+.major-disability-input-wrapper {
+  border: none;
+  width: 90%;
+  border-bottom: 1px solid #ccc;
+  border-radius: 0;
+  margin: 10px 0;
+}
+
+.major-disability-details-input {
   color: #000;
   margin-bottom: 10px;
-  width: 150px;
+  width: 90%;
   border: 1px solid #ccc;
   border-radius: 4px;
   padding: 5px;
 }
-/* Body Examination Metrics */
+
+@media (max-width:480px)  {
+  .major-disability-container {
+    color: #34327a;
+    margin-top: 30px;  
+  }
+
+  .major-disability-container > .question {
+    font-weight: 700;
+    font-size: 16px;
+    color: #34327a;
+    margin-top: 30px;    
+  }
+
+  .visual-activity-checkbox-wrapper {
+    color: #34327a;
+    --auto-grid-min-size: 9rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+    list-style-type: none;
+    grid-gap: 1rem;
+    margin-top: 30px;
+    width: 100%;    
+  }
+
+  .major-disability-checkbox-wrapper {
+    color: #34327a;
+    --auto-grid-min-size: 9rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+    list-style-type: none;
+    grid-gap: 1rem;
+    margin-top: 10px;
+    width: 100%;
+  }
+  .major-disability-have-details-checkbox-wrapper > label {
+    margin-right: 6px;
+  }
+
+  .major-disability-container > .major-disability-input-wrapper, .major-disability-details-wrapper {
+    display: grid;
+    margin: 15px 0;
+  }
+
+  .major-disability-input-wrapper {
+    border: none;
+    width: 340px;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0;
+    margin: 10px 0;
+  }
+
+  .major-disability-details-input {
+    color: #000;
+    margin-bottom: 10px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px;
+  }
+}
+
+/* Major Disability */
+
+/* Visual Test Details */
+
+.findings-visual-details-table {
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 1%;
+  border-collapse: collapse;
+  overflow-x: auto;
+  display: block;
+}
+
+.findings-visual-details-table,
+.findings-visual-details-table > thead > tr > th,
+.findings-visual-details-table > tbody > tr > td {
+  font-weight: 600;
+  color: #34327a;
+  text-align: center;
+  padding: 0.5em;
+  border: thin solid #34327a;
+  border-collapse: collapse;
+  text-decoration: underline;
+}
+
+.findings-visual-details-table > thead > tr {
+  color: #34327a;
+}
+
+.findings-table-input {
+    width: 100%;
+    border: 1px solid #ccc;
+    color: #34327a;
+    height: 30px;
+}
+
+.visual-test-details-input-wrapper {
+  display: grid;
+  margin: 15px 0;
+  color: #34327a;
+}
+
+.visual-test-details-input-wrapper > input {
+  border: none;
+  width: 90%;
+  border-bottom: 1px solid #ccc;
+  border-radius: 0;
+  margin: 10px 0;
+}
+
+.eye-sight-details-table {
+  margin-top: 40px;
+  width: 70%;
+}
+
+@media (max-width:480px) {
+  .findings-visual-details-table {
+    width: fit-content;
+    max-width: 100%;
+    margin-top: 5%;
+    border-collapse: collapse;
+    overflow-x: auto;
+    display: block;
+  }
+
+  .findings-table-input {
+    width: 90px;
+    border: 1px solid #ccc;
+    color: #34327a;
+    height: 30px;
+  }
+
+  .visual-test-details-input-wrapper {
+    display: grid;
+    margin: 15px 0;
+    color: #34327a;
+  }
+
+  .visual-test-details-input-wrapper > input {
+    border: none;
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0;
+    margin: 10px 0;
+  }
+
+  .eye-sight-details-table {
+    margin-top: 40px;
+  }
+}
+
+/* Visual Test Details */
+
+/* Test Evaluations and Findings */
+
+.test-evaluations-and-findings-container {
+  color: #34327a;
+  margin-top: 30px;
+}
+
+.test-evaluations-and-findings-container > .test-evaluations-and-findings-input-checkbox-container {
+  color: #34327a;
+  display: grid;
+  list-style-type: none;
+  margin-top: 20px;
+  width: 90%;
+}
+
+.test-evaluations-and-findings-input-checkbox-container > .test-evaluations-and-findings-text-input {
+  color: #34327a;
+  width: 100%;
+  border: none;
+  color: #34327a;
+  height: 30px;
+  border-bottom: 1px solid #ccc;
+}
+
+.test-evaluations-and-findings-input-checkbox-container > .input-label-container > label {
+  margin-right: 6px;
+}
+
+.deworming-input-label-container > input {
+  width: 100%;
+  border: none;
+  color: #34327a;
+  height: 30px;
+  border-bottom: 1px solid #ccc;
+  margin: 5px 0 10px 0;
+}
+
+.test-evaluations-and-findings-input-checkbox-container > .deworming-input-remark {
+  border: none;
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+  border-radius: 0;
+  margin: 10px 0;
+}
+
+.test-evaluations-and-findings-label-input-container {
+  margin-top: 30px;
+}
+
+.test-evaluations-and-findings-label-input-container > li {
+  display: grid;
+  margin: 10px 0;
+}
+
+.test-evaluations-and-findings-label-input-container > li > .test-evaluations-and-findings-input {
+  width: 90%;
+  border: none;
+  color: #34327a;
+  height: 30px;
+  border-bottom: 1px solid #ccc;
+  margin: 5px 0 10px 0;
+}
+
+.test-evaluations-and-findings-label-input-container > li > .test-evaluations-and-findings-remark-input {
+  border: none;
+  width: 90%;
+  border-bottom: 1px solid #ccc;
+  border-radius: 0;
+  margin: 5px 0 10px 0;
+}
+
+.test-evaluations-and-findings-opinion-checked-container {
+  color: #34327a;
+  margin-top: 30px;
+}
+
+.test-evaluations-and-findings-opinion-checked-container > label {
+  font-weight: 700;
+}
+
+.test-evaluations-and-findings-opinion-checked-container > ul {
+  --auto-grid-min-size: 16rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+  list-style-type: none;
+  grid-gap: .5rem;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.test-evaluations-and-findings-opinion-checked-container > ul > li > input {
+  margin-right: 6px;
+}
+
+.test-evaluations-and-findings-opinion-checked-container > ul {
+  --auto-grid-min-size: 16rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+  list-style-type: none;
+  grid-gap: 1rem;
+  margin-top: 20px;
+  width: 100%;
+}
+
+@media (max-width:480px)  {
+  .test-evaluations-and-findings-container {
+    color: #34327a;
+    margin-top: 30px;
+  }
+  
+  .test-evaluations-and-findings-container > .test-evaluations-and-findings-input-checkbox-container {
+    color: #34327a;
+    --auto-grid-min-size: 16rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+    list-style-type: none;
+    grid-gap: .5rem;
+    margin-top: 20px;
+    width: 100%;
+  }
+
+  .test-evaluations-and-findings-input-checkbox-container > .test-evaluations-and-findings-text-input {
+    color: #34327a;
+    width: 100%;
+    border: 1px solid #ccc;
+    color: #34327a;
+    height: 30px;
+  }
+
+  .test-evaluations-and-findings-input-checkbox-container > .input-label-container > label {
+    margin-right: 6px;
+  }
+
+  .deworming-input-label-container > input {
+    color: #34327a;
+    width: 100%;
+    border: 1px solid #ccc;
+    color: #34327a;
+    height: 30px;  
+    margin: 10px 0;
+  }
+
+  .test-evaluations-and-findings-input-checkbox-container > .deworming-input-remark {
+    border: none;
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0;
+    margin-bottom: 10px;
+  }
+
+  .test-evaluations-and-findings-label-input-container {
+    margin-top: 30px;
+  }
+
+  .test-evaluations-and-findings-label-input-container > li {
+    display: grid;
+    margin: 10px 0;
+  }
+
+  .test-evaluations-and-findings-label-input-container > li > .test-evaluations-and-findings-input {
+    color: #34327a;
+    width: 100%;
+    border: 1px solid #ccc;
+    color: #34327a;
+    height: 30px;
+    margin: 5px 0 10px 0;
+  }
+
+  .test-evaluations-and-findings-label-input-container > li > .test-evaluations-and-findings-remark-input {
+    border: none;
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0;
+    margin: 5px 0 10px 0;
+  }
+
+  .test-evaluations-and-findings-opinion-checked-container {
+    color: #34327a;
+    margin-top: 30px;
+  }
+
+  .test-evaluations-and-findings-opinion-checked-container > label {
+    font-weight: 700;
+  }
+
+  .test-evaluations-and-findings-opinion-checked-container > ul {
+    --auto-grid-min-size: 16rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+    list-style-type: none;
+    grid-gap: .5rem;
+    margin-top: 20px;
+    width: 100%;
+  }
+
+  .test-evaluations-and-findings-opinion-checked-container > ul > li > input {
+    margin-right: 6px;
+  }
+
+  .test-evaluations-and-findings-opinion-checked-container > ul {
+    --auto-grid-min-size: 9rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+    list-style-type: none;
+    grid-gap: 1rem;
+    margin-top: 20px;
+    width: 100%;
+  }
+}
+
+/* Test Evaluations and Findings */
+
+/* Submit Button Container */
+
+.medical-findings-submit-button-container {
+  display: grid;
+  width: 20%;
+  margin: 40px auto;
+}
+
+.medical-findings-submit-button-container > button {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+/* Submit Button Container */

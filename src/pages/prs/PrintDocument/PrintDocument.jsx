@@ -48,17 +48,19 @@ const PrintDocument = () => {
 	const fetchMedicalDetails = async() => {
 		const medicalData = await fetchPatientMedicalDetails(pid);
 		const newData = medicalData[0];
-		setMedicalDetails(newData);
-		setAilmentsHistoryDetails(newData.ailmentsHistoryDetails.sort())
-		setBodyExaminationMetrics(newData.bodyExaminationMetrics.sort())
-		setBodyExaminationAilments(newData.bodyExaminationAilments.sort())
-		setBodyOrgansAndTests(newData.bodyOrgansAndTests.sort())
-		setContagiuosSkinDiseases(newData.contagiuosSkinDiseases.sort())
-		setMajorDisability(newData.majorDisability)
-		setVisualTestDetails(newData.visualTestDetails.sort())
-		setEyeSightDetails(newData.eyeSightDetails.sort())
-		setTestEvaluationsAndFindings(newData.testEvaluationsAndFindings)
-		setEyeSightRemark(newData.eyeSightRemark)
+		if(newData) {
+			setMedicalDetails(newData);
+			setAilmentsHistoryDetails(newData.ailmentsHistoryDetails.sort())
+			setBodyExaminationMetrics(newData.bodyExaminationMetrics.sort())
+			setBodyExaminationAilments(newData.bodyExaminationAilments.sort())
+			setBodyOrgansAndTests(newData.bodyOrgansAndTests.sort())
+			setContagiuosSkinDiseases(newData.contagiuosSkinDiseases.sort())
+			setMajorDisability(newData.majorDisability)
+			setVisualTestDetails(newData.visualTestDetails.sort())
+			setEyeSightDetails(newData.eyeSightDetails.sort())
+			setTestEvaluationsAndFindings(newData.testEvaluationsAndFindings)
+			setEyeSightRemark(newData.eyeSightRemark.eye_remark)
+		}
 	};
 
 	const handlePrint = useReactToPrint({
@@ -439,26 +441,26 @@ const PrintDocument = () => {
 					{/* Visual Activity */}
 					<p style={{position:'absolute', top:'477px', left:'145px', whiteSpace:'nowrap' }} className="ft12">Color Vision</p>
 					<div style={{maxHeight: '50px',overflow: 'hidden',position:'absolute', top:'510px', left:'96px', whiteSpace:'nowrap', lineHeight: 1}} className="ft12">
-						<p style={{width:'236px', overflow:'hidden'}} className="ft22"><b>{visualTestDetails[0].options[0].value}</b></p>
+						<p style={{width:'236px', overflow:'hidden'}} className="ft22"><b>{visualTestDetails[0].value}</b></p>
 					</div>
 					<p style={{position:'absolute', top:'477px', left:'396px', whiteSpace:'nowrap' }} className="ft12">Vision With Glasses</p>
 					<p style={{position:'absolute', top:'503px', left:'326px', whiteSpace:'nowrap' }} className="ft12">Right Eye</p>
 					<div style={{maxHeight: '50px',overflow: 'hidden',position:'absolute', top:'505px', left:'410px', whiteSpace:'nowrap', lineHeight: 1}} className="ft12">
-						<p style={{whiteSpace:'nowrap' }} className="ft12"><b>{visualTestDetails[1].options[0].value}</b></p>
+						<p style={{whiteSpace:'nowrap' }} className="ft12"><b>{visualTestDetails[1].value}</b></p>
 					</div>
 					<p style={{position:'absolute', top:'531px', left:'327px', whiteSpace:'nowrap' }} className="ft12">Left Eye</p>
 					<div style={{maxHeight: '50px',overflow: 'hidden',position:'absolute', top:'533px', left:'410px', whiteSpace:'nowrap', lineHeight: 1}} className="ft12">
-						<p style={{whiteSpace:'nowrap' }} className="ft12"><b>{visualTestDetails[1].options[1].value}</b></p>
+						<p style={{whiteSpace:'nowrap' }} className="ft12"><b>{visualTestDetails[2].value}</b></p>
 					</div>
 
 					<p style={{position:'absolute', top:'477px', left:'712px', whiteSpace:'nowrap' }} className="ft12">Vision Without Glasses</p>
 					<p style={{position:'absolute', top:'504px', left:'646px', whiteSpace:'nowrap' }} className="ft12">Right Eye</p>
 					<div style={{maxHeight: '50px',overflow: 'hidden',position:'absolute', top:'505px', left:'735px', whiteSpace:'nowrap', lineHeight: 1}} className="ft12">
-						<p style={{whiteSpace:'nowrap' }} className="ft12"><b>{visualTestDetails[2].options[0].value}</b></p>
+						<p style={{whiteSpace:'nowrap' }} className="ft12"><b>{visualTestDetails[3].value}</b></p>
 					</div>
 					<p style={{position:'absolute', top:'531px', left:'651px', whiteSpace:'nowrap' }} className="ft12">Left Eye</p>
 					<div style={{maxHeight: '50px',overflow: 'hidden',position:'absolute', top:'532px', left:'735px', whiteSpace:'nowrap', lineHeight: 1}} className="ft12">
-						<p style={{whiteSpace:'nowrap' }} className="ft12"><b>{visualTestDetails[2].options[1].value}</b></p>
+						<p style={{whiteSpace:'nowrap' }} className="ft12"><b>{visualTestDetails[4].value}</b></p>
 					</div>
 					{/* Visual Activity */}
 
