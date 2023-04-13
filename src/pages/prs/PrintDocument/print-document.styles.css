@@ -99,3 +99,36 @@ p {
     font-family: 'Poppins', sans-serif;
     color:#003fbf;
 }
+
+#print-document {
+    margin: 5% auto 0px;
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    overflow: "scroll";
+}
+
+#page1-div {
+    position: absolute;
+    top: 100px;
+}
+
+#page2-div {
+    position: absolute;
+    width: 1026px;
+    height: 1350px;
+    left: -524px;
+    top: 1800px;
+    left: -524px;
+}
+
+@media (max-width: 480px) {
+    #print-document {
+        margin: 5% auto 0px;
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        transform: translate(-50%, 0%);
+    }
+}

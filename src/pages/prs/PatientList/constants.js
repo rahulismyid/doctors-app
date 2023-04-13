@@ -61,22 +61,22 @@ export const COLUMNS = (onEditPrescription, onEditPatientDetails, onDeleteClick,
 }, {
     name: 'Actions',
     sortable: false,
-    cell:(row) => <>
-        <span className="table-action-btn" title="Edit Personal Details" onClick={() => onEditPatientDetails(row)}>
+    cell:(row) => <div className="patient-list-action-buttons">
+        <div className="table-action-btn" title="Edit Personal Details" onClick={() => onEditPatientDetails(row)}>
             <EditDocument width={18} height={18} style={{margin: '0 5px'}} />
-        </span>
-        <span className="table-action-btn" title="Edit Prescription" onClick={() => onEditPrescription(row)}>
+        </div>
+        <div className="table-action-btn" title="Edit Prescription" onClick={() => onEditPrescription(row)}>
             <Prescription width={18} height={18} style={{margin: '0 5px'}} />
-        </span>
+        </div>
         {row.medical_details_added ? (
-            <span className="table-action-btn" title="Prescription" onClick={() => onPDFClick(row)}>
+            <div className="table-action-btn" title="Prescription" onClick={() => onPDFClick(row)}>
                     <PdfSvg width={18} height={18} style={{margin: '0 5px'}} />
-            </span>) : null
+            </div>) : null
         }
-        <span className="table-action-btn" title="Delete patient" onClick={() => onDeleteClick(row)}>
+        <div className="table-action-btn" title="Delete patient" onClick={() => onDeleteClick(row)}>
             <DeleteSvg width={18} height={18} style={{margin: '0 5px'}} />
-        </span>
-    </>,
+        </div>
+    </div>,
     width: "150px",
     ignoreRowClick: true,
     allowOverflow: true,

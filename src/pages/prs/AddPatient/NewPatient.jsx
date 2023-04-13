@@ -16,7 +16,7 @@ const initialValues = {
     code: "",
     age: "",
     gender: "",
-    doj: "",
+    doj: new Date().toISOString().slice(0, -8).split('T')[0],
     department: "",
     son_of: "",
     mobile: "",
@@ -73,6 +73,7 @@ const NewPatient = () => {
 
     const submitForNextStep = (e) => {
         e.preventDefault();
+        console.log(values)
         if(!values.name || !values.age || !values.gender || !values.mobile) {
             setShowError(true);
         } else {
@@ -146,7 +147,7 @@ const NewPatient = () => {
                         <form>
                             <h1><span className='new-patient-form-header-less-than' onClick={() => navigate(ROOT_ROUTE)}>&lt;</span>Patient Details</h1>
                             <div className="item">
-                                <p>Patient's Details</p>
+                                {/* <p>Patient's Details</p> */}
                                 <div className="new-patient-input-fields-wrapper">
                                     <div className='input-wrapper'>
                                         <label htmlFor="name">Name</label>
@@ -168,8 +169,8 @@ const NewPatient = () => {
                                             type="date"
                                             name="doj"
                                             placeholder='Date of Joining'
-                                            defaultValue={defaultValue}
-                                            value={values.doj} onChange={(e) => setValues({...values, doj: e.target.value})}
+                                            value={values.doj}
+                                            onChange={(e) => setValues({...values, doj: e.target.value})}
                                         />
                                     </div>
                                     <div className='input-wrapper'>
@@ -194,19 +195,19 @@ const NewPatient = () => {
                                     </div>
                                 </div>
                             </div>
-                            <p>Address</p>
+                            {/* <p>Address</p> */}
                             <div className="new-patient-input-fields-wrapper">
-                                <div className='input-wrapper'>
-                                    <label htmlFor="present_address">Present Address</label>
-                                    <input id='present_address' type="text" name="present_address" className='new-patient-input-fields' placeholder="Present address" value={values.present_address} onChange={(e) => setValues({...values, present_address: e.target.value})}/>
-                                </div>
                                 <div className='input-wrapper'>
                                     <label htmlFor="emergency_contact_person">Emergency Contact Person</label>
                                     <input id='emergency_contact_person' type="text" name="emergency_contact_person" className='new-patient-input-fields' placeholder="Emergency Contact" value={values.emergency_contact_person} onChange={(e) => setValues({...values, emergency_contact_person: e.target.value})}/>
                                 </div>
                                 <div className='input-wrapper'>
                                     <label htmlFor="emergency_mobile">Emergency Mobile</label>
-                                    <input id='emergency_mobile' type="tel" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" maxlength="10" name="emergency_mobile" className='new-patient-input-fields' placeholder="Emergency Mobile" value={values.emergency_mobile} onChange={(e) => setValues({...values, emergency_mobile: e.target.value})}/>
+                                    <input id='emergency_mobile' type="tel" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" maxLength="10" name="emergency_mobile" className='new-patient-input-fields' placeholder="Emergency Mobile" value={values.emergency_mobile} onChange={(e) => setValues({...values, emergency_mobile: e.target.value})}/>
+                                </div>
+                                <div className='input-wrapper'>
+                                    <label htmlFor="present_address">Present Address</label>
+                                    <textarea id='present_address' type="text" name="present_address" className='new-patient-input-fields' placeholder="Present address" rows="1" cols="50" value={values.present_address} onChange={(e) => setValues({...values, present_address: e.target.value})} />
                                 </div>
                             </div>
                             {

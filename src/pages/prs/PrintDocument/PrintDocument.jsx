@@ -650,19 +650,9 @@ const PrintDocument = () => {
 	return (
 		<div>
 		{/* <button style={{marginTop: '10%'}} onClick={handlePrint} className="print__button">  Print </button>  */}
-		<pre style={{height: '100vh', marginLeft: '5%', marginTop: '20%'}} id="json"></pre>
 		{
 			personalDetails && medicalDetails ? (
-				<div bgcolor="#A0A0A0" vlink="blue" link="blue" ref={componentRef}
-					style={{
-						margin: '0 auto',
-						marginTop: '5%',
-						position: 'absolute',
-						top: '0%',
-						left: '50%',
-						transform: 'translate(-50%, 0%)',
-					}}
-					>
+				<div id='print-document' bgcolor="#A0A0A0" vlink="blue" link="blue" ref={componentRef}>
 					<a name="1"></a>
 					<div id="page1-div" style={{position:'relative',width:'1026px',height:'1350px'}}>
 						<img width="1026" height="1350" src={img1} alt="background image"/>
@@ -708,7 +698,7 @@ const PrintDocument = () => {
 						</div>
 					</div>
 					<a name="2"></a>
-					<div id="page2-div" style={{position:'relative',width:'1026px',height:'1350px'}}>
+					<div id="page2-div" style={{position:'absolute',width:'1026px',height:'1350px', left: '-24px'}}>
 						<img width="1026" height="1350" src={img2} alt="background image"/>
 						<p style={{position:'absolute', top:'40px', left:'448px', whiteSpace:'nowrap' }} className="ft12"><b>Medical examination</b></p>
 						{/* Medical Examination S1 */}

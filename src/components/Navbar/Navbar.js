@@ -1,14 +1,15 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import logo from "../../components/images/target001_cropped.png";
 import { GlobalContext } from '../../contexts/GlobalContext';
+import { ADD_PATIENT_ROUTE, HOME_ROUTE, LIST_PATIENT_ROUTE, LOGIN_ROUTE, ROOT_ROUTE } from '../../routes/constants';
 import "./styles.css"
-import { HOME_ROUTE, LOGIN_ROUTE, ROOT_ROUTE } from '../../routes/constants';
 
 const Navbar = () => {
 	const { logout } = useAuth();
     const navigate = useNavigate();
+    const [openNavBar, setOpenNavBar] = useState(false);
     const { setModalData } = useContext(GlobalContext);
 
     const handleLogout = async () => {
@@ -17,6 +18,7 @@ const Navbar = () => {
     };
 
     const handleModalClick = () => {
+        setOpenNavBar(false);
         setModalData({
             open: true,
             title: 'Logout',
@@ -27,38 +29,31 @@ const Navbar = () => {
 
     return (
         <>
-            <nav id="navbar" className="">
-                <div className="nav-wrapper">
-                    <div className="logo">
-                        <a onClick={() => navigate(HOME_ROUTE, {replace: true})}><i className="fas fa-chess-knight"></i>
-                            <img width={55} height={55} src={logo} alt="fireSpot"/>
-                        </a>
-                    </div>
-
-                    <ul id="menu">
-                        <ul id="menu">
-                            <li><Link to={ROOT_ROUTE}> Home</Link></li>
-                            <li><a onClick={() => handleModalClick()}>Logout</a></li>
+            <header className="header">
+                <nav className="navbar">
+                    <a className='brand' onClick={() => navigate(HOME_ROUTE, {replace: true})}>
+                        <i className="fas fa-chess-knight"></i>
+                        <img width={55} height={55} src={logo} alt="fireSpot"/>
+                    </a>
+                    <input type="checkbox" id="nav" checked={openNavBar} className="hidden" readOnly />
+                    <label htmlFor="nav" className="nav-toggle" onClick={() => setOpenNavBar(!openNavBar)}>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </label>
+                    <div className="wrapper">
+                        <ul className="menu">
+                            <li className="menu-item"><Link to={ROOT_ROUTE} onClick={() => setOpenNavBar(false)}> Home</Link></li>
+                            <li className="menu-item hide-wide"><Link to={ADD_PATIENT_ROUTE} onClick={() => setOpenNavBar(false)}> Add New Patient</Link></li>
+                            <li className="menu-item hide-wide"><Link to={LIST_PATIENT_ROUTE} onClick={() => setOpenNavBar(false)}> View Patient List</Link></li>
+                            <li className="menu-item"><Link onClick={() => handleModalClick()}>Logout</Link></li>
                         </ul>
-                        {/* <a href="#myModal" className="trigger-btn" data-toggle="modal">Click to Open Confirm Modal</a> */}
-                    </ul>
-                </div>
-            </nav>
-
-            <div className="menuIcon">
-                <span className="icon icon-bars"></span>
-                <span className="icon icon-bars overlay"></span>
-            </div>
-
-            <div className="overlay-menu">
-                <ul id="menu">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <li><a href="#logout">Logout</a></li>
-                </ul>
-            </div>
+                    </div>
+                </nav>
+            </header>
+            {/* <footer>
+                © Copyright {new Date().getFullYear()}. All rights reserved <span><a href='https://www.linkedin.com/in/rahul-ajarekar/'>Rahul</a></span>
+            </footer> */}
         </>
     )
 }

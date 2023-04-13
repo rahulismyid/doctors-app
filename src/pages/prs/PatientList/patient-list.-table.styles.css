@@ -25,7 +25,7 @@
 	background-color: transparent;
 	color: black;
 	margin: 0 5px;
-	padding: 4px 3px;
+	/* padding: 4px 3px; */
 	width: auto;
     text-align: center;
 	font-size: 14px;
@@ -35,5 +35,21 @@
 .table-action-btn:hover {
 	cursor: pointer;
 	color: white;
-	background-color: #e31e31;
+}
+
+.patient-list-action-buttons {
+	--auto-grid-min-size: 1rem;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+	list-style-type: none;
+	grid-gap: 1rem;
+	margin-top: 20px;
+	width: 100%;
+}
+
+@media (max-width:480px)  {
+	.patient-list-table-container {
+		/* margin: 0 20px; */
+		margin-top: 20%;
+	}	
 }
