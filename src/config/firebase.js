@@ -6,12 +6,12 @@ import { getAuth } from "firebase/auth"
 
 // Your web app's Firebase configuration
 const app = initializeApp({
-  apiKey: "AIzaSyBjX2eRB7w9qNLZYBkkXIcg4IDQZo_kwNw",
-  authDomain: "patient-record-system-21212.firebaseapp.com",
-  projectId: "patient-record-system-21212",
-  storageBucket: "patient-record-system-21212.appspot.com",
-  messagingSenderId: "638707582975",
-  appId: "1:638707582975:web:3dbfed273202a7411649ca"
+  apiKey: "BIzaSyBjX2eRB7w9qNLZYBkkXIcg4IDQZo_kwNw",
+  authDomain: "my-patient-record-system-21212.firebaseapp.com",
+  projectId: "my-patient-record-system-21212",
+  storageBucket: "my-patient-record-system-21212.appspot.com",
+  messagingSenderId: "738707582975",
+  appId: "2:638707582975:web:3dbfed273202a7411649ca"
 });
 
 // Initialize Firebase
