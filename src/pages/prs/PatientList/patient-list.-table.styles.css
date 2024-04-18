@@ -1,0 +1,55 @@
+.patient-list-table-container {
+	margin-top: 5%;
+	padding: 0 20px;
+}
+
+.patient-list-table-container > header {
+	justify-content: space-between;
+}
+
+.patient-list-table-header-wrapper > .less-than {
+	font-size: 30px;
+	font-weight: 700;
+}
+
+.patient-list-table-header-wrapper > .less-than:hover {
+	cursor: pointer;
+}
+
+.rdt_Table {
+	border: 2px solid #ccc;
+	border-radius: 4px;
+}
+
+.table-action-btn {
+	background-color: transparent;
+	color: black;
+	margin: 0 5px;
+	/* padding: 4px 3px; */
+	width: auto;
+    text-align: center;
+	font-size: 14px;
+	border-radius: 4px;
+}
+
+.table-action-btn:hover {
+	cursor: pointer;
+	color: white;
+}
+
+.patient-list-action-buttons {
+	--auto-grid-min-size: 1rem;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+	list-style-type: none;
+	grid-gap: 1rem;
+	margin-top: 20px;
+	width: 100%;
+}
+
+@media (max-width:480px)  {
+	.patient-list-table-container {
+		/* margin: 0 20px; */
+		margin-top: 20%;
+	}	
+}

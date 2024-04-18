@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+* {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+*::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+input[type="checkbox"]:focus {
+    outline: 1px solid;
+	padding: 2px;
+}
+
+button {
+	width: auto;
+	padding: 10px 20px;
+	border: none;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	/* background-color: #f5ba1a; */
+	background-color: #e31e31;
+	font-size: 16px;
+	color: #fff;
+	cursor: pointer;
+	font-weight: 500;
+}
+
+.border-none {
+  border: none !important;
+}
+
+button:hover {
+  cursor: pointer !important;
+}
+
+h1 {
+    font-size: 30px;
+    margin-bottom: 40px;
+}
+
+@media (max-width:480px)  {
+	h1 {
+		font-size: 30px;
+		margin-bottom: 20px;
+	}	
+}
+
+::selection {
+  color: darkblue;
+  background: aqua;
+}
